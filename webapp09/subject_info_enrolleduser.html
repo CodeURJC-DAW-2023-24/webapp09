@@ -43,7 +43,7 @@
     <header class="">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="main_page.html">
                     <h2>Estudoku<em>.</em></h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -53,28 +53,24 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Subjects
+                            <a class="nav-link active" href="subjects_registereduser.html">Subjects
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Exams</a>
+                            <a class="nav-link" href="exam_student.html">Exams</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Marks</a>
+                            <a class="nav-link" href="viewmarks_student.html">Marks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Profile</a>
+                            <a class="nav-link" href="profile.html">Profile</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
-
-
-
 
 
     <!--  ########## PAGE CONTENT ##########  -->
@@ -106,7 +102,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#informacion_general"
+                        <a class="nav-link" href="#informacion_general"
                             onclick="changeContent('informacion_general')">General information</a>
                     </li>
                     <li class="nav-item">
@@ -115,10 +111,11 @@
                             es un profe o un estudiante, ya que el html es distinto en función del
                             usuario
                         -->
-                        <a class="nav-link" href="exam_student.html" 
-                            onclick="changeContent('exam_student')">Exams</a>
+                        <a class="nav-link" href="#exams_student_subject"
+                            onclick="changeContent('exams_student_subject')">Exams</a>
                     </li>
                     <li class="nav-item">
+                        <!-- Muestra todas las notas, cuando solo debería mostrar las de la asignatura en la que está -->
                         <a class="nav-link" href="viewmarks_student.html"
                             onclick="changeContent('viewmarks_student')">Marks</a>
                     </li>
@@ -161,8 +158,7 @@
         </div>
     </section>
 
-    <!-- supongo que esta seccion de abajo habría que borrarla -->
-    <section class="blog-posts" id="evaluacion" style="display: none;">
+    <section class="blog-posts" id="exams_student_subject" style="display: none;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 centered-div">
@@ -170,7 +166,64 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="blog-post">
-                                    <h2>Pruebas de evaluación o actividades evaluables</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Exam 1</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="main-button">
+                                                                <a>Open</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Exam 2</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="main-button">
+                                                                <a>Open</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Exam 3</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="main-button">
+                                                                <a>Open</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Final Exam</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="main-button">
+                                                                <a>Open</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -184,10 +237,10 @@
         function changeContent(sectionId) {
             let sec1 = document.getElementById("informacion_general")
             sec1.style.display = 'none'
-            const section1 = document.querySelector(`#${sectionId}`);
-            section1.style.display = 'block';
-            const section2 = document.querySelector(`#${sectionId}`);
-            section2.style.display = 'block';
+            let sec2 = document.getElementById("exams_student_subject")
+            sec2.style.display = 'none'
+            const section = document.querySelector(`#${sectionId}`);
+            section.style.display = 'block';
         }
     </script>
 
@@ -196,11 +249,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="social-icons">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Behance</a></li>
-                        <li><a href="#">Linkedin</a></li>
-                        <li><a href="#">Dribbble</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">About Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-12">
