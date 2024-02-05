@@ -1,7 +1,9 @@
 
 # webapp09: ESTUDOKU 
 
-## Members of the development team 
+## FASE 0: Formación del equipo y definición de las funcionalidades de la web
+
+### Members of the development team 
 
 - Name: Ismael Albert Aparicio
     - University email: i.albert.2020@alumnos.urjc.es
@@ -24,7 +26,7 @@
     - GitHub user: aleromtor
 
 
-## Main Aspects of the Web Application 
+### Main Aspects of the Web Application 
 
 - Entities: 
     + User (teachers, students and administrators).
@@ -55,3 +57,8 @@
     + Edit Profile (registered user)
     + View marks (teachers = subject -> tabla marks-student_name-exam_num)
     + View marks (students = subject -> marks-exam_num)
+
+
+## FASE 1: Maquetación de páginas con HTML y CSS 
+
+
