@@ -1,11 +1,7 @@
-___README___
+## webapp09
+# Aplication Name: ESTUDOKU 
 
-    # __Aplication Name__ # 
-
-Estudoku
-
-
-    # __Members of the development team__ #
+## Members of the development team 
 
 - Name: Ismael Albert Aparicio
     - University email: i.albert.2020@alumnos.urjc.es
@@ -28,7 +24,7 @@ Estudoku
     - GitHub user: aleromtor
 
 
-    # __Main Aspects of the Web Application __ #
+## Main Aspects of the Web Application 
 
 - Entities: 
     + User (teachers, students and administrators).
