@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
+        rel="stylesheet">
+
+    <title>Stand Blog Posts</title>
+
+    <!-- Bootstrap -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+
+</head>
+
+
+<!--  ########## HEADER ##########  -->
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="main_page.html">
+                    <h2>Estudoku<em>.</em></h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="subjects_registereduser.html">Subjects
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="exam_student.html">Exams</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="viewmarks_student.html">Marks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!--  ########## PAGE CONTENT ##########  -->
+    <!-- Title -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="assets/images/imagenFotoPerfil.jpg"
+                            class="card-img-top rounded-circle img-fluid mx-auto" alt="Imagen de Perfil"
+                            style="width: 100px; height: 100px">
+                        <br></br>
+                        <div class="text-content">
+                            <h2>Name</h2>
+                            <br></br>
+                            <h4>Estructura de Datos</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <br></br>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="col-lg-5">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#informacion_general"
+                            onclick="changeContent('informacion_general')">General information</a>
+                    </li>
+                    <li class="nav-item">
+                        <!--
+                            aqui vamos a tener q diferenciar si el usuario que está usando la web
+                            es un profe o un estudiante, ya que el html es distinto en función del
+                            usuario
+                        -->
+                        <a class="nav-link" href="#exams_student_subject"
+                            onclick="changeContent('exams_student_subject')">Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Muestra todas las notas, cuando solo debería mostrar las de la asignatura en la que está -->
+                        <a class="nav-link" href="#marks" onclick="changeContent('marks')">Marks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="blog-posts" id="informacion_general">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 centered-div">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <h2>Presentación de la asignatura</h2>
+                                    <p>Estimado/a alumno/a,</p>
+                                    <p>te doy la bienvenida a la asignatura de Estructuras de Datos, comprendida dentro
+                                        del Grado en Ingeniería del Software en la que estás matriculado/a.</p>
+                                    <p>En la guía docente adjunta en este apartado encontrarás toda la información
+                                        inicial necesaria para su seguimiento, así como las instrucciones específicas
+                                        para su desarrollo, la planificación temporal, aspectos relativos a la
+                                        evaluación o los objetivos.</p>
+                                    <p>Es conveniente que leas la guía docente antes de comenzar a desarrollar la
+                                        asignatura. Una vez concluyas la lectura, te sugerimos que revises el correo con
+                                        el objeto de comprobar si ya dispones de alguna comunicación mía. Por otro lado,
+                                        si una vez leída toda la información que te adjuno en este apartado, tienes
+                                        alguna duda concreta, te sugiero que me la consultes a través del bloque de
+                                        "Correo" que tienes disponible en la parte izquierda de la pantalla o bien
+                                        enviándome un correo electrónico, para que pueda ayudarte a comenzar tu
+                                        formación de la manera más adecuada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="blog-posts grid-system" id="exams_student_subject" style="display: none;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">View</th>
+                                <th scope="col">Upload</th>
+                                <th scope="col">Correct</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Exam 1</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Up</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Correct</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Exam 2</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Up</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Correct</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Exam 3</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Up</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Correct</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Final Exam</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a>Up</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a id="correct">Correct</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="blog-posts grid-system" id="exams_allstudent_subject" style="display: none;">
+        <div class="container">
+
+            <!-- Subject 1 -->
+
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Names</th>
+                                <th scope="col">View</th>
+                                <th scope="col">Edit Note</th>
+                                <th scope="col">Correct exam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>María Belén Esteban Menéndez</td>
+                                <td id="job4">9.25</td>
+                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
+                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="main-button">
+                                                <a href="viewmarks_teacher-onestudent.html">Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gonzalo Julián Conde</td>
+                                <td id="job4">9.25</td>
+                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
+                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="main-button">
+                                                <a href="viewmarks_teacher-onestudent.html">Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jordi Hurtado Torres</td>
+                                <td id="job4">9.25</td>
+                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
+                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="main-button">
+                                                <a href="viewmarks_teacher-onestudent.html">Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Francisco José Rivera Pantoja</td>
+                                <td id="job4">9.25</td>
+                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
+                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="main-button">
+                                                <a href="viewmarks_teacher-onestudent.html">Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="blog-posts" id="marks" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 centered-div">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Proyect 1</th>
+                                                <th scope="col">Proyect 2</th>
+                                                <th scope="col">
+                                                    <Fieldset>Final Exam</Fieldset>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Antonia de la Rosa Gonzalez</td>
+                                                <td>10</td>
+                                                <td>1.2</td>
+                                                <td>9.8</td>
+
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td>Belen Esteban Salvame</td>
+                                                <td>10</td>
+                                                <td>1.2</td>
+                                                <td>9.8</td>
+
+                                            </tr>
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td>Kiko Rivera Pantoja</td>
+                                                <td>10</td>
+                                                <td>1.2</td>
+                                                <td>9.8</td>
+
+                                            </tr>
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td>Hjadsos JSWOQ UHSFSUD</td>
+                                                <td>10</td>
+                                                <td>1.2</td>
+                                                <td>9.8</td>
+
+                                            </tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function changeContent(sectionId) {
+            let sec1 = document.getElementById("informacion_general")
+            sec1.style.display = 'none'
+            let sec2 = document.getElementById("exams_student_subject")
+            sec2.style.display = 'none'
+            let sec3 = document.getElementById("marks")
+            sec3.style.display = 'none'
+            const section = document.querySelector(`#${sectionId}`);
+            section.style.display = 'block';
+        }
+    </script>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="social-icons">
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <p>Copyright 2020 Stand Blog Co.
+
+                            | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/owl.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/js/accordions.js"></script>
+
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t) {                   //declaring the array outside of the
+            if (!cleared[t.id]) {                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value = '';         // with more chance of typos
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
