@@ -58,12 +58,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam_student.html">Exams</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="viewmarks_student.html">Marks</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="profile.html">Profile</a>
                         </li>
                     </ul>
@@ -125,6 +119,18 @@
 
     <section class="blog-posts" id="informacion_general">
         <div class="container">
+
+
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <div class="main-button">
+                        <a class="nav-link">Add Student</a>
+                    </div>
+                </div>
+            </div>
+            </br>
+
             <div class="row">
                 <div class="col-lg-12 centered-div">
                     <div class="all-blog-posts">
@@ -161,7 +167,19 @@
 
 
     <section class="blog-posts grid-system" id="exams_student_subject" style="display: none;">
+
         <div class="container">
+
+
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <div class="main-button">
+                        <a class="nav-link">Add Exam</a>
+                    </div>
+                </div>
+            </div>
+            </br>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -200,7 +218,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="main-button">
-                                                <a>Correct</a>
+                                                <a class="nav-link" href="#exams_allstudent_subject"
+                                                    onclick="changeContent('exams_allstudent_subject')">Correct</a>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +249,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="main-button">
-                                                <a>Correct</a>
+                                                <a class="nav-link" href="#exams_allstudent_subject"
+                                                    onclick="changeContent('exams_allstudent_subject')">Correct</a>
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +280,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="main-button">
-                                                <a>Correct</a>
+                                                <a class="nav-link" href="#exams_allstudent_subject"
+                                                    onclick="changeContent('exams_allstudent_subject')">Correct</a>
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +311,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="main-button">
-                                                <a id="correct">Correct</a>
+                                                <a class="nav-link" href="#exams_allstudent_subject"
+                                                    onclick="changeContent('exams_allstudent_subject')">Correct</a>
                                             </div>
                                         </div>
                                     </div>
@@ -307,13 +329,10 @@
 
     <section class="blog-posts grid-system" id="exams_allstudent_subject" style="display: none;">
         <div class="container">
-
+            <b>Exam 1</b>
             <!-- Subject 1 -->
-
-
             <div class="row">
                 <div class="col-lg-12">
-
                     <table class="table">
                         <thead>
                             <tr>
@@ -327,8 +346,14 @@
                             <tr>
                                 <td>María Belén Esteban Menéndez</td>
                                 <td id="job4">9.25</td>
-                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
-                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a class="nav-link">Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="row">
@@ -343,8 +368,13 @@
                             <tr>
                                 <td>Gonzalo Julián Conde</td>
                                 <td id="job4">9.25</td>
-                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
-                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a class="nav-link">Edit</a>
+                                            </div>
+                                        </div>
                                 </td>
                                 <td>
                                     <div class="row">
@@ -359,8 +389,13 @@
                             <tr>
                                 <td>Jordi Hurtado Torres</td>
                                 <td id="job4">9.25</td>
-                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
-                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a class="nav-link">Edit</a>
+                                            </div>
+                                        </div>
                                 </td>
                                 <td>
                                     <div class="row">
@@ -375,8 +410,13 @@
                             <tr>
                                 <td>Francisco José Rivera Pantoja</td>
                                 <td id="job4">9.25</td>
-                                <td><button id="4" type="button" class="btn btn-primary" onClick="click_here(this.id)"
-                                        data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="main-button">
+                                                <a class="nav-link">Edit</a>
+                                            </div>
+                                        </div>
                                 </td>
                                 <td>
                                     <div class="row">
@@ -470,6 +510,8 @@
             sec2.style.display = 'none'
             let sec3 = document.getElementById("marks")
             sec3.style.display = 'none'
+            let sec4 = document.getElementById("exams_allstudent_subject")
+            sec4.style.display = 'none'
             const section = document.querySelector(`#${sectionId}`);
             section.style.display = 'block';
         }

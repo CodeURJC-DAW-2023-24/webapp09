@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <link rel="stylesheet" href="assets/css/owl.css">
-
 </head>
 
 
@@ -58,12 +57,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam_student.html">Exams</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="viewmarks_student.html">Marks</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="profile.html">Profile</a>
                         </li>
                     </ul>
@@ -87,6 +80,14 @@
         </section>
     </div>
 
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="centered-div">
+                <p>Congratulations, you have enrolled in a new subject!</p>
+            </div>
+        </div>
+    </div>
+
     <section class="blog-posts">
         <div class="container">
             <div class="row">
@@ -108,7 +109,8 @@
                                             usen dichas estructuras. Al terminar el curso, los
                                             alumnos deberán conocer las propiedades, el funcionamiento y las posibles
                                             implementaciones de las principales estructuras de
-                                            datos, y saber cuándo y cómo utilizarlas para la resolución de problemas.</p>
+                                            datos, y saber cuándo y cómo utilizarlas para la resolución de problemas.
+                                        </p>
                                         <p>Las estructuras de datos junto con los algoritmos, son los pilares de la
                                             programación de computadores, por lo que se trata de
                                             una asignatura fundamental en cualquier titulación relacionada con la
@@ -145,7 +147,7 @@
 
                             <div class="col-lg-12">
                                 <div class="main-button">
-                                    <a href="#">I am interested</a>
+                                    <a id="mostrarModalBtn">Enroll Now!</a>
                                 </div>
                             </div>
 
@@ -155,6 +157,48 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+
+        // COMPROBAR SI EL USUARIO TIENE LA SESION INICIADA O QUE EL BOTÓN PARA INSCRIBIRSE SOLO SE MUESTRE SI TIENE LA SESION INICIADA
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('myModal');
+            var span = document.getElementsByClassName('close')[0];
+            var mostrarModalBtn = document.getElementById('mostrarModalBtn');
+
+            // Función para mostrar el modal
+            function mostrarModal() {
+                // Mostrar el cuadro pop-up
+                modal.style.display = 'block';
+            }
+
+            // Función para cerrar el modal
+            function cerrarModal() {
+                modal.style.display = 'none';
+                window.location.href = "main_page.html"
+            }
+
+            // Evento clic del botón para mostrar el mensaje de alerta y el modal
+            mostrarModalBtn.addEventListener('click', function () {
+                // Mostrar el mensaje de alerta
+                var opcion = confirm("Are you sure you want enroll in this subject?");
+                if (opcion == true) {
+
+                    //RECOGER DATOS DEL USUARIO PARA AÑADIRLO A LA ASIGNATURA
+
+                    // Si el usuario pulsa "Aceptar", mostrar el modal
+                    mostrarModal();
+
+                    // Cerrar el cuadro pop-up después de 2 segundos
+                    setTimeout(cerrarModal, 2000);
+                }
+            });
+
+
+        });
+    </script>
 
     <footer>
         <div class="container">
