@@ -60,6 +60,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">Profile</a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -111,6 +112,9 @@
                     <li class="nav-item">
                         <!-- Muestra todas las notas, cuando solo debería mostrar las de la asignatura en la que está -->
                         <a class="nav-link" href="#marks" onclick="changeContent('marks')">Marks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#forum" onclick="changeContent('forum')">Forum</a>
                     </li>
                 </ul>
             </div>
@@ -304,6 +308,48 @@
         </div>
     </section>
 
+    <section class="blog-posts grid-system" id="forum" style="display: none;">
+        <div class="container">
+    
+            <!-- Subject 1 -->
+    
+            <!-- Sección de Comentarios -->
+            <div class="comentario">
+                <div class="autor">Nombre del Usuario</div>
+                <div class="fecha">12 de febrero de 2024</div>
+                <div class="texto">
+                    <p>cuerpo del comentario 1</p>
+                </div>
+            </div>
+            
+            <hr>
+
+            <div class="comentario">
+                <div class="autor">Otro Usuario</div>
+                <div class="fecha">13 de febrero de 2024</div>
+                <div class="texto">
+                    <p>cuerpo del comentario 2</p>
+                </div>
+            </div>
+    
+            <hr>
+
+            <!-- Formulario para agregar nuevos comentarios -->
+            <form id="formulario-comentario">
+                <h2>Añadir Comentario</h2>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+    
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" name="comentario" required></textarea>
+    
+                <button type="submit">Enviar Comentario</button>
+            </form>
+    
+        </div>
+    </section>
+    
+
     <script>
         function changeContent(sectionId) {
             let sec1 = document.getElementById("informacion_general")
@@ -312,6 +358,8 @@
             sec2.style.display = 'none'
             let sec3 = document.getElementById("marks")
             sec3.style.display = 'none'
+            let sec4 = document.getElementById("forum")
+            sec4.style.display = 'none'
             const section = document.querySelector(`#${sectionId}`);
             section.style.display = 'block';
         }
