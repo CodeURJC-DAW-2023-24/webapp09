@@ -1,7 +1,11 @@
-{{>head}} 
-    <body>
-    {{>header}}
+<!DOCTYPE html>
+<html>
 
+{{>head}}
+
+<body>
+
+    {{>header}}
 
     <!--  ########## PAGE CONTENT ##########  -->
     <!-- Title -->
@@ -10,9 +14,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <img src="assets/images/imagenFotoPerfil.jpg"
-                            class="card-img-top rounded-circle img-fluid mx-auto" alt="Imagen de Perfil"
-                            style="width: 100px; height: 100px">
+                        <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
+                            alt="Imagen de Perfil" style="width: 100px; height: 100px">
                         <br></br>
                         <div class="text-content">
                             <h2>Name</h2>
@@ -243,47 +246,54 @@
         </div>
     </section>
 
+
     <section class="blog-posts grid-system" id="forum" style="display: none;">
         <div class="container">
-    
-            <!-- Subject 1 -->
-    
-            <!-- Sección de Comentarios -->
-            <div class="comentario">
-                <div class="autor">Nombre del Usuario</div>
-                <div class="fecha">12 de febrero de 2024</div>
-                <div class="texto">
-                    <p>cuerpo del comentario 1</p>
+            <div class="row">
+                <div class="col-lg-12 centered-div">
+                    <div class="all-blog-posts">
+
+                        <div class="blog-post">
+                            <!-- Sección de Comentarios -->
+                            <div class="comentario">
+                                <div class="autor">Nombre del Usuario</div>
+                                <div class="fecha">12 de febrero de 2024</div>
+                                <div class="texto">
+                                    <p>cuerpo del comentario 1</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="comentario">
+                                <div class="autor">Otro Usuario</div>
+                                <div class="fecha">13 de febrero de 2024</div>
+                                <div class="texto">
+                                    <p>cuerpo del comentario 2</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Formulario para agregar nuevos comentarios -->
+
+                            <form id="formulario-comentario">
+                                <br></br>
+                                <h2>Add Comment</h2>
+                                <hr>
+                                <div class="centered-div">
+                                    <textarea name="comment" class="form-control" id="comment" rows="5"
+                                        placeholder="Write here..."></textarea>
+
+                                    <br></br>
+                                    <div class="main-button">
+                                        <a onclick="">Send</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <hr>
-
-            <div class="comentario">
-                <div class="autor">Otro Usuario</div>
-                <div class="fecha">13 de febrero de 2024</div>
-                <div class="texto">
-                    <p>cuerpo del comentario 2</p>
-                </div>
-            </div>
-    
-            <hr>
-
-            <!-- Formulario para agregar nuevos comentarios -->
-            <form id="formulario-comentario">
-                <h2>Añadir Comentario</h2>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-    
-                <label for="comentario">Comentario:</label>
-                <textarea id="comentario" name="comentario" required></textarea>
-    
-                <button type="submit">Enviar Comentario</button>
-            </form>
-    
         </div>
     </section>
-    
+
 
     <script>
         function changeContent(sectionId) {
@@ -301,3 +311,7 @@
     </script>
 
     {{>footer}}
+
+</body>
+
+</html>
