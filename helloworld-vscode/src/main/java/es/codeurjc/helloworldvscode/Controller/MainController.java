@@ -1,9 +1,8 @@
-package es.codeurjc.helloworldvscode.controller;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+package es.codeurjc.helloworldvscode.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
@@ -34,20 +33,20 @@ public class MainController {
     public String editProfile(HttpServletRequest request){
         return "editProfile";
     }
- 
-    @RequestMapping("/subjects-registered-user")
-    public String subjectsRegisteredUser() {
-        return "subjects_registereduser";
+
+    @RequestMapping("/edit-profile")
+    public String editProfile() {
+        return "editProfile";
     }
+
 
     @RequestMapping("/subject-one-subj-admin")
     public String subjectOneSubjAdmin() {
         return "subject_onesubj_admin";
     }
 
-    @RequestMapping("/subject-one-subj-teacher")
-    public String subjectOneSubjTeacher() {
-        return "subject_onesubj_teacher";
-    }
+
+
+
 
 }

@@ -1,9 +1,8 @@
-package es.codeurjc.helloworldvscode.controller;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+package es.codeurjc.helloworldvscode.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
