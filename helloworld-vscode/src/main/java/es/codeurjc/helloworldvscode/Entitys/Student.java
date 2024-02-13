@@ -1,100 +1,115 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotBlank(message = "Name not null")
-    @Size(max = 100)
-    private String name;
+    @NotBlank(message = "First name is required")
+    private String firstName;
 
-    @NotBlank(message = "Surname not null")
-    @Size(max = 100)
-    private String surname;
+    @NotBlank(message = "Last name is required")
+    private String lastName;
 
-    @NotBlank(message = "mail not null")
-    @Email(message = "invalid mail")
-    @Size(max = 100)
-    @Column(unique = true)
+    @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "password not null")
+
     private String password;
 
     @Lob
-    private byte[] profilePhoto;
+    private byte[] profilePicture;
 
+    @ManyToMany(mappedBy = "students")
+    private Set<Subject> subjects;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExamStudent> examStudents;
+
+
+    // Constructors
     public Student() {
     }
 
-    public Student(String name, String surname, String email, String password, byte[] profilePhoto) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.profilePhoto = profilePhoto;
-    }
+    // Include a constructor with parameters if needed
 
-    // Getters y setters
-    public String getId() {
+    // Getters
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    // Use JsonProperty on getter to allow password field to be deserialized during JSON parsing
+    @JsonProperty
     public String getPassword() {
         return password;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public List<ExamStudent> getExamStudents() {
+        return examStudents;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public byte[] getProfilePhoto() {
-        return profilePhoto;
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
-    public void setProfilePhoto(byte[] profilePhoto) {
-        this.profilePhoto = profilePhoto;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
+
+    public void setExamStudents(List<ExamStudent> examStudents) {
+        this.examStudents = examStudents;
+    }
+
+    // Add any additional methods needed for your logic
 }
-

@@ -1,13 +1,8 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Exam {
@@ -16,45 +11,56 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false)
-    private Subject subject; // Reference to the Subject entity
-
     @Lob
-    private byte[] statement; // PDF statement of the exam
+    @NotNull(message = "Exam statement is required")
+    private byte[] statement; // Assuming this is a PDF file.
 
-    // No-argument constructor
+    @ManyToOne
+    @JoinColumn(name = "subject_id", nullable = false)
+    private Subject subject;
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExamStudent> examStudents;
+
+    // Constructors
     public Exam() {
     }
 
-    // Constructor with all fields
-    public Exam(Subject subject, byte[] statement) {
-        this.subject = subject;
-        this.statement = statement;
-    }
+    // Include a constructor with parameters if needed
 
-    // Getters and setters
+    // Getters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
     }
 
     public byte[] getStatement() {
         return statement;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public List<ExamStudent> getExamStudents() {
+        return examStudents;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setStatement(byte[] statement) {
         this.statement = statement;
     }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public void setExamStudents(List<ExamStudent> examStudents) {
+        this.examStudents = examStudents;
+    }
+
+    // Add any additional methods needed for your logic
 }
