@@ -1,6 +1,12 @@
-{{>head}} 
-    <body>
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
     {{>header}}
+
     <!-- BANNER PARA PONER ASIGNATURAS -->
     <div class="main-banner header-text">
         <div class="container-fluid">
@@ -12,7 +18,7 @@
                             <div class="meta-category">
                                 <span>Programación</span>
                             </div>
-                            <a href="subject_info.html">
+                            <a href="/subject-info">
                                 <h4>Estructura de Datos</h4>
                             </a>
                         </div>
@@ -25,7 +31,7 @@
                             <div class="meta-category">
                                 <span>Programación</span>
                             </div>
-                            <a href="subject_info.html">
+                            <a href="/subject-info">
                                 <h4>Desarrollo de Aplicaciones Web</h4>
                             </a>
                         </div>
@@ -38,7 +44,7 @@
                             <div class="meta-category">
                                 <span>Matemáticas</span>
                             </div>
-                            <a href="subject_info.html">
+                            <a href="/subject-info">
                                 <h4>Cálculo</h4>
                             </a>
                         </div>
@@ -51,7 +57,7 @@
                             <div class="meta-category">
                                 <span>Infantil</span>
                             </div>
-                            <a href="subject_info.html">
+                            <a href="/subject-info">
                                 <h4>Macarrones</h4>
                             </a>
                         </div>
@@ -73,10 +79,13 @@
                                     <h4 style="	color: #f48840;">Studoku</h4>
                                     <br></br>
                                     <h6 style="color:#fff">Welcome to our website! Here, you'll discover a diverse array
-                                        of subjects waiting to be explored. Join our platform to enroll in subjects, delve into new topics, and
+                                        of subjects waiting to be explored. Join our platform to enroll in subjects,
+                                        delve into new topics, and
                                         expand your knowledge horizons. Whether you're seeking to deepen your
-                                        understanding of a specific field or embark on a learning journey across various disciplines,
-                                        our platform offers a gateway to boundless educational opportunities. Join us today
+                                        understanding of a specific field or embark on a learning journey across various
+                                        disciplines,
+                                        our platform offers a gateway to boundless educational opportunities. Join us
+                                        today
                                         and embark on a path of continuous learning and growth!</h6>
                                 </div>
                             </div>
@@ -101,7 +110,7 @@
                                         <img src="/images/blog-post-01.jpg" alt="">
                                     </div>
                                     <div class="down-content">
-                                        <a href="subject_info.html" class="subject-link">
+                                        <a href='/subject-info' class="subject-info-link">
                                             Estructura de Datos
                                         </a>
                                         <p>Esta asignatura pretende ser un curso introductorio a las estructuras de
@@ -135,7 +144,7 @@
                                         <img src="/images/blog-post-02.jpg" alt="">
                                     </div>
                                     <div class="down-content">
-                                        <a href="subject_info.html" class="subject-link">
+                                        <a href="/subject-info" class="subject-info-link">
                                             Desarrollo de Aplicaciones Web
                                         </a>
                                         <p>El objetivo de la asignatura de “Desarrollo de Aplicaciones Web” es ofrecer
@@ -179,6 +188,8 @@
         </div>
     </section>
 
+    {{>footer}}
 
+</body>
 
-{{>footer}}
+</html>

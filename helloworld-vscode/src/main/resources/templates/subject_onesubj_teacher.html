@@ -1,7 +1,11 @@
-{{>head}} 
-    <body>
-    {{>header}}
+<!DOCTYPE html>
+<html>
 
+{{>head}}
+
+<body>
+
+    {{>header}}
 
     <!--  ########## PAGE CONTENT ##########  -->
     <!-- Title -->
@@ -10,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <img src="assets/images/imagenFotoPerfil.jpg"
+                        <img src="/images/imagenFotoPerfil.jpg"
                             class="card-img-top rounded-circle img-fluid mx-auto" alt="Imagen de Perfil"
                             style="width: 100px; height: 100px">
                         <br></br>
@@ -441,12 +445,12 @@
         </div>
     </section>
 
-    
+
     <section class="blog-posts grid-system" id="forum" style="display: none;">
         <div class="container">
-    
+
             <!-- Subject 1 -->
-    
+
             <!-- Sección de Comentarios -->
             <div class="comentario">
                 <div class="autor">Nombre del Usuario</div>
@@ -456,7 +460,7 @@
                 </div>
                 <button onclick="borrarComentario(this)">Borrar Comentario</button>
             </div>
-    
+
             <hr>
 
             <div class="comentario">
@@ -467,7 +471,7 @@
                 </div>
                 <button onclick="borrarComentario(this)">Borrar Comentario</button>
             </div>
-    
+
             <hr>
 
             <!-- Formulario para agregar nuevos comentarios -->
@@ -475,13 +479,13 @@
                 <h2>Añadir Comentario</h2>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
-    
+
                 <label for="comentario">Comentario:</label>
                 <textarea id="comentario" name="comentario" required></textarea>
-    
+
                 <button type="submit">Enviar Comentario</button>
             </form>
-    
+
         </div>
     </section>
 
@@ -503,3 +507,7 @@
     </script>
 
     {{>footer}}
+
+</body>
+
+</html>

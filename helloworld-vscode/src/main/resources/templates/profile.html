@@ -1,8 +1,11 @@
-{{>head}} 
-    <body>
-    {{>header}}
+<!DOCTYPE html>
+<html>
 
+{{>head}}
 
+<body>
+
+  {{>header}}
 
   <!-- Banner Starts Here -->
   <div class="heading-page header-text">
@@ -30,7 +33,7 @@
 
           <div class="container mt-5">
             <div class="row">
-              <img src="assets/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
+              <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
                 alt="Imagen de Perfil" style="width: 100px; height: 100px">
             </div>
           </div>
@@ -46,7 +49,7 @@
               <!-- Botón para editar perfil -->
               <br></br>
               <div class="main-button">
-                <a href="editProfile.html">Edit Profile</a>
+                <a href="/editProfile">Edit Profile</a>
               </div>
             </div>
           </div>
@@ -81,5 +84,8 @@
     </div>
   </div>
 
+  {{>footer}}
 
-{{>footer}}
+</body>
+
+</html>
