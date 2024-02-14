@@ -13,22 +13,27 @@ public class MainController {
     public String index(HttpServletRequest request){
         return "main_page";
     }
+
     @RequestMapping("/subject") // LLEVARÁ UN ID DE ASIGNATURA 
     public String subject_student(HttpServletRequest request){
         return "subject_onesubj_student";
     }
+
     @RequestMapping("/subject-info") // LLEVARÁ UN ID DE ASIGNATURA 
     public String subject_info(HttpServletRequest request){
         return "subject_info";
     }
+
     @RequestMapping("/subjects") // LLEVARÁ UN ID DE USER 
     public String subjects_registereduser(HttpServletRequest request){
         return "subjects_registereduser";
     }
+
     @RequestMapping("/profile") // LLEVARÁ UN ID DE USER
     public String profile(HttpServletRequest request){
         return "profile";
     }
+
     @RequestMapping("/editProfile") // LLEVARÁ UN ID DE USER
     public String editProfile(HttpServletRequest request){
         return "editProfile";
@@ -38,7 +43,6 @@ public class MainController {
     public String editProfile() {
         return "editProfile";
     }
-
 
     @RequestMapping("/subject-one-subj-admin")
     public String subjectOneSubjAdmin() {

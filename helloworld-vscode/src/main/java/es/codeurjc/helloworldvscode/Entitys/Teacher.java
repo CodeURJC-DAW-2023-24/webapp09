@@ -22,7 +22,6 @@ public class Teacher {
     @Email(message = "Email should be valid")
     private String email;
 
-
     private String password;
 
     @Lob
@@ -32,7 +31,15 @@ public class Teacher {
     private Set<Subject> subjects;
 
     // Constructors
-    public Teacher() {
+    public Teacher(String firstName, String lastName, String email, String password) {
+
+        super();
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+
     }
 
     // Include a constructor with parameters if needed
