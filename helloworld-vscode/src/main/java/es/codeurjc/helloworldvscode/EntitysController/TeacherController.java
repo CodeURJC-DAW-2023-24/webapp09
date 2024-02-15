@@ -4,11 +4,9 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Optional;
 
 import jakarta.annotation.PostConstruct;
 
-import org.springframework.data.repository.CrudRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.helloworldvscode.EntitysRepository.TeacherRepository;
-import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 
 @RestController
@@ -45,7 +42,7 @@ public class TeacherController {
 	
 	@GetMapping("/")
 	public Collection<Teacher> getItems() {
-		return teacherRepository.findAll();
+		return (Collection<Teacher>) teacherRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
@@ -54,14 +51,15 @@ public class TeacherController {
 		return teacherRepository.findById(id).orElseThrow();
 	}
 
+	@SuppressWarnings("null")
 	@PostMapping("/")
-	public ResponseEntity<Teacher> createItem(@RequestBody Teacher item) {
+	public ResponseEntity<Teacher> createItem(@RequestBody Teacher teacher) {
 
-		teacherRepository.save(item);
+		teacherRepository.save(teacher);
 
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(item.getId()).toUri();
+		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(teacher.getId()).toUri();
 
-		return ResponseEntity.created(location).body(item);
+		return ResponseEntity.created(location).body(teacher);
 	}
 
 	@PutMapping("/{id}")
