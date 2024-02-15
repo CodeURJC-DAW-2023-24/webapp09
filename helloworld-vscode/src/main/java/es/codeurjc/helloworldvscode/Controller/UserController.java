@@ -1,8 +1,11 @@
-package es.codeurjc.helloworldvscode.Controller;
+package es.codeurjc.helloworldvscode.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -21,4 +24,5 @@ public class UserController {
     public String signup(HttpServletRequest request){
         return "signup";
     }
+    
 }

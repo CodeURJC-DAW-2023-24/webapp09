@@ -1,13 +1,16 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 
 @Entity(name = "teacher")
@@ -16,32 +19,48 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String firstName;
-
+    @Column(nullable = false)
     private String lastName;
-
+    @Column(nullable = false)
     private String email;
-
+    @Column(nullable = false)
     private String password;
-
+    @Column
+    @Lob
     private byte[] profilePicture;
 
     @ManyToMany(mappedBy = "students")
     private Set<Subject> subjects;
 
     // Constructors
+    public Teacher(){}
+
     public Teacher(String firstName, String lastName, String email, String password) {
-
-        super();
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-
+        this.profilePicture = null;
     }
 
+    public Teacher(String firstName, String lastName, String email, String password, byte[] profile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.profilePicture = profile;
+    }
+
+    public Teacher(Teacher t) {
+        this.firstName = t.firstName;
+        this.lastName = t.lastName;
+        this.email = t.email;
+        this.password = "";
+        this.profilePicture = t.profilePicture;
+        this.subjects = new HashSet<>();
+    }
     // Include a constructor with parameters if needed
 
     // Getters

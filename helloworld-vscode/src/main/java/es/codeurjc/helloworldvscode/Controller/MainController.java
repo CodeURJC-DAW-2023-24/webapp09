@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.Controller;
+package es.codeurjc.helloworldvscode.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;

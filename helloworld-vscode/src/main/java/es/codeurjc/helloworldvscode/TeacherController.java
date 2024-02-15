@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/teachers/")
 public class TeacherController {
 
 	@Autowired
-	private TeacherRepository teacherRepository;
+	private TeacherRepository teacherList;
 
 	@PostConstruct
 	public void init() {
@@ -33,27 +33,27 @@ public class TeacherController {
 		Teacher t1 = new Teacher("Pepe","Franco","pfespania@gmail.com","vivaespaña");
 		Teacher t2 = new Teacher("Belen","Esteban","salavame@gmail.com","andreita");
 
-		teacherRepository.save(t1);
-		teacherRepository.save(t2);
+		teacherList.save(t1);
+		teacherList.save(t2);
 
 	}
 	
 	@GetMapping("/")
 	public Collection<Teacher> getItems() {
-		return (Collection<Teacher>) teacherRepository.findAll();
+		return teacherList.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public Teacher getItem(@PathVariable long id) {
 
-		return teacherRepository.findById(id).orElseThrow();
+		return teacherList.findById(id).orElseThrow();
 	}
 
 	@SuppressWarnings("null")
 	@PostMapping("/")
 	public ResponseEntity<Teacher> createItem(@RequestBody Teacher teacher) {
 
-		teacherRepository.save(teacher);
+		teacherList.save(teacher);
 
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(teacher.getId()).toUri();
 
@@ -63,10 +63,10 @@ public class TeacherController {
 	@PutMapping("/{id}")
 	public Teacher replaceItem(@PathVariable long id, @RequestBody Teacher newteacherRepository) {
 
-		teacherRepository.findById(id).orElseThrow();
+		teacherList.findById(id).orElseThrow();
 
 		newteacherRepository.setId(id);
-		teacherRepository.save(newteacherRepository);
+		teacherList.save(newteacherRepository);
 			
 		return newteacherRepository;
 	}
@@ -74,9 +74,9 @@ public class TeacherController {
 	@DeleteMapping("/{id}")
 	public Teacher deleteItem(@PathVariable long id) {
 
-		Teacher item = teacherRepository.findById(id).orElseThrow();
+		Teacher item = teacherList.findById(id).orElseThrow();
 
-		teacherRepository.deleteById(id);
+		teacherList.deleteById(id);
 		
 		return item;
 	}
