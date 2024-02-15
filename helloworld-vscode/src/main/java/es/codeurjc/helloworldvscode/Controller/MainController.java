@@ -1,10 +1,17 @@
 package es.codeurjc.helloworldvscode.controller;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collection;
 
+import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 
 @Controller
 public class MainController { 
@@ -48,9 +55,6 @@ public class MainController {
     public String subjectOneSubjAdmin() {
         return "subject_onesubj_admin";
     }
-
-
-
 
 
 }

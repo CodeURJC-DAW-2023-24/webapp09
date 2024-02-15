@@ -1,7 +1,7 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public class Student {
     private String password;
 
     @Lob
-    private byte[] profilePicture;
+    private Blob profilePicture;
 
     @ManyToMany(mappedBy = "students")
     private Set<Subject> subjects;
@@ -62,7 +62,7 @@ public class Student {
         return password;
     }
 
-    public byte[] getProfilePicture() {
+    public Blob getProfilePicture() {
         return profilePicture;
     }
 
@@ -95,7 +95,7 @@ public class Student {
         this.password = password;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    public void setProfilePicture(Blob profilePicture) {
         this.profilePicture = profilePicture;
     }
 

@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode;
+package es.codeurjc.helloworldvscode.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

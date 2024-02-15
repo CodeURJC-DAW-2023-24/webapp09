@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode;
+package es.codeurjc.helloworldvscode.controller;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 
 @RestController
 @RequestMapping("/teachers/")

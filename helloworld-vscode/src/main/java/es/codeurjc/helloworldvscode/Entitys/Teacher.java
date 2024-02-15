@@ -2,7 +2,7 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.sql.Blob;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -29,7 +29,7 @@ public class Teacher {
     private String password;
     @Column
     @Lob
-    private byte[] profilePicture;
+    private Blob profilePicture;
 
     @ManyToMany(mappedBy = "students")
     private Set<Subject> subjects;
@@ -45,7 +45,7 @@ public class Teacher {
         this.profilePicture = null;
     }
 
-    public Teacher(String firstName, String lastName, String email, String password, byte[] profile) {
+    public Teacher(String firstName, String lastName, String email, String password, Blob profile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -86,7 +86,7 @@ public class Teacher {
         return password;
     }
 
-    public byte[] getProfilePicture() {
+    public Blob getProfilePicture() {
         return profilePicture;
     }
 
@@ -115,7 +115,7 @@ public class Teacher {
         this.password = password;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    public void setProfilePicture(Blob profilePicture) {
         this.profilePicture = profilePicture;
     }
 
