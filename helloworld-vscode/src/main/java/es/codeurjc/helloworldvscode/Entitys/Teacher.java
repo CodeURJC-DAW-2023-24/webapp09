@@ -1,30 +1,30 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+@Entity(name = "teacher")
 public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is required")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
     private String lastName;
 
-    @Email(message = "Email should be valid")
     private String email;
 
     private String password;
 
-    @Lob
     private byte[] profilePicture;
 
     @ManyToMany(mappedBy = "students")

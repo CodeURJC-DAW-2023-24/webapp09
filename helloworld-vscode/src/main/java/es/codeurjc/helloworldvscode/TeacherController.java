@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.EntitysController;
+package es.codeurjc.helloworldvscode;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -6,7 +6,6 @@ import java.net.URI;
 import java.util.Collection;
 
 import jakarta.annotation.PostConstruct;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.codeurjc.helloworldvscode.EntitysRepository.TeacherRepository;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 
 @RestController

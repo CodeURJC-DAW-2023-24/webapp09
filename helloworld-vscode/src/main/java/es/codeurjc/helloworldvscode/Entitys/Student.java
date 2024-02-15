@@ -2,11 +2,10 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
@@ -15,13 +14,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is required")
     private String firstName;
-
-    @NotBlank(message = "Last name is required")
+    
     private String lastName;
 
-    @Email(message = "Email should be valid")
     private String email;
 
 

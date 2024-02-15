@@ -1,7 +1,6 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 
 @Entity
 public class Forum {
@@ -10,10 +9,8 @@ public class Forum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Username is required")
     private String username;
 
-    @NotBlank(message = "Comment is required")
     private String comment;
 
     @ManyToOne

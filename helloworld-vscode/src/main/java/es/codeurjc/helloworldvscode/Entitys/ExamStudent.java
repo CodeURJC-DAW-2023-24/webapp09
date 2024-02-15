@@ -1,6 +1,6 @@
 package es.codeurjc.helloworldvscode.Entitys;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.*;
 
 @Entity
 public class ExamStudent {
@@ -9,13 +9,15 @@ public class ExamStudent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @NotNull(message = "Student response is required")
     private byte[] response; // Assuming this is a PDF file containing the student's response.
 
     @ManyToOne
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 
     // Additional fields can include student information if needed, depending on the model.
 

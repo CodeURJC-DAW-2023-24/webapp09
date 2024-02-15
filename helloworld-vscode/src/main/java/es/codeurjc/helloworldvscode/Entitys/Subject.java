@@ -1,6 +1,7 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ public class Subject {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
     )
+    
     private Set<Teacher> teachers;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
