@@ -1,10 +1,10 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import es.codeurjc.helloworldvscode.enumerate.Role;
 import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -25,6 +25,9 @@ public class Student {
 
     @Lob
     private Blob profilePicture;
+
+    @Enumerated(EnumType.STRING)
+    private final Role role = Role.ROLE_STUDENT;
 
     @ManyToMany(mappedBy = "students")
     private Set<Subject> subjects;
@@ -73,6 +76,8 @@ public class Student {
     public List<ExamStudent> getExamStudents() {
         return examStudents;
     }
+
+    public Role getRole(){ return this.role;}
 
     // Setters
     public void setId(Long id) {

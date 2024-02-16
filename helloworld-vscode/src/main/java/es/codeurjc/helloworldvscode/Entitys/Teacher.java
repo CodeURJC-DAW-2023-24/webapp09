@@ -5,13 +5,8 @@ import java.util.Set;
 import java.sql.Blob;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
+import es.codeurjc.helloworldvscode.enumerate.Role;
+import jakarta.persistence.*;
 
 @Entity(name = "teacher")
 public class Teacher {
@@ -30,6 +25,8 @@ public class Teacher {
     @Column
     @Lob
     private Blob profilePicture;
+    @Enumerated(EnumType.STRING)
+    private final Role role = Role.ROLE_TEACHER;
 
     @ManyToMany(mappedBy = "students")
     private Set<Subject> subjects;
@@ -93,6 +90,8 @@ public class Teacher {
     public Set<Subject> getSubjects() {
         return subjects;
     }
+
+    public Role getRole(){ return this.role;}
 
     // Setters
     public void setId(Long id) {
