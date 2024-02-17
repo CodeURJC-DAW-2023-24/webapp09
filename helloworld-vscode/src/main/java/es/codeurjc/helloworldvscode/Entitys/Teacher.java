@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.sql.Blob;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,7 +50,8 @@ public class Teacher {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        setPassword(password);
         this.profilePicture = profile;
     }
 
@@ -112,7 +114,9 @@ public class Teacher {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     public void setProfilePicture(Blob profilePicture) {
