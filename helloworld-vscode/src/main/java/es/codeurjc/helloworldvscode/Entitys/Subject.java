@@ -11,7 +11,12 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private String allInfo;
 
     @ManyToMany
     @JoinTable(
@@ -40,7 +45,18 @@ public class Subject {
     public Subject() {
     }
 
-    // Include a constructor with parameters if needed
+    public Subject(String name, String description, String allInfo) {
+        this.name = name;
+        this.description = description;
+        this.allInfo = allInfo;
+    }
+
+    public Subject (Subject s){
+        this.name = s.name;
+        this.description = s.description;
+        this.allInfo = s.allInfo;
+        // COMPLETAR SI ES NECESARIO
+    }
 
     // Getters
     public Long getId() {
@@ -49,6 +65,10 @@ public class Subject {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getAllInfo() {
+        return allInfo;
     }
 
     public Set<Student> getStudents() {
@@ -67,6 +87,10 @@ public class Subject {
         return forums;
     }
 
+    public String getName() {
+        return name;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -74,6 +98,10 @@ public class Subject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setAllInfo(String allInfo) {
+        this.allInfo = allInfo;
     }
 
     public void setStudents(Set<Student> students) {

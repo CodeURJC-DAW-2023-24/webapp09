@@ -7,17 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.ui.Model;
 import java.util.Collection;
 
+import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 
 @Controller
 public class MainController { 
 
+    @Autowired
+	SubjectRepository subjectsList;
+
     @RequestMapping("/")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request, Model model){
+        model.addAttribute("subjects",subjectsList.findAll());
         return "main_page";
     }
 
@@ -55,6 +62,5 @@ public class MainController {
     public String subjectOneSubjAdmin() {
         return "subject_onesubj_admin";
     }
-
 
 }

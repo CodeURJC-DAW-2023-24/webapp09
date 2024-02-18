@@ -13,16 +13,15 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String firstName;
-    
+    @Column(nullable = false)
     private String lastName;
-
+    @Column(nullable = false)
     private String email;
-
-
+    @Column(nullable = false)
     private String password;
-
+    @Column
     @Lob
     private Blob profilePicture;
 
@@ -80,10 +79,6 @@ public class Student {
     public Role getRole(){ return this.role;}
 
     // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
