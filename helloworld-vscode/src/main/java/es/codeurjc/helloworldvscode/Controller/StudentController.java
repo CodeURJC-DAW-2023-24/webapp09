@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.controller;
+package es.codeurjc.helloworldvscode.Controller;
 
 public class StudentController {
 }

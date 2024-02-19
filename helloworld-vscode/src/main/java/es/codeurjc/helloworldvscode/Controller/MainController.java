@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.controller;
+package es.codeurjc.helloworldvscode.Controller;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;

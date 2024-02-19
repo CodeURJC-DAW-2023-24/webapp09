@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.controller;
+package es.codeurjc.helloworldvscode.Controller;
 
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
