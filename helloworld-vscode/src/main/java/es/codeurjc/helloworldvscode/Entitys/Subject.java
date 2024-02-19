@@ -2,6 +2,7 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import jakarta.persistence.*;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +14,14 @@ public class Subject {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000000)
     private String description;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000000)
     private String allInfo;
+    @Column(nullable = false)
+    private String gender;
+    @Column
+    private String banner;
 
     @ManyToMany
     @JoinTable(
@@ -45,17 +50,41 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String name, String description, String allInfo) {
+    public Subject(String name, String description, String allInfo, String gender) {
         this.name = name;
         this.description = description;
         this.allInfo = allInfo;
+        this.gender = gender;
+        this.banner = "/images/blog-post-03.jpg";
+    }
+
+    public Subject(String name, String description, String allInfo, String gender, String banner) {
+        this.name = name;
+        this.description = description;
+        this.allInfo = allInfo;
+        this.gender = gender;
+        this.banner = banner;
     }
 
     public Subject (Subject s){
         this.name = s.name;
         this.description = s.description;
         this.allInfo = s.allInfo;
+        this.gender = s.gender;
+        this.banner = s.banner;
         // COMPLETAR SI ES NECESARIO
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 
     // Getters
@@ -91,7 +120,15 @@ public class Subject {
         return name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     // Setters
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

@@ -14,7 +14,7 @@
                     <div class="col-lg-12">
                         <div class="text-content">
                             <h4>Get Informed</h4>
-                            <h2>Estructura de Datos</h2>
+                            <h2>{{subject.name}}</h2>
                         </div>
                     </div>
                 </div>
@@ -41,44 +41,19 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="/images/blog-post-01.jpg" alt="">
+                                        <img src={{subject.banner}} alt="">
                                     </div>
                                     <div class="down-content">
-                                        <h4>Estructura de Datos</h4>
-                                        <p>Esta asignatura pretende ser un curso introductorio a las estructuras de
-                                            datos clásicas tratadas con el enfoque de tipos
-                                            abstractos de datos (TAD), y al desarrollo metodológico de programas que
-                                            usen dichas estructuras. Al terminar el curso, los
-                                            alumnos deberán conocer las propiedades, el funcionamiento y las posibles
-                                            implementaciones de las principales estructuras de
-                                            datos, y saber cuándo y cómo utilizarlas para la resolución de problemas.
-                                        </p>
-                                        <p>Las estructuras de datos junto con los algoritmos, son los pilares de la
-                                            programación de computadores, por lo que se trata de
-                                            una asignatura fundamental en cualquier titulación relacionada con la
-                                            Informática. De hecho, una de las principales
-                                            competencias de estas titulaciones es diseñar y desarrollar correctamente
-                                            programas informáticos eficientes.
-                                            Esta asignatura se imparte en el segundo cuatrimestre del primer curso de la
-                                            titulación, como continuación de la asignatura de
-                                            Introducción a la Programación del cuatrimestre anterior. Sirve por otro
-                                            lado de base para el resto de asignaturas de
-                                            programación que se imparten posteriormente en la titulación.</p>
-                                        <p>Se considera fundamental que el alumno haya cursado con aprovechamiento la
-                                            asignatura Introducción a la Programación del
-                                            cuatrimestre anterior y que se desenvuelva correctamente con el lenguaje de
-                                            programación utilizado. También es deseable que
-                                            el alumno haya asimilado algunos conceptos fundamentales de matemática
-                                            discreta y lógica impartidos en el cuatrimestre
-                                            anterior.</p>
+                                        <h4>{{subject.name}}</h4>
+                                        <p>{{subject.description}}</p>
+                                        <p>{{subject.allInfo}}</p>
                                         <div class="post-options">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <ul class="post-tags">
                                                         <!--SE PUEDEN USAR PARA EL ALGORITMO DE RECOMENDACIÓN-->
                                                         <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Programación</a>,</li>
-                                                        <li><a href="#">Suspender</a></li>
+                                                        <li><a>{{subject.gender}}</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -119,7 +94,7 @@
             // Función para cerrar el modal
             function cerrarModal() {
                 modal.style.display = 'none';
-                window.location.href = "main_page.html"
+                window.location.href = "/"
             }
 
             // Evento clic del botón para mostrar el mensaje de alerta y el modal
