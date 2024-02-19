@@ -17,6 +17,8 @@ public class Subject {
     private String description;
     @Column(nullable = false, length = 1000000)
     private String allInfo;
+    @Column(nullable = false)
+    private String gender;
 
     @ManyToMany
     @JoinTable(
@@ -45,16 +47,18 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String name, String description, String allInfo) {
+    public Subject(String name, String description, String allInfo, String gender) {
         this.name = name;
         this.description = description;
         this.allInfo = allInfo;
+        this.gender = gender;
     }
 
     public Subject (Subject s){
         this.name = s.name;
         this.description = s.description;
         this.allInfo = s.allInfo;
+        this.gender = s.gender;
         // COMPLETAR SI ES NECESARIO
     }
 
@@ -91,7 +95,15 @@ public class Subject {
         return name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     // Setters
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
