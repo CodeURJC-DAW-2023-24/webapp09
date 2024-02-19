@@ -35,11 +35,11 @@ public class SubjectController {
         Subject s2 = new Subject("Desarrollo de Aplicaciones Web",
                 "La asignatura ofrece una visión general del desarrollo de aplicaciones web para diversos dispositivos. Cubre características esenciales, tecnologías, arquitecturas y protocolos comunes.",
                 "Las aplicaciones web son vitales en informática. La asignatura enseña el desarrollo web para crear aplicaciones profesionales.",
-                "Programación");
+                "Programación", "/images/blog-post-daw.jpg");
         Subject s3 = new Subject("Inteligencia Artificial",
                 "La asignatura explora los fundamentos y aplicaciones de la inteligencia artificial. Los estudiantes estudiarán algoritmos de búsqueda, aprendizaje automático, lógica difusa y sistemas expertos.",
                 "Proporciona una visión general de los fundamentos y aplicaciones de la IA. El objetivo es comprender y aplicar técnicas avanzadas de IA en diferentes campos.",
-                "Aprendizaje automático");
+                "Aprendizaje automático", "/images/blog-post-ia.jpg");
         Subject s4 = new Subject("Introducción a las Bases de Datos",
                 "Los estudiantes aprenderán sobre diseño, implementación y optimización de bases de datos. Se explorarán temas como SQL, modelado de datos y gestión de transacciones.",
                 "Bases de Datos introduce los conceptos esenciales de las bases de datos relacionales y no relacionales. Los estudiantes adquieren habilidades en diseño, implementación y gestión de bases de datos para aplicaciones modernas.",

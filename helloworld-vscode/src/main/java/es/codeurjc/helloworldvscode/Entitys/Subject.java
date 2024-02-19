@@ -2,6 +2,7 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import jakarta.persistence.*;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +20,8 @@ public class Subject {
     private String allInfo;
     @Column(nullable = false)
     private String gender;
+    @Column
+    private String banner;
 
     @ManyToMany
     @JoinTable(
@@ -52,6 +55,15 @@ public class Subject {
         this.description = description;
         this.allInfo = allInfo;
         this.gender = gender;
+        this.banner = "/images/blog-post-03.jpg";
+    }
+
+    public Subject(String name, String description, String allInfo, String gender, String banner) {
+        this.name = name;
+        this.description = description;
+        this.allInfo = allInfo;
+        this.gender = gender;
+        this.banner = banner;
     }
 
     public Subject (Subject s){
@@ -59,7 +71,20 @@ public class Subject {
         this.description = s.description;
         this.allInfo = s.allInfo;
         this.gender = s.gender;
+        this.banner = s.banner;
         // COMPLETAR SI ES NECESARIO
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 
     // Getters

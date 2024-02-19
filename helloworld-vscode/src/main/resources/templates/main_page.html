@@ -97,10 +97,10 @@
                         subjectItem.innerHTML = `
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                    <img src="/images/blog-post-01.jpg" alt="">
+                                    <img src=${subject.banner} alt="">
                                 </div>
                                 <div class="down-content">
-                                    <a href='/subject-info' class="subject-link">${subject.name}</a>
+                                    <a href='/subject/${subject.id}' class="subject-link">${subject.name}</a>
                                     <p>${subject.description}</p>
                                     <div class="post-options">
                                         <div class="row">
