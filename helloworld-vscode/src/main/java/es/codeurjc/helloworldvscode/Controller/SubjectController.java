@@ -35,14 +35,15 @@ public class SubjectController {
 
     @GetMapping("/subject/{id}")
     public ModelAndView uniqueEvent(HttpServletRequest request, Model model, @PathVariable Long id){
+        ModelAndView modelView = new ModelAndView();
         if (subjectService.unique(id).isPresent()) {
-            ModelAndView modelView = new ModelAndView();
             modelView.setViewName("subject_info");
             model.addAttribute("subject", subjectService.unique(id).get());
             return modelView;
         }
         else{
-            return null;
+            modelView.setViewName("error");
+            return modelView;
         }
     }
 }
