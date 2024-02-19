@@ -3,7 +3,9 @@ package es.codeurjc.helloworldvscode.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
@@ -15,7 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SubjectController {
 
     @Autowired
-	    private SubjectRepository subjectsList;
+    SubjectRepository subjectsList;
+    @Autowired
+    SubjectService subjectService;
 
     @PostConstruct
 	public void init() {
@@ -28,4 +32,17 @@ public class SubjectController {
         subjectsList.save(s3);
         subjectsList.save(s4);
     }    
+
+    @GetMapping("/subject/{id}")
+    public ModelAndView uniqueEvent(HttpServletRequest request, Model model, @PathVariable Long id){
+        if (subjectService.unique(id).isPresent()) {
+            ModelAndView modelView = new ModelAndView();
+            modelView.setViewName("subject_info");
+            model.addAttribute("subject", subjectService.unique(id).get());
+            return modelView;
+        }
+        else{
+            return null;
+        }
+    }
 }

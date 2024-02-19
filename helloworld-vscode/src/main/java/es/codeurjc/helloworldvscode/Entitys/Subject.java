@@ -13,9 +13,9 @@ public class Subject {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000000)
     private String description;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000000)
     private String allInfo;
 
     @ManyToMany
