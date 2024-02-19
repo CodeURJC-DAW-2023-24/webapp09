@@ -66,43 +66,11 @@
                     <div class="all-blog-posts">
                         <div class="row">
 
-                            {{#subjects}}
-                            <!-- ITEM -->
-                            <div class="col-lg-12">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="/images/blog-post-01.jpg" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <a href='/subject/{{id}}' class="subject-link">
-                                            {{name}}
-                                        </a>
-                                        <p>{{description}}
-                                        </p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <ul class="post-tags">
-                                                        <!--SE PUEDEN USAR PARA EL ALGORITMO DE RECOMENDACIÓN-->
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a>{{gender}}</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{/subjects}}
+                            <div id="subjectsContainer"></div>
 
-                            <!-- Empty list -->
-                            {{^subjects}}
-                            <h2>There are no subjects yet</h2>
-                            {{/subjects}}
-                            
                             <div class="col-lg-12">
                                 <div class="main-button">
-                                    <a href="#">View All Subjects</a> <!-- PARA AJAX-->
+                                    <a id="loadMoreButton">View More</a> <!-- PARA AJAX-->
                                 </div>
                             </div>
 
@@ -112,6 +80,60 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+        var page = 0;
+        var size = 2; //CHANGE TO 10
+    
+        function loadSubjects() {
+            fetch('/subjects?page=' + page + '&size=' + size)
+                .then(response => response.json())
+                .then(data => {
+                    var subjectsContainer = document.getElementById('subjectsContainer');
+                    data.forEach(subject => {
+                        var subjectItem = document.createElement('div');
+                        subjectItem.classList.add('col-lg-12');
+                        subjectItem.innerHTML = `
+                            <div class="blog-post">
+                                <div class="blog-thumb">
+                                    <img src="/images/blog-post-01.jpg" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <a href='/subject-info' class="subject-link">${subject.name}</a>
+                                    <p>${subject.description}</p>
+                                    <div class="post-options">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <ul class="post-tags">
+                                                    <!--SE PUEDEN USAR PARA EL ALGORITMO DE RECOMENDACIÓN-->
+                                                    <li><i class="fa fa-tags"></i></li>
+                                                    <li><a href="#">${subject.gender}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        subjectsContainer.appendChild(subjectItem);
+                    });
+                    page++;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // Cargar los primeros subjects al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSubjects();
+        });
+    
+        // Cargar más subjects cuando se hace clic en el botón
+        document.getElementById('loadMoreButton').addEventListener('click', function() {
+            loadSubjects();
+        });
+    </script>
+
+
 
     {{>footer}}
 
