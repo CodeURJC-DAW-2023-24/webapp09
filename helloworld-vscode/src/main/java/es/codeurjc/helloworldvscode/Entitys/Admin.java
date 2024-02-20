@@ -3,7 +3,7 @@ package es.codeurjc.helloworldvscode.Entitys;
 import com.fasterxml.jackson.annotation.JsonView;
 import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.*;
-
+@Entity
 public class Admin {
 
     @Id

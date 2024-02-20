@@ -1,6 +1,8 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.sql.Blob;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,7 +32,7 @@ public class Teacher {
     private final Role role = Role.ROLE_TEACHER;
 
     @ManyToMany(mappedBy = "students")
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
 
     // Constructors
     public Teacher(){}
@@ -58,7 +60,7 @@ public class Teacher {
         this.email = t.email;
         this.password = "";
         this.profilePicture = t.profilePicture;
-        this.subjects = new HashSet<>();
+        this.subjects = new ArrayList<>();
     }
     // Include a constructor with parameters if needed
 
@@ -89,7 +91,7 @@ public class Teacher {
         return profilePicture;
     }
 
-    public Set<Subject> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
@@ -122,7 +124,7 @@ public class Teacher {
         this.profilePicture = profilePicture;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
