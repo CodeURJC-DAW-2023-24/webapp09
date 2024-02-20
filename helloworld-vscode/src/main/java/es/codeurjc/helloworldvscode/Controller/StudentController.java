@@ -4,6 +4,7 @@ import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.Services.StudentService;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,8 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    SubjectService subjectService;
 
 
     @GetMapping("/subjects_registereduser/{studentId}")public ModelAndView showStudentSubjects(@PathVariable Long studentId) {
@@ -26,13 +29,16 @@ public class StudentController {
         Student student = studentService.getStudentById(studentId);
         modelAndView.addObject("student", student);
         return modelAndView;
-
     }
 
-    @GetMapping("subject_onesubj_student")public ModelAndView showStudentSubject() {
-        ModelAndView view=new ModelAndView("subject_onesubj_student");
-        return view ;
+    @GetMapping("/subject_onesubj_student/{studentId}/{subjectId}")
+    public ModelAndView showSubjectDetails(@PathVariable Long studentId, @PathVariable Long subjectId) {
+        ModelAndView modelAndView = new ModelAndView("subject_onesubj_student"); // Asume que tienes una vista con este nombre
+        Subject subject = subjectService.getSubjectById(subjectId); // Asume que tienes un servicio para buscar asignaturas por ID
+        Student student = studentService.getStudentById(studentId); // Reutilización del servicio existente
+
+        modelAndView.addObject("subject", subject);
+        modelAndView.addObject("student", student);
+        return modelAndView;
     }
-
-
 }
