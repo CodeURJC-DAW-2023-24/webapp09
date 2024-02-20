@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.codeurjc</groupId>
-	<artifactId>bd_ejem4</artifactId>
+	<artifactId>webapp09</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -41,17 +41,26 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>5.7.6</version>
-        </dependency>
+        </dependency>-->
 		 <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
     </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 
 
