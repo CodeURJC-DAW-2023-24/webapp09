@@ -1,4 +1,4 @@
-package es.codeurjc.helloworldvscode.controller;
+package es.codeurjc.helloworldvscode.Controller;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
@@ -57,4 +57,3 @@ public class UserController {
 }
 
 
-}
