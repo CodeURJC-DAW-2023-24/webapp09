@@ -52,8 +52,5 @@ public class UserController {
         Student newStudent = new Student(firstName, lastName, email,password);
         studentRepository.save(newStudent);
         return "redirect:/login";
-
     }
 }
-
-
