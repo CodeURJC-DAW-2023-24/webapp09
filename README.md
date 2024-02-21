@@ -1,9 +1,9 @@
 
-# webapp09: ESTUDOKU 
+# webapp09: ESTUDOKU 📚
 
-## FASE 0: Formación del equipo y definición de las funcionalidades de la web
+## PHASE 0: Formation of the team and definition of the functionalities of the website
 
-### Members of the development team 
+### Members of the development team 💻
 
 - Name: Ismael Albert Aparicio
     - University email: i.albert.2020@alumnos.urjc.es
@@ -59,15 +59,21 @@
     + View marks (students = subject -> marks-exam_num)
 
 
-## FASE 1: Maquetación de páginas con HTML y CSS 
-- Edit Profile: in this screen registered users will be able to edit their profile: photo, name, email, city...
-![editProfile](https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/798132c5-a8b3-40d4-bc6e-1fed237fd248)
+## PHASE 1: Page Layout with HTML and CSS 
+- **Edit Profile**: in this screen registered users will be able to edit their profile: photo, name, email, city...
 
-- Login: in this screen the registered users can login
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/798132c5-a8b3-40d4-bc6e-1fed237fd248" alt="Descripción de la imagen" width="300" height="200">
+
+
+- **Login**: in this screen the registered users can login
 ![login](https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/2f5f7261-71de-4fc8-9e0c-b89d87622cff)
+
 
 - Main Page: on the main screen all users will be able to view information about the site and see the different courses offered.
 ![main_page](https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/09bf37a1-27e3-4d89-b0d3-1377fedc0407)
+
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/798132c5-a8b3-40d4-bc6e-1fed237fd248" alt="Descripción de la imagen" width="300" height="200">
+
 
 - Main Page Registered Users: this is the main screen once a user has registered, he will be able to see the courses he is enrolled in and other similar courses will be recommended.
 ![mainPage-registeredUser](https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/1630d4cb-cfa4-4732-9f0d-6d08f38fd503)
