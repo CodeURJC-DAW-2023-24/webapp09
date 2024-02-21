@@ -60,6 +60,9 @@
 
 
 ## PHASE 1: Page Layout with HTML and CSS 
+
+### Screenshots:
+
 - **Edit Profile**: in this screen registered users will be able to edit their profile: photo, name, email, city...
 
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/798132c5-a8b3-40d4-bc6e-1fed237fd248" width="500" height="400">
@@ -107,6 +110,8 @@
 - **SubjectInfoTeachersMarks**: the same as the previous page but this one shows the marks of the different students of the subject.
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/29535c79-6473-4390-b21d-02627f818c6a" width="500" height="400">
 
-
+### Navigation diagram
+This diagram shows how you can move through the different pages according to the type of user you are.
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/DiagramaDeNavegaci%C3%B3n.png" width="500" height="400">
 
 
