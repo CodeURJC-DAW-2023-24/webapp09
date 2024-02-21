@@ -90,7 +90,7 @@
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/df2aa6b4-cbf8-4e75-aa47-459407097fb3" width="500" height="400">
 
 - **SubjectInfoAdmin**: This screen can only be accessed by administrators, where they can view a specific course and edit it (adding teachers and students).
-<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/df2aa6b4-cbf8-4e75-aa47-459407097fb3" width="500" height="400">
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/subjectInfo-admin.jpeg?raw=true" width="500" height="400">
 
 - **SubjectInfoStudent**: this screen is for the students of the subject, in it they will be able to see their grades and exams of this subject.
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/assets/103761543/5186cfda-c54c-48a7-946e-c74a3b64a854" width="500" height="400">
