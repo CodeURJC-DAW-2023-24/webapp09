@@ -3,8 +3,10 @@ package es.codeurjc.helloworldvscode.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class SubjectController {
@@ -26,28 +29,23 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
-    @PostConstruct
-    public void init() {
-        Subject s1 = new Subject("Estructuras de Datos",
-                "La asignatura introduce estructuras de datos clásicas con enfoque en TAD y programación. Los alumnos aprenderán propiedades, funcionamiento e implementaciones para resolver problemas.",
-                "Las estructuras de datos y algoritmos son fundamentales en Informática. Se enseñan en el segundo cuatrimestre del primer curso, continuando la asignatura de Introducción a la Programación.",
-                "Programación");
-        Subject s2 = new Subject("Desarrollo de Aplicaciones Web",
-                "La asignatura ofrece una visión general del desarrollo de aplicaciones web para diversos dispositivos. Cubre características esenciales, tecnologías, arquitecturas y protocolos comunes.",
-                "Las aplicaciones web son vitales en informática. La asignatura enseña el desarrollo web para crear aplicaciones profesionales.",
-                "Programación", "/images/blog-post-daw.jpg");
-        Subject s3 = new Subject("Inteligencia Artificial",
-                "La asignatura explora los fundamentos y aplicaciones de la inteligencia artificial. Los estudiantes estudiarán algoritmos de búsqueda, aprendizaje automático, lógica difusa y sistemas expertos.",
-                "Proporciona una visión general de los fundamentos y aplicaciones de la IA. El objetivo es comprender y aplicar técnicas avanzadas de IA en diferentes campos.",
-                "Aprendizaje automático", "/images/blog-post-ia.jpg");
-        Subject s4 = new Subject("Introducción a las Bases de Datos",
-                "Los estudiantes aprenderán sobre diseño, implementación y optimización de bases de datos. Se explorarán temas como SQL, modelado de datos y gestión de transacciones.",
-                "Bases de Datos introduce los conceptos esenciales de las bases de datos relacionales y no relacionales. Los estudiantes adquieren habilidades en diseño, implementación y gestión de bases de datos para aplicaciones modernas.",
-                "Bases de datos");
-        subjectsList.save(s1);
-        subjectsList.save(s2);
-        subjectsList.save(s3);
-        subjectsList.save(s4);
+    @GetMapping("/")
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
+        ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("main_page");
+
+        // Configuración de la paginación para mostrar 5 elementos por página
+        pageable = PageRequest.of(pageable.getPageNumber(), 5);
+
+        Page<Subject> subjects = subjectService.findAll(pageable);
+
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("hasPrev", subjects.hasPrevious());
+        model.addAttribute("hasNext", subjects.hasNext());
+        model.addAttribute("nextPage", subjects.getNumber() + 1);
+        model.addAttribute("prevPage", subjects.getNumber() - 1);
+
+        return modelView;
     }
 
     @GetMapping("/subject/{id}")
@@ -61,11 +59,5 @@ public class SubjectController {
             modelView.setViewName("error");
             return modelView;
         }
-    }
-
-    @GetMapping("/subjects")
-    public List<Subject> getSubjects(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return subjectService.getSubjects(pageable);
     }
 }

@@ -2,7 +2,7 @@
 package es.codeurjc.helloworldvscode.Controller;
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Services.StudentService;
+import es.codeurjc.helloworldvscode.services.*;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;

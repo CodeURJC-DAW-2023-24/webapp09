@@ -19,9 +19,7 @@
                          style="width: 100px; height: 100px">
                     <br></br>
                     <div class="text-content">y
-                        {{#student}}
-                        <h2>{{firstName}}</h2>
-                        {{/student}}
+                        <h2>{{student.firstName}}</h2>
                         <br></br>
                         <h4>My Subjects</h4>
                     </div>
@@ -41,9 +39,9 @@
                 <div class="all-blog-posts">
                     <div class="row">
                         <!-- ITEM -->
+                        {{#subjects}}
                         <div class="col-lg-6">
                             <div class="blog-post">
-                                {{#subjects}}
                                 <div class="blog-thumb">
                                     <img src="/images/blog-thumb-01.jpg" alt="">
                                 </div>
@@ -53,9 +51,12 @@
                                         {{name}}
                                     </a>
                                 </div>
-                                {{/subjects}}
                             </div>
                         </div>
+                        {{/subjects}}
+                        {{^subjects}}
+                        <h2>There are no subjects yet</h2>
+                        {{/subjects}}
                     </div>
                 </div>
             </div>

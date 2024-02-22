@@ -1,5 +1,5 @@
 
-package es.codeurjc.helloworldvscode.Services;
+package es.codeurjc.helloworldvscode.services;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;

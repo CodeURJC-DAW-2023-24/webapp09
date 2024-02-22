@@ -21,13 +21,13 @@ public class MainController {
 
     @Autowired
 	SubjectRepository subjectsList;
-
+/*
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model){
         model.addAttribute("subjects",subjectsList.findAll());
         return "main_page";
     }
-
+*/
     @RequestMapping("/subject") // LLEVARÁ UN ID DE ASIGNATURA 
     public String subject_student(HttpServletRequest request){
         return "subject_onesubj_student";
