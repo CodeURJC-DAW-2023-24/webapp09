@@ -3,9 +3,11 @@ package es.codeurjc.helloworldvscode.Entitys;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import es.codeurjc.helloworldvscode.enumerate.Role;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Student {
@@ -29,7 +31,7 @@ public class Student {
     private final Role role = Role.ROLE_STUDENT;
 
     @ManyToMany(mappedBy = "students")
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExamStudent> examStudents;
@@ -38,6 +40,17 @@ public class Student {
     // Constructors
     public Student() {
     }
+
+
+    public Student(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        setPassword(password);
+        this.subjects = new ArrayList<>();
+
+    }
+
 
     // Include a constructor with parameters if needed
 
@@ -68,7 +81,7 @@ public class Student {
         return profilePicture;
     }
 
-    public Set<Subject> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
@@ -92,14 +105,15 @@ public class Student {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     public void setProfilePicture(Blob profilePicture) {
         this.profilePicture = profilePicture;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
