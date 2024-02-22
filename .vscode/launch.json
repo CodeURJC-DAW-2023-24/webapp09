@@ -9,6 +9,16 @@
             "projectName": "helloworld-vscode",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HelloworldVscodeApplication<bd_ejem4>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "es.codeurjc.helloworldvscode.HelloworldVscodeApplication",
+            "projectName": "bd_ejem4",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -3,7 +3,6 @@ package es.codeurjc.helloworldvscode.services;
 import java.util.List;
 import java.util.Optional;
 
-import es.codeurjc.helloworldvscode.Entitys.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +29,11 @@ public class SubjectService {
         Page<Subject> subjectPage = subjectRepository.findAll(pageable);
         return subjectPage.getContent();
     }
+
+    public Page<Subject> findAll(Pageable pageable) {
+        return subjectRepository.findAll(pageable);
+    }
+
     public Subject getSubjectById(Long studentId) {
         // Retorna el estudiante o lanza una excepción si no se encuentra
         return subjectRepository.findById(studentId)
