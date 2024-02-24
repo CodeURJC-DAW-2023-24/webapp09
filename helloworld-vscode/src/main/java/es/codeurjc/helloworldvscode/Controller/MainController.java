@@ -62,5 +62,10 @@ public class MainController {
     public String subjectOneSubjAdmin() {
         return "subject_onesubj_admin";
     }
+    
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 }

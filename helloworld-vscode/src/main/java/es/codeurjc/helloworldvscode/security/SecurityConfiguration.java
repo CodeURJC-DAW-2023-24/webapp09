@@ -1,5 +1,6 @@
 package es.codeurjc.helloworldvscode.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-	@Value("${security.user}")
-	private String username; //cargamos el username y la password del fichero de configuracion
-
-	@Value("${security.encodedPassword}")
-	private String encodedPassword;
+	@Autowired
+    public RepositoryUserDetailService userDetailService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -30,24 +28,12 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
-
-		return authProvider;
-	}
-
-	@Bean
-	public InMemoryUserDetailsManager userDetailsService() {
-		UserDetails user = User.builder()
-				.username(username)
-				.password(encodedPassword)
-				.roles("STUDENT")
-				.build();
-		return new InMemoryUserDetailsManager(user);
-	} 
+     public DaoAuthenticationProvider authenticationProvider() {
+         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+         authProvider.setUserDetailsService(userDetailService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+         return authProvider;
+     }
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -57,15 +43,20 @@ public class SecurityConfiguration {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 					// PUBLIC PAGES
+					
 					.requestMatchers("/").permitAll()
-					.requestMatchers("/login").permitAll()
-					// PRIVATE PAGES
-					.anyRequest().authenticated())
-				
+					.requestMatchers("/css/**").permitAll()
+					.requestMatchers("/error").permitAll()
+					.requestMatchers("/images/**").permitAll()
+					.requestMatchers("/js/**").permitAll()
+					.requestMatchers("/subject/**").permitAll()
+
+					
+			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
-					.failureUrl("/")
-					.defaultSuccessUrl("/subejcts_registereduser")
+					.failureUrl("/error")
+					.defaultSuccessUrl("/subjects_registereduser")
 					.permitAll()
 			)
 			.logout(logout -> logout
@@ -73,11 +64,11 @@ public class SecurityConfiguration {
 					.logoutSuccessUrl("/")
 					.permitAll()
 			);
-		
-		// Disable CSRF at the moment
-		http.csrf(csrf -> csrf.disable());
+
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/sendSolicitud"));
 
 		return http.build();
+		
 	}
 
 }
