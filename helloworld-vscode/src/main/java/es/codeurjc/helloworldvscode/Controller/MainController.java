@@ -27,7 +27,7 @@ public class MainController {
         model.addAttribute("subjects",subjectsList.findAll());
         return "main_page";
     }
-*/
+
     @RequestMapping("/subject") // LLEVARÁ UN ID DE ASIGNATURA 
     public String subject_student(HttpServletRequest request){
         return "subject_onesubj_student";
@@ -62,5 +62,10 @@ public class MainController {
     public String subjectOneSubjAdmin() {
         return "subject_onesubj_admin";
     }
+    
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }*/
 
 }
