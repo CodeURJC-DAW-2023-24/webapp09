@@ -1,5 +1,6 @@
 package es.codeurjc.helloworldvscode.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,19 +33,8 @@ public class SubjectController {
     @GetMapping("/")
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
         ModelAndView modelView = new ModelAndView();
+        model.addAttribute("subjects",subjectsList.findAll());
         modelView.setViewName("main_page");
-
-        // Configuración de la paginación para mostrar 5 elementos por página
-        pageable = PageRequest.of(pageable.getPageNumber(), 5);
-
-        Page<Subject> subjects = subjectService.findAll(pageable);
-
-        model.addAttribute("subjects", subjects);
-        model.addAttribute("hasPrev", subjects.hasPrevious());
-        model.addAttribute("hasNext", subjects.hasNext());
-        model.addAttribute("nextPage", subjects.getNumber() + 1);
-        model.addAttribute("prevPage", subjects.getNumber() - 1);
-
         return modelView;
     }
 
@@ -59,5 +49,11 @@ public class SubjectController {
             modelView.setViewName("error");
             return modelView;
         }
+    }
+
+    @GetMapping("/subjects")
+    public List<Subject> getSubjects(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return subjectService.getSubjects(pageable);
     }
 }

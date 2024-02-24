@@ -30,6 +30,7 @@
         </div>
     </div>
 
+    <!-- INFO WEB PAGE -->
     <section class="call-to-action">
         <div class="container">
             <div class="row">
@@ -38,7 +39,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="centered-div">
-                                    <h4 style="color: #f48840;">Estudoku</h4>
+                                    <h4 style="	color: #f48840;">Estudoku</h4>
                                     <br></br>
                                     <h6 style="color:#fff">Welcome to our website! Here, you'll discover a diverse array
                                         of subjects waiting to be explored. Join our platform to enroll in subjects,
@@ -64,50 +65,87 @@
                 <div class="col-lg-8 centered-div">
                     <div class="all-blog-posts">
                         <div class="row">
-                            {{#subjects}}
-                            <!-- ITEM -->
+
+                            <div id="subjectsContainer"></div>
+
+                            <div id="spinner" style="display: none; margin: 0 auto;">
+                                <img src="/images/spinner.gif" alt="Loading..." />
+                            </div>
+
                             <div class="col-lg-12">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src={{banner}} alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <a href='/subject/{{id}}' class="subject-link">
-                                            {{name}}
-                                        </a>
-                                        <p>{{description}}
-                                        </p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <ul class="post-tags">
-                                                        <!--SE PUEDEN USAR PARA EL ALGORITMO DE RECOMENDACIÓN-->
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">{{gender}}</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{/subjects}}
-                            <div class="col-lg-6">
                                 <div class="main-button">
-                                    {{#hasPrev}}<a href="/?page={{prevPage}}">Previus Page</a>{{/hasPrev}}
+                                    <a id="loadMoreButton">View More</a> <!-- PARA AJAX-->
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="main-button">
-                                    {{#hasNext}}<a href="/?page={{nextPage}}">Next Page</a>{{/hasNext}}
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+    <script>
+        var page = 0;
+        var size = 2; //CHANGE TO 10
+
+        function loadSubjects() {
+            // Mostrar la animación de espera
+            document.getElementById('spinner').style.display = 'block';
+
+            fetch('/subjects?page=' + page + '&size=' + size)
+                .then(response => response.json())
+                .then(data => {
+                    var subjectsContainer = document.getElementById('subjectsContainer');
+                    data.forEach(subject => {
+                        var subjectItem = document.createElement('div');
+                        subjectItem.classList.add('col-lg-12');
+                        subjectItem.innerHTML = `
+                    <div class="blog-post">
+                        <div class="blog-thumb">
+                            <img src=${subject.banner} alt="">
+                        </div>
+                        <div class="down-content">
+                            <a href='/subject/${subject.id}' class="subject-link">${subject.name}</a>
+                            <p>${subject.description}</p>
+                            <div class="post-options">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="post-tags">
+                                            <!--SE PUEDEN USAR PARA EL ALGORITMO DE RECOMENDACIÓN-->
+                                            <li><i class="fa fa-tags"></i></li>
+                                            <li><a href="#">${subject.gender}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                        subjectsContainer.appendChild(subjectItem);
+                    });
+                    page++;
+
+                    // Ocultar la animación de espera una vez que se completan los datos
+                    document.getElementById('spinner').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // En caso de error, asegúrate de ocultar la animación de espera
+                    document.getElementById('spinner').style.display = 'none';
+                });
+        }
+
+        // Cargar los primeros subjects al cargar la página
+        document.addEventListener('DOMContentLoaded', function () {
+            loadSubjects();
+        });
+
+        // Cargar más subjects cuando se hace clic en el botón
+        document.getElementById('loadMoreButton').addEventListener('click', function () {
+            loadSubjects();
+        });
+    </script>
 
     {{>footer}}
 
