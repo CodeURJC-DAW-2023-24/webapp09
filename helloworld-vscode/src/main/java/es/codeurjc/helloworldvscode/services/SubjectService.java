@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
@@ -28,10 +30,6 @@ public class SubjectService {
     public List<Subject> getSubjects(Pageable pageable) {
         Page<Subject> subjectPage = subjectRepository.findAll(pageable);
         return subjectPage.getContent();
-    }
-
-    public Page<Subject> findAll(Pageable pageable) {
-        return subjectRepository.findAll(pageable);
     }
 
     public Subject getSubjectById(Long studentId) {
