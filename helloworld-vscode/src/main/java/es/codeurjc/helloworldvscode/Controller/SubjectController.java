@@ -51,7 +51,7 @@ public class SubjectController {
         }
     }
 
-    @GetMapping("/subjects")
+    @GetMapping("/subjectInfo")
     public List<Subject> getSubjects(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return subjectService.getSubjects(pageable);

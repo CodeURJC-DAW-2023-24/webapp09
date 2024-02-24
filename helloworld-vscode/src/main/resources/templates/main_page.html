@@ -94,7 +94,7 @@
             // Mostrar la animación de espera
             document.getElementById('spinner').style.display = 'block';
 
-            fetch('/subjects?page=' + page + '&size=' + size)
+            fetch('/subjectInfo?page=' + page + '&size=' + size)
                 .then(response => response.json())
                 .then(data => {
                     var subjectsContainer = document.getElementById('subjectsContainer');
