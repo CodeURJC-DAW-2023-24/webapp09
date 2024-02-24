@@ -21,7 +21,7 @@ public class MainController {
 
     @Autowired
 	SubjectRepository subjectsList;
-
+/*
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model){
         model.addAttribute("subjects",subjectsList.findAll());
@@ -66,6 +66,6 @@ public class MainController {
     @RequestMapping("/login")
     public String login() {
         return "login";
-    }
+    }*/
 
 }

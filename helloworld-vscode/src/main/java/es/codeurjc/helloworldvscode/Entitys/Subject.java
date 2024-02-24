@@ -3,8 +3,11 @@ package es.codeurjc.helloworldvscode.Entitys;
 import jakarta.persistence.*;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Subject {
@@ -29,7 +32,8 @@ public class Subject {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private Set<Student> students;
+    @JsonBackReference
+    private List<Student> students;
 
     @ManyToMany
     @JoinTable(
@@ -56,6 +60,7 @@ public class Subject {
         this.allInfo = allInfo;
         this.gender = gender;
         this.banner = "/images/blog-post-03.jpg";
+        this.students = new ArrayList<>();
     }
 
     public Subject(String name, String description, String allInfo, String gender, String banner) {
@@ -64,6 +69,8 @@ public class Subject {
         this.allInfo = allInfo;
         this.gender = gender;
         this.banner = banner;
+        this.students = new ArrayList<>();
+
     }
 
     public Subject (Subject s){
@@ -100,7 +107,7 @@ public class Subject {
         return allInfo;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
@@ -141,7 +148,7 @@ public class Subject {
         this.allInfo = allInfo;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

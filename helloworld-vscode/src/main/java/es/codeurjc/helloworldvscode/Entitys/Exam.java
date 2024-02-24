@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,11 @@ public class Exam {
     public Exam() {
     }
 
+    public Exam(byte[] statement, Subject subject) {
+        this.statement = statement;
+        this.subject = subject;
+        this.examStudents = new ArrayList<>();
+    }
     // Include a constructor with parameters if needed
 
     // Getters

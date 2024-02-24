@@ -50,6 +50,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/images/**").permitAll()
 					.requestMatchers("/js/**").permitAll()
 					.requestMatchers("/subject/**").permitAll()
+					.requestMatchers("/subjects/**").permitAll()
 
 					
 			)
