@@ -41,12 +41,15 @@ public class Subject {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
     )
-    
+
+    @JsonBackReference
     private List<Teacher> teachers;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exam> exams;
 
+    //@JsonBackReference
     @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Forum> forums;
 
