@@ -42,7 +42,7 @@ public class Subject {
     @JsonBackReference
     private List<Teacher> teachers;
 
-    @JsonBackReference
+
     @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Exam> exams;
