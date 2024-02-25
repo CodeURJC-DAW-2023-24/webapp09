@@ -1,15 +1,15 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import es.codeurjc.helloworldvscode.enumerate.Role;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
-import jakarta.persistence.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Student extends User{
@@ -38,6 +38,7 @@ public class Student extends User{
     private List<Subject> subjects;
 
     @OneToMany(mappedBy = "student")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<ExamStudent> examStudents;
 
     // Constructors

@@ -1,13 +1,10 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Subject {
@@ -45,9 +42,11 @@ public class Subject {
     private List<Teacher> teachers;
 
     @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Exam> exams;
 
     @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Forum> forums;
 
     // Constructors

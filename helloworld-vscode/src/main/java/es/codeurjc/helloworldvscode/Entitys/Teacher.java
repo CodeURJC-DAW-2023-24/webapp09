@@ -1,17 +1,13 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.List;
-import java.util.Set;
-import java.sql.Blob;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import es.codeurjc.helloworldvscode.enumerate.Role;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "teacher")
 public class Teacher extends User{
@@ -35,6 +31,7 @@ public class Teacher extends User{
 
 
     @ManyToMany(mappedBy = "students")
+    @JsonBackReference
     private List<Subject> subjects;
 
 
