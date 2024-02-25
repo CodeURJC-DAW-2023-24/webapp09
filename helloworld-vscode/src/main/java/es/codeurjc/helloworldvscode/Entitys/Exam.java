@@ -23,7 +23,7 @@ public class Exam {
     @ManyToOne
     private Subject subject;
 
-    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "exam")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExamStudent> examStudents;
 
     // Constructors

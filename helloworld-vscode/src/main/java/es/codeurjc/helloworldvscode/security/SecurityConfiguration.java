@@ -67,6 +67,8 @@ public class SecurityConfiguration {
 					.permitAll()
 			);
 
+
+
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/sendSolicitud"));
 
 		return http.build();

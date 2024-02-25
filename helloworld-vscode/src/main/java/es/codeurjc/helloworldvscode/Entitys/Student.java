@@ -37,7 +37,7 @@ public class Student extends User{
     @JsonManagedReference
     private List<Subject> subjects;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExamStudent> examStudents;
 
     // Constructors
@@ -46,12 +46,14 @@ public class Student extends User{
     public Student(String firstName, String lastName, String email, String password, Blob profile) {
         super(firstName, lastName, email, password, profile, Role.ROLE_STUDENT);
         this.subjects = new ArrayList<>();
+        this.examStudents = new ArrayList<>();
 
     }
 
     public Student(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password, Role.ROLE_STUDENT);
         this.subjects = new ArrayList<>();
+        this.examStudents = new ArrayList<>();
     }
 
 

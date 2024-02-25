@@ -14,7 +14,7 @@ public class Forum {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)
+    @JoinColumn(name = "subject_id")//, nullable = false)
     private Subject subject;
 
     // Constructors

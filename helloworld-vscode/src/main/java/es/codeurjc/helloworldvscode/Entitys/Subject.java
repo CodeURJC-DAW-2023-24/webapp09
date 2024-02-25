@@ -42,12 +42,12 @@ public class Subject {
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
     )
     
-    private Set<Teacher> teachers;
+    private List<Teacher> teachers;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exam> exams;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Forum> forums;
 
     // Constructors
@@ -61,6 +61,7 @@ public class Subject {
         this.gender = gender;
         this.banner = "/images/blog-post-03.jpg";
         this.students = new ArrayList<>();
+        this.exams = new ArrayList<>();
     }
 
     public Subject(String name, String description, String allInfo, String gender, String banner) {
@@ -70,6 +71,7 @@ public class Subject {
         this.gender = gender;
         this.banner = banner;
         this.students = new ArrayList<>();
+        this.exams = new ArrayList<>();
 
     }
 
@@ -111,7 +113,7 @@ public class Subject {
         return students;
     }
 
-    public Set<Teacher> getTeachers() {
+    public List<Teacher> getTeachers() {
         return teachers;
     }
 
@@ -152,7 +154,7 @@ public class Subject {
         this.students = students;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
+    public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
 

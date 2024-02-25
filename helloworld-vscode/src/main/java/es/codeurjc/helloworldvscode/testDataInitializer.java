@@ -25,6 +25,8 @@ public class testDataInitializer {
     @Autowired
     private ExamRepository examRepository;
     @Autowired
+    private ExamStudentRepository examStudentRepository;
+    @Autowired
     private ForumRepository forumRepository;
 
     @PostConstruct
@@ -59,18 +61,27 @@ public class testDataInitializer {
                 "Bases de Datos introduce los conceptos esenciales de las bases de datos relacionales y no relacionales. Los estudiantes adquieren habilidades en diseño, implementación y gestión de bases de datos para aplicaciones modernas.",
                 "Bases de datos");
 
+        Exam exam = new Exam(null, subject1);
+        ExamStudent examStudent = new ExamStudent(null, exam, student1);
+
+        exam.setSubject(subject1);
+        exam.getExamStudents().add(examStudent);
         // Relacionar estudiantes y asignaturas
         subject1.getStudents().add(student1);
         subject1.getStudents().add(student2);
+        subject1.getExams().add(exam);
         subject2.getStudents().add(student3);
         subject3.getStudents().add(student4);
         subject4.getStudents().add(student1);
 
         student1.getSubjects().add(subject1);
+        student1.getExamStudents().add(examStudent);
         student2.getSubjects().add(subject1);
         student3.getSubjects().add(subject2);
         student4.getSubjects().add(subject3);
         student1.getSubjects().add(subject4);
+
+
 
         // Guardar estudiantes y asignaturas
         studentRepository.save(student1);
@@ -86,5 +97,8 @@ public class testDataInitializer {
         subjectRepository.save(s2);
         subjectRepository.save(s3);
         subjectRepository.save(s4);
+
+        examRepository.save(exam);
+        examStudentRepository.save(examStudent);
     }
 }

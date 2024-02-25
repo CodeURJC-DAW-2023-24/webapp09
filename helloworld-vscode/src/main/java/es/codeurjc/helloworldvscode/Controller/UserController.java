@@ -15,12 +15,19 @@ import java.sql.Blob;
 @Controller
 public class UserController {
     @Autowired private StudentRepository studentRepository;
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request){
+
+    @GetMapping("/login")public String showLogin() {
         return "login";
-
-
     }
+    /*
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request,
+                        Model model,
+                        @RequestParam String email,
+                        @RequestParam String password){
+        //comprobaciones
+        return "login";
+    }*/
     @RequestMapping("/loginerror")
     public String loginerror() {
         return "loginerror";

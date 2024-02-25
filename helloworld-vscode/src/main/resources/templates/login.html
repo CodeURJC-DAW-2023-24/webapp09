@@ -46,7 +46,7 @@
                       <div class="row">
                         <div class="col-md-6 col-sm-12">
                           <fieldset>
-                            <input name="username" type="text" id="username" placeholder="Username" required="">
+                            <input name="username" type="text" id="email" placeholder="Email" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -55,12 +55,12 @@
                           </fieldset>
                         </div>
                       </div>
-                    </form>
                   </div>
                   <div class="content">
-                    <fieldset>
-                      <button type="submit" id="login-submit" class="main-button">Login</button>
-                    </fieldset>
+                    <div>
+                      <input type="submit" value="Log in"/>
+                      <input type="hidden" name="_csrf" value="{{token}}">
+                    </div>
                   </div>
                 </div>
                 </form>

@@ -25,6 +25,13 @@ public class ExamStudent {
     public ExamStudent() {
     }
 
+    public ExamStudent (byte[] response, Exam exam, Student student ){
+    this.response=response;
+    this.exam=exam;
+    this.student=student;
+
+    }
+
     // Include a constructor with parameters if needed
 
     // Getters
@@ -51,6 +58,10 @@ public class ExamStudent {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+    }
+
+    public Student getStudent() {
+        return this.student;
     }
 
     // Add any additional methods needed for your logic
