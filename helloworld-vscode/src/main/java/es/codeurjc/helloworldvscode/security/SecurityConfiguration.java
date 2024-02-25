@@ -45,6 +45,7 @@ public class SecurityConfiguration {
 					// PUBLIC PAGES
 					
 					.requestMatchers("/").permitAll()
+					.requestMatchers("/sign-up").permitAll()
 					.requestMatchers("/css/**").permitAll()
 					.requestMatchers("/error").permitAll()
 					.requestMatchers("/images/**").permitAll()
