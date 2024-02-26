@@ -1,11 +1,15 @@
 package es.codeurjc.helloworldvscode.Controller;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
+import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.Entitys.User;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
+import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
+import es.codeurjc.helloworldvscode.services.StudentService;
+import es.codeurjc.helloworldvscode.services.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -13,35 +17,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import java.security.Principal;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Controller
 public class UserController {
-    @Autowired private StudentRepository studentRepository;
-    @Autowired
-	//private UserService userService;
+    @Autowired 
+    private StudentRepository studentRepository;
+    @Autowired 
+    private TeacherRepository teacherRepository;
 
-    @ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
-
-		Principal principal = request.getUserPrincipal();
-
-		if (principal != null) {
-
-			model.addAttribute("logged", true);
-			model.addAttribute("username", principal.getName());
-			model.addAttribute("user", request.isUserInRole("USER"));
-
-		} else {
-			model.addAttribute("logged", false);
-		}
-	}
+    @Autowired 
+    private StudentService studentService;
+    @Autowired 
+    private TeacherService teacherService;
     
-
     @GetMapping("/login")public String showLogin() {
         return "login";
     }
@@ -88,10 +85,35 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-	public String personalArea(Model model, HttpServletRequest request) {
-		//model.addAttribute("username", request.getUserPrincipal().getName());
-    	//model.addAttribute("admin", request.isUserInRole("ADMIN")); 
-		return "profile";
+	public ModelAndView personalArea(Model model, HttpServletRequest request) {
+		model.addAttribute("username", request.getUserPrincipal().getName());
+    	String role = "UNKNOWN"; // Por defecto
+        if (request.isUserInRole("STUDENT")) {
+            role = "STUDENT";
+        } else if (request.isUserInRole("TEACHER")) {
+            role = "TEACHER";
+        } else if (request.isUserInRole("ADMIN")) {
+            role = "ADMIN";
+        }
+
+        model.addAttribute("role", role); 
+        //sse podria mostrar el email tambien
+        List<Subject> subjects = new ArrayList<>();
+        String username = request.getUserPrincipal().getName();
+        Optional<User> student = studentRepository.findByFirstName(username);
+        Optional<User> teacher = teacherRepository.findByFirstName(username);
+        if (student.isPresent()) {
+            // Si se encuentra un estudiante, obtener las asignaturas asociadas
+            subjects = studentService.findSubjectsByStudentId(student.get().getId());
+        } else if (teacher.isPresent()) {
+            // Si se encuentra un profesor, obtener las asignaturas asociadas
+            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
+        }
+
+        // Crear el modelo y agregar las asignaturas
+        ModelAndView modelAndView = new ModelAndView("profile");
+        modelAndView.addObject("subjects", subjects);
+        return modelAndView;
 	}
 
     @GetMapping("/editProfile")

@@ -79,6 +79,13 @@ h1,h2,h3,h4,h5,h6 {
 	letter-spacing: 0.5px;
 }
 
+.page-heading .text-content h3 {
+	color: #fff;
+	font-size: 25px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
 #preloader {
   overflow: hidden;
   background: #f48840;
