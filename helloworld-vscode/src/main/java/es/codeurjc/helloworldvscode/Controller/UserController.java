@@ -42,6 +42,12 @@ public class UserController {
     @GetMapping("/login")public String showLogin() {
         return "login";
     }
+
+    @PostMapping("/logout")public String showLogout() {
+        //Invalidar la sesión del usuario
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "redirect:/login?logout"; // Redireccionar a la página de login con un mensaje de logout
+    }
     /*
     @RequestMapping("/login")
     public String login(HttpServletRequest request,
