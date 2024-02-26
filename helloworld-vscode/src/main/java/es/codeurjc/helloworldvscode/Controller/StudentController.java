@@ -29,11 +29,11 @@ public class StudentController {
     @Autowired
     ExamService examService;
 
-    @GetMapping("/subjects_registereduser")
+    /* @GetMapping("/subjects_registereduser")
     public String showStudentSubjectsForCurrentUser(Authentication authentication) {
-        return "redirect:/subjects_registereduser";
+        return "subjects_registereduser";
     }
-
+ */
     @GetMapping("/subjects_registereduser/{studentId}")public ModelAndView showStudentSubjects(@PathVariable Long studentId) {
         List<Subject> subjects = studentService.findSubjectsByStudentId(studentId);
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");

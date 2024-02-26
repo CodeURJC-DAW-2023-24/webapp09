@@ -59,12 +59,15 @@ public class SecurityConfiguration {
 					.requestMatchers("/subjects_registereduser/**").hasAnyRole("STUDENT", "TEACHER", "ROLE_ADMIN") 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
+					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")
+					.requestMatchers("/subject_onesubj_student").hasAnyRole("STUDENT")
+					.requestMatchers("/subject_onesubj_teacher").hasAnyRole("STUDENT")
 					
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
 					.failureUrl("/loginerror")
-					.defaultSuccessUrl("/profile")
+					.defaultSuccessUrl("/")
 					.permitAll()
 			)
 			.logout(logout -> logout

@@ -1,5 +1,6 @@
 package es.codeurjc.helloworldvscode.Controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
@@ -29,6 +33,22 @@ public class SubjectController {
     SubjectRepository subjectsList;
     @Autowired
     SubjectService subjectService;
+
+    @ModelAttribute
+	public void addAttributes(Model model, HttpServletRequest request) {
+
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+
+			model.addAttribute("logged", true);
+			model.addAttribute("username", principal.getName());
+			model.addAttribute("user", request.isUserInRole("USER"));
+
+		} else {
+			model.addAttribute("logged", false);
+		}
+	}
 
     @GetMapping("/")
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
