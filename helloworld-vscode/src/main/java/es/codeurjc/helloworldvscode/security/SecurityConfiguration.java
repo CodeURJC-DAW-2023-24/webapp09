@@ -49,6 +49,7 @@ public class SecurityConfiguration {
 					// PUBLIC PAGES
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/sign-up").permitAll()
+					.requestMatchers("/login").permitAll()
 					.requestMatchers("/error").permitAll()
 					.requestMatchers("/loginerror").permitAll()
 					.requestMatchers("/subject/**").permitAll()
@@ -56,7 +57,7 @@ public class SecurityConfiguration {
 
 					//PRIVATE PAGES
 
-					.requestMatchers("/subjects_registereduser/**").hasAnyRole("STUDENT", "TEACHER", "ROLE_ADMIN") 
+					.requestMatchers("/students/subjects_registereduser/").hasAnyRole("STUDENT", "TEACHER", "ROLE_ADMIN") 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")

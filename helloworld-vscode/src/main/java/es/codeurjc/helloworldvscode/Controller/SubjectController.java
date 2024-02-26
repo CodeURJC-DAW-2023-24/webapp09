@@ -34,22 +34,7 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
-    @ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
-
-		Principal principal = request.getUserPrincipal();
-
-		if (principal != null) {
-
-			model.addAttribute("logged", true);
-			model.addAttribute("username", principal.getName());
-			model.addAttribute("user", request.isUserInRole("USER"));
-
-		} else {
-			model.addAttribute("logged", false);
-		}
-	}
-
+ 
     @GetMapping("/")
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
         ModelAndView modelView = new ModelAndView();
