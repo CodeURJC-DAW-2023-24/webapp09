@@ -42,23 +42,29 @@ public class SecurityConfiguration {
 		
 		http
 			.authorizeHttpRequests(authorize -> authorize
-					// PUBLIC PAGES
+
+					// STATIC RESOURCES
+					.requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
 					
+					// PUBLIC PAGES
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/sign-up").permitAll()
-					.requestMatchers("/css/**").permitAll()
 					.requestMatchers("/error").permitAll()
-					.requestMatchers("/images/**").permitAll()
-					.requestMatchers("/js/**").permitAll()
+					.requestMatchers("/loginerror").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
 
+					//PRIVATE PAGES
+
+					.requestMatchers("/subjects_registereduser/**").hasAnyRole("STUDENT", "TEACHER", "ROLE_ADMIN") 
+					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
+					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
 					
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
-					.failureUrl("/error")
-					.defaultSuccessUrl("/subjects_registereduser")
+					.failureUrl("/loginerror")
+					.defaultSuccessUrl("/profile")
 					.permitAll()
 			)
 			.logout(logout -> logout
@@ -70,6 +76,8 @@ public class SecurityConfiguration {
 
 
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/sendSolicitud"));
+		
+
 
 		return http.build();
 		

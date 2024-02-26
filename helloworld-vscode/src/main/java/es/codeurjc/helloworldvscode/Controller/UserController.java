@@ -60,4 +60,14 @@ public class UserController {
         studentRepository.save(newStudent);
         return "redirect:/login";
     }
+
+    @GetMapping("/profile")
+    public String showProfile() {
+        return "profile";
+    }
+
+    @GetMapping("/editProfile")
+    public String showEditProfile() {
+        return "editProfile";
+    }
 }
