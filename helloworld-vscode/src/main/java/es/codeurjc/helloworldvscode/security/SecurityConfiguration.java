@@ -1,18 +1,14 @@
 package es.codeurjc.helloworldvscode.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.*;
+import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
@@ -52,7 +48,9 @@ public class SecurityConfiguration {
 					.requestMatchers("/js/**").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
-
+					.requestMatchers("/students/subjects_registereduser/1").permitAll()
+					.requestMatchers("/students/subject_onesubj_student/{studentId}/{subjectId}").permitAll()
+					.requestMatchers("/**").permitAll()
 					
 			)
 			.formLogin(formLogin -> formLogin
