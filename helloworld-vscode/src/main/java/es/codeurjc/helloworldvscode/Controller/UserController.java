@@ -92,18 +92,16 @@ public class UserController {
 
     @GetMapping("/profile")
 	public ModelAndView personalArea(Model model, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("profile");
 		model.addAttribute("username", request.getUserPrincipal().getName());
     	String role = "UNKNOWN"; // Por defecto
         if (request.isUserInRole("STUDENT")) {
-            role = "STUDENT";
+            role = "Student";
         } else if (request.isUserInRole("TEACHER")) {
-            role = "TEACHER";
-        } else if (request.isUserInRole("ADMIN")) {
-            role = "ADMIN";
+            role = "Teacher";
         }
 
         model.addAttribute("role", role); 
-        //sse podria mostrar el email tambien
         List<Subject> subjects = new ArrayList<>();
         String username = request.getUserPrincipal().getName();
         Optional<User> student = studentRepository.findByFirstName(username);
@@ -117,7 +115,6 @@ public class UserController {
         }
 
         // Crear el modelo y agregar las asignaturas
-        ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("subjects", subjects);
         return modelAndView;
 	}

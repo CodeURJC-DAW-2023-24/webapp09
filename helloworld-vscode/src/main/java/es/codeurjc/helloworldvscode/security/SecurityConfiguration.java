@@ -51,7 +51,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/sign-up").permitAll()
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/error").permitAll()
-					.requestMatchers("/loginerror").permitAll()
+					.requestMatchers("/error").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
 
@@ -68,7 +68,7 @@ public class SecurityConfiguration {
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
-					.failureUrl("/loginerror")
+					.failureUrl("/error")
 					.defaultSuccessUrl("/")
 					.permitAll()
 			)

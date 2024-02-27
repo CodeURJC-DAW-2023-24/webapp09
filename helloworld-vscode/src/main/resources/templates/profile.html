@@ -14,9 +14,9 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="text-content">
-              <h2>PROFILE OF</h2>
-              <h3>{{username}}</h3>
-            </div>
+              <h4>Profile of</h4>
+              <h2>{{username}}</h2>
+          </div>
           </div>
         </div>
       </div>
@@ -41,12 +41,8 @@
 
           <div class="container mt-5">
             <div class="card-body">
-              <h5 class="card-title">{{username}}</h5>
-              <p class="card-text"></p>
-              <p class="card-text">Tipo de Usuario:{{role}}</p>
-              <p class="card-text">Ciudad: Madrid</p>
-              <p class="card-text">Pais: España</p>
-              <p class="card-text">Descripción: URJC</p>
+              <h5 class="card-title">First Name: {{username}}</h5>
+              <p class="card-text">Role: {{role}}</p>
               <!-- Botón para editar perfil -->
               <br></br>
               <div class="main-button">
@@ -64,7 +60,12 @@
             <h5 class="card-title">Asignaturas</h5>
             <ul class="list-group">
                 {{#subjects}}
-                <li>{{name}}</li>
+                <li class="list-group-item">
+                  <p>{{name}}</p>
+                </li>
+                {{/subjects}}
+                {{^subjects}}
+                  <p>There are no subjects yet</p>
                 {{/subjects}}
             </ul>
           </div>
