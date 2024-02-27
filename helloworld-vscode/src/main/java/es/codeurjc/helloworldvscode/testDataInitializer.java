@@ -1,15 +1,14 @@
 package es.codeurjc.helloworldvscode;
 
 
-import es.codeurjc.helloworldvscode.Entitys.*;
+import es.codeurjc.helloworldvscode.Entitys.Exam;
+import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
+import es.codeurjc.helloworldvscode.Entitys.Student;
+import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 @Service
 public class testDataInitializer {
@@ -31,6 +30,14 @@ public class testDataInitializer {
 
     @PostConstruct
     public void init() throws Exception {
+
+
+
+        // TEACHER
+
+
+
+
 
         // Crear estudiantes
         Student student1 = new Student("Juan", "Pérez", "juan.perez@example.com", "password123");
@@ -61,25 +68,63 @@ public class testDataInitializer {
                 "Bases de Datos introduce los conceptos esenciales de las bases de datos relacionales y no relacionales. Los estudiantes adquieren habilidades en diseño, implementación y gestión de bases de datos para aplicaciones modernas.",
                 "Bases de datos");
 
-        Exam exam = new Exam(null, subject1);
-        ExamStudent examStudent = new ExamStudent(null, exam, student1);
 
-        exam.setSubject(subject1);
-        exam.getExamStudents().add(examStudent);
+
+        // STUDENT
+        Student st1 = new Student("Juan", "Gomez", "juan@gmail.com", "juan");
+        st1.getSubjects().add(s4);
+        s4.getStudents().add(st1);
+
+        Student st2 = new Student("Pablo", "Rollo", "pablo@gmail.com", "pablo");
+        st2.getSubjects().add(s4);
+        s4.getStudents().add(st2);
+
+        Student st3 = new Student("Cris", "Sanz", "cris@gmail.com", "cris");
+        st3.getSubjects().add(s4);
+        s4.getStudents().add(st3);
+
+        Student st4 = new Student("Lucas", "Pavo", "lucas@gmail.com", "pavo");
+        st4.getSubjects().add(s4);
+        s4.getStudents().add(st4);
+
+        Student st5 = new Student("Pau", "Rios", "pau@gmail.com", "pau");
+        st5.getSubjects().add(s4);
+        s4.getStudents().add(st5);
+
+        Student st6 = new Student("Leo", "Conde", "leo@gmail.com", "leo");
+        st6.getSubjects().add(s4);
+        s4.getStudents().add(st6);
+
+
+        Exam e1 = new Exam("Exam 1", null, null, s4);
+        Exam e2 = new Exam("Exam 2", null, null, s4);
+        Exam e3 = new Exam("Exam 3", null, null, s4);
+        Exam e4 = new Exam("Final Exam", null, null, s4);
+
+
+        ExamStudent es1 = new ExamStudent(3.45, null, null, e1, st1);
+        ExamStudent es2 = new ExamStudent(10, null, null, e2, st1);
+        ExamStudent es3 = new ExamStudent(8.35, null, null, e3, st1);
+        ExamStudent es4 = new ExamStudent(5.04, null, null, e4, st1);
+        ExamStudent es5 = new ExamStudent(2.45, null, null, e1, st2);
+        ExamStudent es6 = new ExamStudent(0, null, null, e1, st2);
+
         // Relacionar estudiantes y asignaturas
         subject1.getStudents().add(student1);
         subject1.getStudents().add(student2);
-        subject1.getExams().add(exam);
         subject2.getStudents().add(student3);
         subject3.getStudents().add(student4);
         subject4.getStudents().add(student1);
 
         student1.getSubjects().add(subject1);
-        student1.getExamStudents().add(examStudent);
         student2.getSubjects().add(subject1);
         student3.getSubjects().add(subject2);
         student4.getSubjects().add(subject3);
         student1.getSubjects().add(subject4);
+
+
+
+        // EXAMS STUDENT
 
 
 
@@ -88,6 +133,14 @@ public class testDataInitializer {
         studentRepository.save(student2);
         studentRepository.save(student3);
         studentRepository.save(student4);
+
+        studentRepository.save(st1);
+        studentRepository.save(st2);
+        studentRepository.save(st3);
+        studentRepository.save(st4);
+        studentRepository.save(st5);
+        studentRepository.save(st6);
+
 
         subjectRepository.save(subject1);
         subjectRepository.save(subject2);
@@ -98,7 +151,22 @@ public class testDataInitializer {
         subjectRepository.save(s3);
         subjectRepository.save(s4);
 
-        examRepository.save(exam);
-        examStudentRepository.save(examStudent);
+        // EXAMS
+
+        examRepository.save(e1);
+        examRepository.save(e2);
+        examRepository.save(e3);
+        examRepository.save(e4);
+
+
+
+
+        examStudentRepository.save(es1);
+        examStudentRepository.save(es2);
+        examStudentRepository.save(es3);
+        examStudentRepository.save(es4);
+        examStudentRepository.save(es5);
+        examStudentRepository.save(es6);
+
     }
 }

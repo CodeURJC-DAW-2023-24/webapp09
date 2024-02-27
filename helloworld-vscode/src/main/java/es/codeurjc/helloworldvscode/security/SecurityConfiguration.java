@@ -1,18 +1,14 @@
 package es.codeurjc.helloworldvscode.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.*;
+import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
@@ -42,16 +38,14 @@ public class SecurityConfiguration {
 		
 		http
 			.authorizeHttpRequests(authorize -> authorize
-
-					// STATIC RESOURCES
-					.requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
-					
 					// PUBLIC PAGES
+					
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/sign-up").permitAll()
-					.requestMatchers("/login").permitAll()
+					.requestMatchers("/css/**").permitAll()
 					.requestMatchers("/error").permitAll()
-					.requestMatchers("/loginerror").permitAll()
+					.requestMatchers("/images/**").permitAll()
+					.requestMatchers("/js/**").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
 					//.requestMatchers("/subjects_registereduser").permitAll()
@@ -69,8 +63,8 @@ public class SecurityConfiguration {
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
-					.failureUrl("/loginerror")
-					.defaultSuccessUrl("/")
+					.failureUrl("/error")
+					.defaultSuccessUrl("/subjects_registereduser")
 					.permitAll()
 			)
 			.logout(logout -> logout
@@ -82,8 +76,6 @@ public class SecurityConfiguration {
 
 
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/sendSolicitud"));
-		
-
 
 		return http.build();
 		
