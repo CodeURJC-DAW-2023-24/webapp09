@@ -4,21 +4,21 @@ import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.services.*;
+import jakarta.servlet.http.HttpServletRequest;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.nio.file.attribute.UserPrincipal;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/students/")
-
+@Controller
 public class StudentController {
 
     @Autowired
@@ -29,17 +29,19 @@ public class StudentController {
     @Autowired
     ExamService examService;
 
-    /* @GetMapping("/subjects_registereduser")
-    public String showStudentSubjectsForCurrentUser(Authentication authentication) {
-        return "subjects_registereduser";
-    }
- */
-    @GetMapping("/subjects_registereduser/{studentId}")public ModelAndView showStudentSubjects(@PathVariable Long studentId) {
-        List<Subject> subjects = studentService.findSubjectsByStudentId(studentId);
+    @GetMapping("/subjects_registereduser")public ModelAndView showStudentSubjects(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+
+        List<Subject> subjects = studentService.findSubjectsByStudentName(principal.getName());
+
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
         modelAndView.addObject("subjects", subjects);
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByName(principal.getName());
         modelAndView.addObject("student", student);
+
+        System.out.println("HOLA: " + principal.getName());
+
+
         return modelAndView;
     }
 

@@ -15,6 +15,16 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    public List<Subject> findSubjectsByStudentName(String name) {
+        Optional<Student> student = studentRepository.findByFirstName(name);
+
+        if (student.isPresent()) {
+            return new ArrayList<>(student.get().getSubjects());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
     public List<Subject> findSubjectsByStudentId(Long studentId) {
         Optional<Student> student = studentRepository.findById(studentId);
         if (student.isPresent()) {
@@ -22,6 +32,12 @@ public class StudentService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    public Student getStudentByName(String name) {
+        // Retorna el estudiante o lanza una excepción si no se encuentra
+        return studentRepository.findByFirstName(name)
+                .orElseThrow(() -> new RuntimeException("Student not found with name " + name));
     }
 
     public Student getStudentById(Long studentId) {

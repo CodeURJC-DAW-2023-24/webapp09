@@ -33,12 +33,15 @@ public class UserController {
     private StudentRepository studentRepository;
     @Autowired 
     private TeacherRepository teacherRepository;
+    @Autowired 
+    private UserRepository userRepository;
 
     @Autowired 
     private StudentService studentService;
     @Autowired 
     private TeacherService teacherService;
-    
+
+        
     @GetMapping("/login")public String showLogin() {
         return "login";
     }
@@ -106,7 +109,7 @@ public class UserController {
         //sse podria mostrar el email tambien
         List<Subject> subjects = new ArrayList<>();
         String username = request.getUserPrincipal().getName();
-        Optional<User> student = studentRepository.findByFirstName(username);
+        Optional<Student> student = studentRepository.findByFirstName(username);
         Optional<User> teacher = teacherRepository.findByFirstName(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
@@ -125,5 +128,12 @@ public class UserController {
     @GetMapping("/editProfile")
     public String showEditProfile() {
         return "editProfile";
+    }
+
+    @PostMapping("/editProfile")
+    public String editarPerfil(@ModelAttribute User usuario) {
+        // Lógica para actualizar los datos del usuario en la base de datos
+        userRepository.save(usuario);
+        return "redirect:/profile";
     }
 }

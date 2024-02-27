@@ -54,10 +54,11 @@ public class SecurityConfiguration {
 					.requestMatchers("/loginerror").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
+					//.requestMatchers("/subjects_registereduser").permitAll()
 
 					//PRIVATE PAGES
 
-					.requestMatchers("/students/subjects_registereduser/").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
+					.requestMatchers("/subjects_registereduser/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
 					.requestMatchers("/logout").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
