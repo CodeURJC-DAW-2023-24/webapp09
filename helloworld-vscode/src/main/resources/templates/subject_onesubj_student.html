@@ -109,22 +109,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {{#examStudents}}
                             <tr>
-                                <td>Proyect 1</td>
-                                <td>10</td>
+                                <td>{{exam.name}}</td>
+                                <td>{{mark}}</td>
                             </tr>
-                            <tr>
-                                <td>Proyect 2</td>
-                                <td>9.75</td>
-                            </tr>
-                            <tr>
-                                <td>Proyect 3</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>Final Exam</td>
-                                <td>9.25</td>
-                            </tr>
+                        {{/examStudents}}
                         </tbody>
                     </table>
                 </div>
@@ -151,8 +141,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        {{#examStudents}}
                                             <tr>
-                                                <td>Exam 1</td>
+                                                <td>{{exam.name}}</td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-3">
@@ -172,69 +163,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Exam 2</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Open</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Up</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Exam 3</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Open</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Up</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Final Exam</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Open</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="main-button">
-                                                                <a>Up</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        {{/examStudents}}
                                         </tbody>
                                     </table>
                                 </div>

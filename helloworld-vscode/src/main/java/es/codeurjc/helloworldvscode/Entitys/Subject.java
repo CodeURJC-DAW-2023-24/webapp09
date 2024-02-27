@@ -14,6 +14,7 @@ public class Subject {
     private Long id;
     @Column(nullable = false)
     private String name;
+    @Lob
     @Column(nullable = false, length = 1000000)
     private String description;
     @Column(nullable = false, length = 1000000)
@@ -74,7 +75,6 @@ public class Subject {
         this.banner = banner;
         this.students = new ArrayList<>();
         this.exams = new ArrayList<>();
-
     }
 
     public Subject (Subject s){
