@@ -39,16 +39,12 @@ public class SecurityConfiguration {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 					// PUBLIC PAGES
-					
+					.requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/sign-up").permitAll()
-					.requestMatchers("/css/**").permitAll()
 					.requestMatchers("/error").permitAll()
-					.requestMatchers("/images/**").permitAll()
-					.requestMatchers("/js/**").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
-					//.requestMatchers("/subjects_registereduser").permitAll()
 
 					//PRIVATE PAGES
 
@@ -64,12 +60,12 @@ public class SecurityConfiguration {
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
 					.failureUrl("/error")
-					.defaultSuccessUrl("/subjects_registereduser")
+					.defaultSuccessUrl("/")
 					.permitAll()
 			)
 			.logout(logout -> logout
-					.logoutUrl("/")
-					.logoutSuccessUrl("/")
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/login")
 					.permitAll()
 			);
 
