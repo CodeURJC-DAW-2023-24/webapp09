@@ -77,4 +77,13 @@ public class SubjectController {
         Pageable pageable = PageRequest.of(page, size);
         return subjectService.getSubjects(pageable);
     }
+
+    @GetMapping("/subjectUser")
+    public List<Subject> getSubjectsUser(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        Pageable pageable = PageRequest.of(page, size);
+        return subjectService.getSubjectsUser(request, pageable);
+    }
 }

@@ -26,89 +26,100 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
 public class UserController {
-    @Autowired 
+    @Autowired
     private StudentRepository studentRepository;
-    @Autowired 
+    @Autowired
     private TeacherRepository teacherRepository;
-    @Autowired 
+    @Autowired
     private UserRepository userRepository;
 
-    @Autowired 
+    @Autowired
     private StudentService studentService;
-    @Autowired 
+    @Autowired
     private TeacherService teacherService;
 
-        
-    @GetMapping("/login")public String showLogin() {
+    @GetMapping("/login")
+    public String showLogin() {
         return "login";
     }
 
-    @PostMapping("/logout")public String showLogout() {
-        //Invalidar la sesión del usuario
+    @PostMapping("/logout")
+    public String showLogout() {
+        // Invalidar la sesión del usuario
         SecurityContextHolder.getContext().setAuthentication(null);
         return "redirect:/login?logout"; // Redireccionar a la página de login con un mensaje de logout
     }
-    /*
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request,
-                        Model model,
-                        @RequestParam String email,
-                        @RequestParam String password){
-        //comprobaciones
-        return "login";
-    }*/
+
+    @GetMapping("/subjects_registereduser")
+    public ModelAndView showStudentSubjects(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
+
+        if (request.isUserInRole("STUDENT")) {
+            Student student = studentService.getStudentByName(principal.getName());
+            modelAndView.addObject("user", student);
+        } else if (request.isUserInRole("TEACHER")) {
+            Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            modelAndView.addObject("user", teacher);
+        }
+
+        return modelAndView;
+    }
+
     @RequestMapping("/loginerror")
     public String loginerror() {
         return "loginerror";
     }
 
-    @GetMapping("/sign-up")public String showSignup() {
+    @GetMapping("/sign-up")
+    public String showSignup() {
         return "signup";
     }
+
     @PostMapping("/sign-up")
     public String showSignup(HttpServletRequest request,
-                             Model model,
-                             @RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam String email,
-                             @RequestParam String confirmEmail,
-                             @RequestParam String password,
-                             @RequestParam String confirmPassword) {
+            Model model,
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            @RequestParam String email,
+            @RequestParam String confirmEmail,
+            @RequestParam String password,
+            @RequestParam String confirmPassword) {
 
-        // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y contraseñas coincidan
-        if(!email.equals(confirmEmail)) {
+        // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y
+        // contraseñas coincidan
+        if (!email.equals(confirmEmail)) {
             model.addAttribute("error", "Emails do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }
-        if(!password.equals(confirmPassword)) {
+        if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }
         // Crear y guardar el nuevo usuario
-        Student newStudent = new Student(firstName, lastName, email,password);
+        Student newStudent = new Student(firstName, lastName, email, password);
         studentRepository.save(newStudent);
         return "redirect:/login";
     }
 
     @GetMapping("/profile")
-	public ModelAndView personalArea(Model model, HttpServletRequest request) {
+    public ModelAndView personalArea(Model model, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("profile");
-		model.addAttribute("username", request.getUserPrincipal().getName());
-    	String role = "UNKNOWN"; // Por defecto
+        model.addAttribute("username", request.getUserPrincipal().getName());
+        String role = "UNKNOWN"; // Por defecto
         if (request.isUserInRole("STUDENT")) {
             role = "Student";
         } else if (request.isUserInRole("TEACHER")) {
             role = "Teacher";
         }
 
-        model.addAttribute("role", role); 
+        model.addAttribute("role", role);
         List<Subject> subjects = new ArrayList<>();
         String username = request.getUserPrincipal().getName();
         Optional<Student> student = studentRepository.findByFirstName(username);
-        Optional<User> teacher = teacherRepository.findByFirstName(username);
+        Optional<Teacher> teacher = teacherRepository.findByFirstName(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
             subjects = studentService.findSubjectsByStudentId(student.get().getId());
@@ -120,7 +131,7 @@ public class UserController {
         // Crear el modelo y agregar las asignaturas
         modelAndView.addObject("subjects", subjects);
         return modelAndView;
-	}
+    }
 
     @GetMapping("/editProfile")
     public String showEditProfile() {

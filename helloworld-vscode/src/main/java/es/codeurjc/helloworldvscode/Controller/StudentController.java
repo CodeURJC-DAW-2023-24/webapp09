@@ -29,22 +29,6 @@ public class StudentController {
     @Autowired
     ExamService examService;
 
-    @GetMapping("/subjects_registereduser")public ModelAndView showStudentSubjects(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-
-        List<Subject> subjects = studentService.findSubjectsByStudentName(principal.getName());
-
-        ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
-        modelAndView.addObject("subjects", subjects);
-        Student student = studentService.getStudentByName(principal.getName());
-        modelAndView.addObject("student", student);
-
-        System.out.println("HOLA: " + principal.getName());
-
-
-        return modelAndView;
-    }
-
     @GetMapping("/subject_onesubj_student/{studentId}/{subjectId}")
     public ModelAndView showSubjectDetails(@PathVariable Long studentId, @PathVariable Long subjectId) {
         ModelAndView modelAndView = new ModelAndView("subject_onesubj_student"); // Asume que tienes una vista con este nombre

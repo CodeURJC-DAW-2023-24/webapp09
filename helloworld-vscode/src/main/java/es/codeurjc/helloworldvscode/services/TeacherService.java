@@ -28,8 +28,12 @@ public class TeacherService {
     }
 
     public Teacher getStudentById(Long teacherId) {
-        // Retorna el estudiante o lanza una excepción si no se encuentra
         return teacherRepository.findById(teacherId)
-                .orElseThrow(() -> new RuntimeException("Student not found with id " + teacherId));
+                .orElseThrow(() -> new RuntimeException("Teacher not found with id " + teacherId));
+    }
+
+    public Teacher getTeacherByName(String name) {
+        return teacherRepository.findByFirstName(name)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with name " + name));
     }
 }

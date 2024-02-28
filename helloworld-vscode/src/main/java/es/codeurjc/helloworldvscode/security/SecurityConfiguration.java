@@ -48,7 +48,8 @@ public class SecurityConfiguration {
 
 					//PRIVATE PAGES
 
-					.requestMatchers("/subjects_registereduser/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
+					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+					.requestMatchers("/subjectUser").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
 					.requestMatchers("/logout").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
