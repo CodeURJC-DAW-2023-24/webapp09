@@ -64,7 +64,6 @@ public class UserController {
             Teacher teacher = teacherService.getTeacherByName(principal.getName());
             modelAndView.addObject("user", teacher);
         }
-
         return modelAndView;
     }
 
