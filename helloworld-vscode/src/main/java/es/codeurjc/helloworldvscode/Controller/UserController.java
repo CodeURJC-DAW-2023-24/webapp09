@@ -1,9 +1,6 @@
 package es.codeurjc.helloworldvscode.Controller;
 
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
-import es.codeurjc.helloworldvscode.Entitys.User;
+import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
@@ -87,9 +84,10 @@ public class UserController {
             @RequestParam String password,
             @RequestParam String confirmPassword) {
 
+        List<Student> students =studentRepository.findAll();
         // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y
         // contraseñas coincidan
-        if (!email.equals(confirmEmail)) {
+        if (!email.equals(confirmEmail)||(studentService.existsByEmail(students, email))) {
             model.addAttribute("error", "Emails do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }

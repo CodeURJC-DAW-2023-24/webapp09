@@ -45,4 +45,9 @@ public class StudentService {
         return studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found with id " + studentId));
     }
+
+    public boolean existsByEmail(List<Student> students, String email) {
+        return students.stream()
+                .anyMatch(student -> email.equals(student.getEmail()));
+    }
 }
