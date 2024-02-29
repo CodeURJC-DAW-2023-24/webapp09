@@ -27,7 +27,7 @@ public class SecurityConfiguration {
      public DaoAuthenticationProvider authenticationProvider() {
          DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
          authProvider.setUserDetailsService(userDetailService);
-        authProvider.setPasswordEncoder(passwordEncoder());
+         authProvider.setPasswordEncoder(passwordEncoder());
          return authProvider;
      }
 
@@ -60,6 +60,7 @@ public class SecurityConfiguration {
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
+					.usernameParameter("email")
 					.failureUrl("/error")
 					.defaultSuccessUrl("/")
 					.permitAll()

@@ -27,7 +27,7 @@ public class TeacherService {
         }
     }
 
-    public Teacher getStudentById(Long teacherId) {
+    public Teacher getTeacherById(Long teacherId) {
         return teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new RuntimeException("Teacher not found with id " + teacherId));
     }

@@ -12,5 +12,6 @@ import es.codeurjc.helloworldvscode.Entitys.User;
 public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findByFirstName(String name);
     Optional<User> findById(Long id);
+    Optional<User> findByEmail(String email);
     
 }

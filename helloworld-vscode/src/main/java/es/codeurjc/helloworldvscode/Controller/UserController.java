@@ -57,12 +57,16 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
 
-        if (request.isUserInRole("STUDENT")) {
-            Student student = studentService.getStudentByName(principal.getName());
-            modelAndView.addObject("user", student);
-        } else if (request.isUserInRole("TEACHER")) {
-            Teacher teacher = teacherService.getTeacherByName(principal.getName());
-            modelAndView.addObject("user", teacher);
+        if (principal instanceof User){
+
+            User usuario = (User) principal;
+            if (request.isUserInRole("STUDENT")) {
+                Student student = studentService.getStudentById(usuario.getId());
+                modelAndView.addObject("user", student);
+            } else if (request.isUserInRole("TEACHER")) {
+                Teacher teacher = teacherService.getTeacherById(usuario.getId());
+                modelAndView.addObject("user", teacher);
+            }
         }
 
         return modelAndView;

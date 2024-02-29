@@ -71,7 +71,7 @@ public class testDataInitializer {
 
 
         // STUDENT
-        Student st1 = new Student("Juann", "Gomez", "juan@gmail.com", "juan");
+        Student st1 = new Student("Juan", "Gomez", "juan@gmail.com", "juan");
         st1.getSubjects().add(s4);
         s4.getStudents().add(st1);
 
