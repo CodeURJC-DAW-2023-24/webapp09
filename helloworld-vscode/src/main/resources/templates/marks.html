@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+    {{>header}}
+
+    <!--  ########## PAGE CONTENT ##########  -->
+    <!-- Title -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
+                            alt="Imagen de Perfil" style="width: 100px; height: 100px">
+                        <br></br>
+                        <div class="text-content">
+                            <h2>Name</h2>
+                            <br></br>
+                            <h4>{{name}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </br>
+    {{>navbar_subjects}}
+
+
+    <section class="blog-posts" id="marks">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="blog-post">
+
+                        <div id="accordion">
+                            {{#table}}
+                            <div class="card">
+                                <div class="card-header" id="heading">
+                                    <h5 class="mb-0">
+                                        <button class="btn" data-toggle="collapse" data-target="#collapse"
+                                            aria-expanded="true" aria-controls="collapse">
+                                            {{key}}
+                                        </button>
+                                    </h5>
+                                </div>
+
+
+                                <div id="collapse" class="collapse show" aria-labelledby="heading"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+
+
+                                        <div class="row">
+                                            <div class="col-lg-5 centered-div">
+                                                <!--STUDENTS-->
+                                                <div class="row">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Mark</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {{#value}}
+                                                            <tr>
+                                                                <td>{{student.firstName}}
+                                                                    {{student.lastName}}</td>
+
+                                                                <td>{{mark}}</td>
+                                                            <tr>
+                                                                {{/value}}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </br>
+
+                                    {{/table}}
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{>footer}}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

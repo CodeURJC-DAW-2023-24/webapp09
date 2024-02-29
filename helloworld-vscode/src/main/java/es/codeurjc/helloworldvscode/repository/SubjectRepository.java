@@ -13,4 +13,9 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
     List<Subject> findByGender(String gender);
 
+    Optional<Subject> findByName(String name);
+
+    @SuppressWarnings("null")
+    Optional<Subject> findById(Long subjectId);
+
 }

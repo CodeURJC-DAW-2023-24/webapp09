@@ -130,10 +130,10 @@ public class UserController {
         Optional<Teacher> teacher = teacherRepository.findByFirstName(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
-            subjects = studentService.findSubjectsByStudentId(student.get().getId());
+            subjects = studentService.findSubjectsByStudentId(student.get().getStudentId());
         } else if (teacher.isPresent()) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
-            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
+            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getTeacherId());
         }
 
         // Crear el modelo y agregar las asignaturas

@@ -5,6 +5,7 @@ import es.codeurjc.helloworldvscode.Entitys.Exam;
 import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
+import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,15 @@ public class testDataInitializer {
                 "A través de estudios de caso, los estudiantes examinarán prácticas, creencias y relaciones sociales en diferentes culturas alrededor del mundo.",
                 "Ciencias Sociales");
 
+//////// TEACHER
+        Teacher t1 = new Teacher("Pepe", "Franco", "pfespania@gmail.com", "vivaespaña");
+        t1.setOneSubject(s4);
+        s4.setOneTeacher(t1);
+
+        Teacher t2 = new Teacher("Belen", "Esteban", "salavame@gmail.com", "andreita");
+        t2.setOneSubject(s4);
+        s4.setOneTeacher(t2);
+
 
 ////////EXAMS
         Exam e1 = new Exam("Exam 1", null, null, s4);
@@ -185,6 +195,9 @@ public class testDataInitializer {
         st10.getSubjects().addAll(List.of(s4,s17));
 
         // Guardar todos los datos en listas
+        teacherRepository.save(t1);
+        teacherRepository.save(t2);
+
         studentRepository.saveAll(List.of(st1,st2,st3,st4,st5,st6,st7,st8,st9,st10));
         studentRepository.saveAll(List.of(st1,st2,st3,st4,st5,st6));
         subjectRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20));
