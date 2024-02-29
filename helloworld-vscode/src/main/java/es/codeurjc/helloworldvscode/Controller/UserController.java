@@ -6,6 +6,7 @@ import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -37,6 +38,9 @@ public class UserController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private SubjectService subjectService;
+
     @GetMapping("/login")
     public String showLogin() {
         return "login";
@@ -54,15 +58,22 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
 
-        if (request.isUserInRole("STUDENT")) {
+        boolean isStudent = request.isUserInRole("STUDENT");
+        modelAndView.addObject("isStudent", isStudent);
+
+        if (isStudent) {
             Student student = studentService.getStudentByName(principal.getName());
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
         } else if (request.isUserInRole("TEACHER")) {
             Teacher teacher = teacherService.getTeacherByName(principal.getName());
             modelAndView.addObject("user", teacher);
+            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
         }
         return modelAndView;
     }
+
 
     @RequestMapping("/loginerror")
     public String loginerror() {
@@ -98,7 +109,7 @@ public class UserController {
         // Crear y guardar el nuevo usuario
         Student newStudent = new Student(firstName, lastName, email, password);
         studentRepository.save(newStudent);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/profile")

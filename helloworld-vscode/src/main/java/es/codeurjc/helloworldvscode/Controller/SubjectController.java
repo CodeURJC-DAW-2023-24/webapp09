@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.codeurjc.helloworldvscode.Entitys.Student;
+import es.codeurjc.helloworldvscode.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +36,9 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
+    @Autowired
+    StudentService studentService;
+
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -52,10 +57,25 @@ public class SubjectController {
 	}
  
     @GetMapping("/")
-    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable,HttpServletRequest request) {
         ModelAndView modelView = new ModelAndView();
+        Principal principal = request.getUserPrincipal();
         model.addAttribute("subjects",subjectsList.findAll());
         modelView.setViewName("main_page");
+        List<Subject> recommendedSubjects =new ArrayList<Subject>();
+        boolean show=false;
+        if (principal!=null){
+            if (request.isUserInRole("STUDENT")){
+                show=true;
+                Student student=studentService.getStudentByName(principal.getName());
+                recommendedSubjects = subjectService.recommendSubjects(student);
+            }
+        }else{
+            show=true;
+            recommendedSubjects = subjectService.recommendSubjects(null);
+        }
+        model.addAttribute("show", show);
+        model.addAttribute("recommendedSubjects", recommendedSubjects);
         return modelView;
     }
 
