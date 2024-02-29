@@ -47,7 +47,6 @@ public class SecurityConfiguration {
 					.requestMatchers("/subjectInfo").permitAll()
 
 					//PRIVATE PAGES
-
 					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/subjectUser").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
 					.requestMatchers("/logout").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
@@ -56,6 +55,29 @@ public class SecurityConfiguration {
 					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")
 					.requestMatchers("/subject_onesubj_student").hasAnyRole("STUDENT")
 					.requestMatchers("/subject_onesubj_teacher").hasAnyRole("STUDENT")
+
+
+					//TEACHER 
+					.requestMatchers("/teachers/subject/**/general-information").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/general-information/delete").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/add-teacher").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/add-student").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/type-exams").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/type-exams/download").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/type-exams/delete").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/add-exam").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/type-exams/**/correct-exams").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/type-exams/**/download").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/marks").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/forum").hasAnyRole("TEACHER")
+					.requestMatchers("/teachers/subject/**/forum/delete").hasAnyRole("TEACHER")
+
+
+					//ADMIN 
+					.requestMatchers("/admins/subject/**/general-information").hasAnyRole("ADMIN")
+					.requestMatchers("/admins/subject/**/general-information/delete").hasAnyRole("ADMIN")
+					.requestMatchers("/admins/subject/**/add-teacher").hasAnyRole("ADMIN")
+					.requestMatchers("/admins/subject/**/add-student").hasAnyRole("ADMIN")
 					
 			)
 			.formLogin(formLogin -> formLogin
