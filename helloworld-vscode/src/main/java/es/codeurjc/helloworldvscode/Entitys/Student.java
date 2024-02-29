@@ -10,7 +10,7 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-public class Student {
+public class Student extends User {
 
     @Id
     @Column(name = "studentId")
@@ -30,7 +30,7 @@ public class Student {
     private Blob profilePicture;
 
     @Enumerated(EnumType.STRING)
-    private final Role role = Role.ROLE_STUDENT;
+    private final static Role role = Role.ROLE_STUDENT;
 
     @ManyToMany(mappedBy = "students")
     private List<Subject> subjects;
@@ -44,10 +44,7 @@ public class Student {
     }
 
     public Student(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        setPassword(password);
+        super(firstName, lastName, email, password, role);
         this.subjects = new ArrayList<>();
         this.examStudents = new ArrayList<>();
 

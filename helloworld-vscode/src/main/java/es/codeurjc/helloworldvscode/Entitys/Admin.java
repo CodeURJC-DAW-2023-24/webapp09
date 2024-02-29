@@ -4,7 +4,7 @@ import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.*;
 
 @Entity(name = "admin")
-public class Admin {
+public class Admin extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,10 @@ public class Admin {
 
     @Column(nullable = false)
    // @JsonView(View.Admin.class)
+    private String lastName;
+
+    @Column(nullable = false)
+   // @JsonView(View.Admin.class)
     private String email;
 
     @Column(nullable = false)
@@ -25,15 +29,13 @@ public class Admin {
 
     @Enumerated(EnumType.STRING)
    // @JsonView(View.Admin.class)
-    private Role role = Role.ROLE_ADMIN;
+    private static Role role = Role.ROLE_ADMIN;
 
 
     public Admin(){}
 
-    public Admin(String firstName, String email, String password){
-        this.firstName = firstName;
-        this.email = email;
-        this.password = password;
+    public Admin(String firstName, String lastName,String email, String password){
+        super( firstName, lastName, email, password, role);
     }
 
     public void setId(Long id) { this.id = id;}

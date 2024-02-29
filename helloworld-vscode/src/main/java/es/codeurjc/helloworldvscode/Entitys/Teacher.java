@@ -10,7 +10,7 @@ import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.*;
 
 @Entity(name = "teacher")
-public class Teacher {
+public class Teacher extends User{
 
     @Id
     @Column(name = "teacherId")
@@ -29,7 +29,7 @@ public class Teacher {
     private Blob profilePicture;
     
     @Enumerated(EnumType.STRING)
-    private final Role role = Role.ROLE_TEACHER;
+    private final static Role role = Role.ROLE_TEACHER;
 
     @ManyToMany(mappedBy = "teachers")
     private List<Subject> subjects;
@@ -38,10 +38,7 @@ public class Teacher {
     public Teacher(){}
 
     public Teacher(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+        super( firstName, lastName, email, password, role);
         this.profilePicture = null;
         this.subjects = new ArrayList<>();
     }
