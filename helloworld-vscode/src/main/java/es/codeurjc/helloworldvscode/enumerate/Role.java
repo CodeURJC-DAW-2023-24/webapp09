@@ -1,7 +1,5 @@
 package es.codeurjc.helloworldvscode.enumerate;
 
-import java.util.List;
-
 public enum Role {
         ROLE_ADMIN("ROLE_ADMIN"),
         ROLE_TEACHER("ROLE_TEACHER"),

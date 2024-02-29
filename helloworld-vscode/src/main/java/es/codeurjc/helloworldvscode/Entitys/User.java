@@ -1,7 +1,6 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
 import java.sql.Blob;
-import java.util.ArrayList;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

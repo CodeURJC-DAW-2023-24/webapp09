@@ -1,14 +1,12 @@
 package es.codeurjc.helloworldvscode.Controller;
 
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
-import es.codeurjc.helloworldvscode.Entitys.User;
+import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -40,6 +38,9 @@ public class UserController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private SubjectService subjectService;
+
     @GetMapping("/login")
     public String showLogin() {
         return "login";
@@ -57,20 +58,22 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
 
-        if (principal instanceof User){
+        boolean isStudent = request.isUserInRole("STUDENT");
+        modelAndView.addObject("isStudent", isStudent);
 
-            User usuario = (User) principal;
-            if (request.isUserInRole("STUDENT")) {
-                Student student = studentService.getStudentById(usuario.getId());
-                modelAndView.addObject("user", student);
-            } else if (request.isUserInRole("TEACHER")) {
-                Teacher teacher = teacherService.getTeacherById(usuario.getId());
-                modelAndView.addObject("user", teacher);
-            }
+        if (isStudent) {
+            Student student = studentService.getStudentByName(principal.getName());
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
+            modelAndView.addObject("user", student);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+        } else if (request.isUserInRole("TEACHER")) {
+            Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            modelAndView.addObject("user", teacher);
+            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
         }
-
         return modelAndView;
     }
+
 
     @RequestMapping("/loginerror")
     public String loginerror() {
@@ -92,9 +95,10 @@ public class UserController {
             @RequestParam String password,
             @RequestParam String confirmPassword) {
 
+        List<Student> students =studentRepository.findAll();
         // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y
         // contraseñas coincidan
-        if (!email.equals(confirmEmail)) {
+        if (!email.equals(confirmEmail)||(studentService.existsByEmail(students, email))) {
             model.addAttribute("error", "Emails do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }
@@ -105,7 +109,7 @@ public class UserController {
         // Crear y guardar el nuevo usuario
         Student newStudent = new Student(firstName, lastName, email, password);
         studentRepository.save(newStudent);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/profile")
@@ -126,10 +130,10 @@ public class UserController {
         Optional<Teacher> teacher = teacherRepository.findByFirstName(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
-            subjects = studentService.findSubjectsByStudentId(student.get().getId());
+            subjects = studentService.findSubjectsByStudentId(student.get().getStudentId());
         } else if (teacher.isPresent()) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
-            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
+            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getTeacherId());
         }
 
         // Crear el modelo y agregar las asignaturas

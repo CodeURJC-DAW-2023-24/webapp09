@@ -1,51 +1,56 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
-import java.sql.Blob;
-import java.util.ArrayList;
-
-import com.fasterxml.jackson.annotation.JsonView;
 import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.*;
 
-@Entity
-public class Admin extends User {
+@Entity(name = "admin")
+public class Admin {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    // @JsonView(View.Admin.class)  --------------------------- PONER CUANDO ESTÉ LA SEGURIDAD (View será una clase)
-//     private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @JsonView(View.Admin.class)  --------------------------- PONER CUANDO ESTÉ LA SEGURIDAD (View será una clase)
+    private Long id;
 
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String firstName;
+    @Column(nullable = false)
+   // @JsonView(View.Admin.class)
+    private String firstName;
 
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String email;
+    @Column(nullable = false)
+   // @JsonView(View.Admin.class)
+    private String email;
 
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String password;
+    @Column(nullable = false)
+   // @JsonView(View.Admin.class)
+    private String password;
 
-//     @Enumerated(EnumType.STRING)
-//    // @JsonView(View.Admin.class)
-//     private Role role = Role.ROLE_ADMIN;
+    @Enumerated(EnumType.STRING)
+   // @JsonView(View.Admin.class)
+    private Role role = Role.ROLE_ADMIN;
+
 
     public Admin(){}
 
-    public Admin(String firstName, String lastName, String email, String password, Blob profile) {
-        super(firstName, lastName, email, password, profile, Role.ROLE_ADMIN);
-
+    public Admin(String firstName, String email, String password){
+        this.firstName = firstName;
+        this.email = email;
+        this.password = password;
     }
 
-    public Admin(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password, Role.ROLE_ADMIN);
+    public void setId(Long id) { this.id = id;}
+    public Long getId() { return id;}
 
-    }
+    public String getFirstName() { return firstName;}
 
-    public Admin(User t) {
-        super(t);
-        
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName;}
+
+    public String getEmail() { return email;}
+
+    public void setEmail(String email) { this.email = email;}
+
+    public String getPassword() { return password;}
+
+    public void setPassword(String password) { this.password = password;}
+
+    public Role getRole() { return this.role;}
     
 }

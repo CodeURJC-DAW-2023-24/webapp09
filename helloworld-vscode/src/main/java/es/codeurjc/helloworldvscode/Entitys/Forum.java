@@ -1,5 +1,8 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,25 +10,41 @@ public class Forum {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long forumId;
 
     private String username;
 
+    @Lob
+    @Column(length = 1000000)
     private String comment;
+    
+    @Lob
+    @Column(length = 1000000)
+    private String date;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")//, nullable = false)
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
     // Constructors
     public Forum() {
     }
 
-    // Include a constructor with parameters if needed
+    public Forum(String username, String comment){
+
+        this.username = username;
+        this.comment = comment;
+        
+        Date currentDate = new Date(); 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+        String currentDateTime = dateFormat. format(currentDate);
+        this.date = currentDateTime;
+
+    }
 
     // Getters
-    public Long getId() {
-        return id;
+    public Long getForumd() {
+        return forumId;
     }
 
     public String getUsername() {
@@ -40,9 +59,14 @@ public class Forum {
         return subject;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+
     // Setters
-    public void setId(Long id) {
-        this.id = id;
+    public void setForumId(Long forumId) {
+        this.forumId = forumId;
     }
 
     public void setUsername(String username) {
@@ -57,5 +81,7 @@ public class Forum {
         this.subject = subject;
     }
 
-    // Add any additional methods needed for your logic
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

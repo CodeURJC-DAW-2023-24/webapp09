@@ -10,19 +10,23 @@ import java.util.List;
 public class Subject {
 
     @Id
+    @Column(name = "subjectId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String name;
+
     @Lob
-    @Column(nullable = false, length = 1000000)
+    @Column(length = 1000000)
     private String description;
-    @Column(nullable = false, length = 1000000)
+
+    @Lob
+    @Column(length = 1000000)
     private String allInfo;
-    @Column(nullable = false)
+    
     private String gender;
-    @Column
+
     private String banner;
+
+    private String name;
 
     @ManyToMany
     @JoinTable(
@@ -39,17 +43,16 @@ public class Subject {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
     )
-
     @JsonBackReference
     private List<Teacher> teachers;
 
 
-    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Exam> exams;
 
-    //@JsonBackReference
-    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Forum> forums;
 
@@ -65,6 +68,8 @@ public class Subject {
         this.banner = "/images/blog-post-03.jpg";
         this.students = new ArrayList<>();
         this.exams = new ArrayList<>();
+        this.teachers = new ArrayList<>();
+        this.forums = new ArrayList<>();
     }
 
     public Subject(String name, String description, String allInfo, String gender, String banner) {
@@ -83,7 +88,7 @@ public class Subject {
         this.allInfo = s.allInfo;
         this.gender = s.gender;
         this.banner = s.banner;
-        // COMPLETAR SI ES NECESARIO
+        //complete if it is necesary
     }
 
     public void setName(String name) {
@@ -99,7 +104,7 @@ public class Subject {
     }
 
     // Getters
-    public Long getId() {
+    public Long getSubjectId() {
         return id;
     }
 
@@ -140,7 +145,7 @@ public class Subject {
         this.gender = gender;
     }
 
-    public void setId(Long id) {
+    public void setSubjectId(Long id) {
         this.id = id;
     }
 
@@ -160,12 +165,43 @@ public class Subject {
         this.teachers = teachers;
     }
 
+    public void setOneStudent(Student s){
+        students.add(s);
+    }
+
+    public void setOneTeacher(Teacher t){
+        teachers.add(t);
+    }
+
     public void setExams(List<Exam> exams) {
         this.exams = exams;
     }
 
     public void setForums(List<Forum> forums) {
         this.forums = forums;
+    }
+
+
+    //Others
+    public void deleteStudentId(Long id){
+        
+        for (Student student : students) {
+            if (student.getStudentId() == id) {
+                students.remove(student);
+                break;
+            }
+        }
+    }
+
+
+    public void deleteTeacherId(Long id){
+        
+        for (Teacher teacher : teachers) {
+            if (teacher.getTeacherId() == id) {
+                teachers.remove(teacher);
+                break;
+            }
+        }
     }
 
 }
