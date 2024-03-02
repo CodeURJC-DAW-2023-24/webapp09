@@ -5,6 +5,7 @@ import es.codeurjc.helloworldvscode.Entitys.Exam;
 import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
+import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,5 +191,18 @@ public class testDataInitializer {
         subjectRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20));
         examRepository.saveAll(List.of(e1,e2,e3,e4));
         examStudentRepository.saveAll(List.of(es1,es2,es3,es4,es5,es6));
-    }
+
+        //////// TEACHER
+        Teacher t1 = new Teacher("Pepe", "Franco", "pfespania@gmail.com", "vivaespaña");
+        t1.setOneSubject(s4);
+        s4.setOneTeacher(t1);
+
+        Teacher t2 = new Teacher("Belen", "Esteban", "salavame@gmail.com", "andreita");
+        t2.setOneSubject(s4);
+        s4.setOneTeacher(t2);
+
+        teacherRepository.save(t1);
+        teacherRepository.save(t2);
+
+}
 }

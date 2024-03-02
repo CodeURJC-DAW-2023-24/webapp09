@@ -12,24 +12,6 @@ import java.util.List;
 @Entity(name = "teacher")
 public class Teacher extends User{
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
-    // @Column(nullable = false)
-    // private String firstName;
-    // @Column(nullable = false)
-    // private String lastName;
-    // @Column(nullable = false)
-    // private String email;
-    // @Column(nullable = false)
-    // private String password;
-    // @Column
-    // @Lob
-    // private Blob profilePicture;
-    // @Enumerated(EnumType.STRING)
-    // private final Role role = Role.ROLE_TEACHER;
-
-
     @ManyToMany(mappedBy = "students")
     @JsonBackReference
     private List<Subject> subjects;
@@ -41,17 +23,17 @@ public class Teacher extends User{
 
     public Teacher(String firstName, String lastName, String email, String password, Blob profile) {
         super(firstName, lastName, email, password, profile, Role.ROLE_TEACHER);
-
+        this.subjects = new ArrayList<>();
     }
 
     public Teacher(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password, Role.ROLE_TEACHER);
+        this.subjects = new ArrayList<>();
 
     }
 
     public Teacher(User t) {
         super(t);
-        this.subjects = new ArrayList<>();
     }
 
     // Include a constructor with parameters if needed
@@ -64,6 +46,20 @@ public class Teacher extends User{
         this.subjects = subjects;
     }
 
+    public void setOneSubject(Subject s){
+        this.subjects.add(s);
+    }
+
+    //Others 
+    @SuppressWarnings("unlikely-arg-type")
+    public void deleteSubjectId(Long id){
+
+        for (Subject subject : subjects) {
+            if (subject.getId() == id) {
+                subjects.remove(subjects);
+            }
+        }
+    }
 
     // Add any additional methods needed for your logic
 }

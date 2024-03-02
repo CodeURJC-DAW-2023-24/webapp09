@@ -10,27 +10,6 @@ import jakarta.persistence.*;
 @Entity
 public class Admin extends User {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    // @JsonView(View.Admin.class)  --------------------------- PONER CUANDO ESTÉ LA SEGURIDAD (View será una clase)
-//     private Integer id;
-
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String firstName;
-
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String email;
-
-//     @Column(nullable = false)
-//    // @JsonView(View.Admin.class)
-//     private String password;
-
-//     @Enumerated(EnumType.STRING)
-//    // @JsonView(View.Admin.class)
-//     private Role role = Role.ROLE_ADMIN;
-
     public Admin(){}
 
     public Admin(String firstName, String lastName, String email, String password, Blob profile) {

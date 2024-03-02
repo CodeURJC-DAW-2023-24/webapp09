@@ -15,11 +15,11 @@ public class Subject {
     @Column(nullable = false)
     private String name;
     @Lob
-    @Column(nullable = false, length = 1000000)
+    @Column(length = 1000000)
     private String description;
-    @Column(nullable = false, length = 1000000)
+    @Column(length = 1000000)
     private String allInfo;
-    @Column(nullable = false)
+    @Column() //NO DEBE SER NULL
     private String gender;
     @Column
     private String banner;
@@ -65,6 +65,8 @@ public class Subject {
         this.banner = "/images/blog-post-03.jpg";
         this.students = new ArrayList<>();
         this.exams = new ArrayList<>();
+        this.forums = new ArrayList();
+        this.teachers= new ArrayList();
     }
 
     public Subject(String name, String description, String allInfo, String gender, String banner) {
@@ -75,6 +77,8 @@ public class Subject {
         this.banner = banner;
         this.students = new ArrayList<>();
         this.exams = new ArrayList<>();
+        this.forums = new ArrayList();
+        this.teachers= new ArrayList();
     }
 
     public Subject (Subject s){
@@ -135,7 +139,6 @@ public class Subject {
         return gender;
     }
 
-    // Setters
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -166,6 +169,36 @@ public class Subject {
 
     public void setForums(List<Forum> forums) {
         this.forums = forums;
+    }
+
+    // REVISAR
+    public void setOneStudent(Student s){
+        students.add(s);
+    }
+
+    public void setOneTeacher(Teacher t){
+        teachers.add(t);
+    }
+
+    //Others
+    public void deleteStudentId(Long id){
+        
+        for (Student student : students) {
+            if (student.getId() == id) {
+                students.remove(student);
+                break;
+            }
+        }
+    }
+
+    public void deleteTeacherId(Long id){
+        
+        for (Teacher teacher : teachers) {
+            if (teacher.getId() == id) {
+                teachers.remove(teacher);
+                break;
+            }
+        }
     }
 
 }

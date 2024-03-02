@@ -14,25 +14,6 @@ import java.util.List;
 @Entity
 public class Student extends User{
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
-    // @Column(nullable = false)
-    // private String firstName;
-    // @Column(nullable = false)
-    // private String lastName;
-    // @Column(nullable = false)
-    // private String email;
-    // @Column(nullable = false)
-    // private String password;
-    // @Column
-    // @Lob
-    // private Blob profilePicture;
-
-    // @Enumerated(EnumType.STRING)
-    // private final Role role = Role.ROLE_STUDENT;
-
-
     @ManyToMany(mappedBy = "students")
     @JsonManagedReference
     private List<Subject> subjects;
@@ -74,5 +55,16 @@ public class Student extends User{
 
     public void setExamStudents(List<ExamStudent> examStudents) {
         this.examStudents = examStudents;
+    }
+
+    //Others
+    @SuppressWarnings("unlikely-arg-type")
+    public void deleteSubjectId(Long id){
+
+        for (Subject subject : subjects) {
+            if (subject.getId() == id) {
+                subjects.remove(subjects);
+            }
+        }
     }
 }

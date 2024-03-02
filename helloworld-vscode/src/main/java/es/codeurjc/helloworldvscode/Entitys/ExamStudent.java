@@ -11,29 +11,13 @@ public class ExamStudent {
     @Column (name="examStudentId")
     private Long id;
 
-    private byte[] data; // Assuming this is a PDF file containing the student's response.
-
-    public double getMark() {
-        return mark;
-    }
-
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
+    @Lob
+    @Column(length = 1000000)
+    private byte[] data; 
 
     private double mark;
 
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     private String type;
-
 
 
     @ManyToOne
@@ -44,9 +28,6 @@ public class ExamStudent {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-
-
-    // Additional fields can include student information if needed, depending on the model.
 
     // Constructors
     public ExamStudent() {
@@ -67,11 +48,17 @@ public class ExamStudent {
         this.student = student;
     }
 
-    // Include a constructor with parameters if needed
-
     // Getters
+    public String getType() {
+        return type;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public double getMark() {
+        return mark;
     }
 
     public byte[] getData() {
@@ -83,6 +70,10 @@ public class ExamStudent {
     }
 
     // Setters
+    public void setMark(double mark) {
+        this.mark = mark;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -99,5 +90,11 @@ public class ExamStudent {
         return this.student;
     }
 
-    // Add any additional methods needed for your logic
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getNameStudent(){
+        return student.getFirstName()+student.getLastName();
+    }
 }

@@ -12,37 +12,22 @@ public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name="examId")
-    private Long id;
+    private Long examId;
 
     @Lob
     @Column (length=1000000)
-    private byte[] data; // Assuming this is a PDF file.
+    private byte[] data; 
 
     @ManyToOne
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    
     private String name;
-
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     private String type;
 
-    @OneToMany(mappedBy = "exam")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "exam")
     @JsonBackReference
     private List<ExamStudent> examStudents;
 
@@ -63,11 +48,19 @@ public class Exam {
         this.subject = subject;
         this.examStudents = new ArrayList<>();
     }
-    // Include a constructor with parameters if needed
 
     // Getters
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+
     public Long getId() {
-        return id;
+        return examId;
     }
 
     public byte[] getData() {
@@ -83,8 +76,16 @@ public class Exam {
     }
 
     // Setters
-    public void setId(Long id) {
-        this.id = id;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long examId) {
+        this.examId = examId;
     }
 
     public void setData(byte[] data) {
@@ -99,5 +100,5 @@ public class Exam {
         this.examStudents = examStudents;
     }
 
-    // Add any additional methods needed for your logic
+    
 }
