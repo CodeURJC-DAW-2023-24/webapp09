@@ -81,6 +81,25 @@
                         </div>
                     </div>
                 </div>
+                {{#show}}
+                <div class="col-lg-3">
+                    <div class="sidebar-item recent-posts">
+
+                        <div class="sidebar-heading">
+                            <h2>Recommended subjects</h2>
+                        </div>
+                        <div class="content">
+                            <ul>
+                                {{#recommendedSubjects}}
+                                <li><a href="/subject/{{id}}">
+                                    <h5>{{name}}</h5>
+                                </a></li>
+                                {{/recommendedSubjects}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {{/show}}
             </div>
         </div>
     </section>

@@ -42,6 +42,19 @@ public class Forum {
 
     }
 
+    public Forum(String username, String comment, Subject subject){
+
+        this.username = username;
+        this.comment = comment;
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentDateTime = dateFormat. format(currentDate);
+        this.date = currentDateTime;
+        this.subject=subject;
+
+    }
+
     // Getters
     public Long getForumd() {
         return forumId;

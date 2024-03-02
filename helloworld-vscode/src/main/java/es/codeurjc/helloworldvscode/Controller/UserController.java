@@ -57,21 +57,20 @@ public class UserController {
     public ModelAndView showStudentSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
-        Optional<User> u = userRepository.findFirstByFirstName(principal.getName());
-        User usuario = u.get();
-        String rol =  usuario.getRole().toString();
-        if(rol == "ROLE_TEACHER"){
-            Teacher teacher = teacherService.getTeacherByName(principal.getName());
-            System.out.println("----------------------------------------------------");
-            System.out.println("----------------------------------------------------" + teacher.getRole());
-            System.out.println("----------------------------------------------------");
-            modelAndView.addObject("user", teacher);
-        }
-        else if (rol == "ROLE_STUDENT") {
-            Student student = studentService.getStudentByName(principal.getName());
-            modelAndView.addObject("user", student);
-        }
 
+        boolean isStudent = request.isUserInRole("STUDENT");
+        modelAndView.addObject("isStudent", isStudent);
+
+        if (isStudent) {
+            Student student = studentService.getStudentByName(principal.getName());
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
+            modelAndView.addObject("user", student);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+        } else if (request.isUserInRole("TEACHER")) {
+            Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            modelAndView.addObject("user", teacher);
+            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
+        }
         return modelAndView;
     }
     
@@ -112,6 +111,8 @@ public class UserController {
         studentRepository.save(newStudent);
         return "redirect:/login";
     }
+
+
 
     @GetMapping("/profile")
     public ModelAndView personalArea(Model model, HttpServletRequest request) {

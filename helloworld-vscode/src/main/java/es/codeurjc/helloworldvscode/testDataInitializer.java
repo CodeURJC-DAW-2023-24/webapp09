@@ -1,11 +1,7 @@
 package es.codeurjc.helloworldvscode;
 
 
-import es.codeurjc.helloworldvscode.Entitys.Exam;
-import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,7 +140,25 @@ public class testDataInitializer {
                 "Exploración de la diversidad cultural de la humanidad y cómo las culturas se desarrollan y cambian a lo largo del tiempo.",
                 "A través de estudios de caso, los estudiantes examinarán prácticas, creencias y relaciones sociales en diferentes culturas alrededor del mundo.",
                 "Ciencias Sociales");
-
+////////FORUMS
+        Forum f1 = new Forum("Manolo Perez", "I'm currently delving into Python programming and have stumbled upon the topic of list comprehensions. While I've grasped the basic concept, I find myself a bit perplexed, particularly when it comes to nested list comprehensions and their comparison to nested loops.\r\n" + //
+                "\r\n" +
+                "Could you kindly elucidate the intricacies of list comprehensions in Python, especially in the context of nested structures? "
+        );
+        Forum f2 = new Forum("Call me by your name","I am currently immersing myself in Python programming and have encountered the concept of list comprehensions. Although I've managed to grasp the fundamental concept, I find myself encountering difficulties, particularly in understanding nested list comprehensions and their correlation with nested loops.\r\n" + //
+                "\r\n" +
+                "Would you be able to provide some guidance on the complexities of list comprehensions in Python, especially within the realm of nested structures? Any clarifying examples or recommended learning materials would be tremendously beneficial to my comprehension."
+        );
+        Forum f3 = new Forum("Belen Estaban","As I continue my journey into Python programming, I've reached a point where I'm exploring list comprehensions. While I've managed to grasp the fundamental concept, I'm encountering challenges, particularly in understanding nested list comprehensions and their comparison to nested loops.\r\n" + //
+                "\r\n" + //
+                "Could you kindly provide some insights into the intricacies of list comprehensions in Python, especially within the context of nested structures?"
+        );
+        Forum f4 = new Forum("Paquito Chocolates","I'm currently engaged in learning Python programming and have reached a section on list comprehensions. While I've attained a basic understanding, I find myself facing difficulties, particularly concerning nested list comprehensions and their relationship with nested loops.\r\n" + //
+                "\r\n" + //
+                "Could you please offer some clarification on the complexities of list comprehensions in Python, particularly within the realm of nested structures? Any additional examples or recommended reading materials would be immensely helpful in solidifying my understanding.\r\n" + //
+                "\r\n" + //
+                "Thank you for your time and guidance."
+        );
 
 ////////EXAMS
         Exam e1 = new Exam("Exam 1", null, null, s4);
@@ -188,6 +202,9 @@ public class testDataInitializer {
         s1.getTeachers().addAll(List.of(t2));
         s20.getTeachers().addAll(List.of(t3));
 
+        //forums IN subjects
+        s4.getForums().addAll(List.of(f1,f2,f3,f4));
+
 
         //subjects IN students
         st1.getSubjects().addAll(List.of(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10));
@@ -206,10 +223,18 @@ public class testDataInitializer {
         t2.getSubjects().addAll(List.of(s1));
         t3.getSubjects().addAll(List.of(s20));
 
+
+        //subjects IN forums
+        f1.setSubject(s4);
+        f2.setSubject(s4);
+        f3.setSubject(s4);
+        f4.setSubject(s4);
+
         // Guardar todos los datos en listas
         studentRepository.saveAll(List.of(st1,st2,st3,st4,st5,st6,st7,st8,st9,st10));
         teacherRepository.saveAll(List.of(t1,t2,t3));
         subjectRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20));
+        forumRepository.saveAll(List.of(f1,f2,f3,f4));
         examRepository.saveAll(List.of(e1,e2,e3,e4));
         examStudentRepository.saveAll(List.of(es1,es2,es3,es4,es5,es6));
 

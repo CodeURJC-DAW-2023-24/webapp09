@@ -184,37 +184,31 @@
 
                     <div class="blog-post">
                         <!-- Sección de Comentarios -->
+                        {{#forums}}
+                        <hr>
                         <div class="comentario">
-                            <div class="autor">Nombre del Usuario</div>
-                            <div class="fecha">12 de febrero de 2024</div>
+                            <div class="autor">{{username}}</div>
+                            <div class="fecha">{{date}}</div>
                             <div class="texto">
-                                <p>cuerpo del comentario 1</p>
+                                <p>{{comment}}</p>
                             </div>
                         </div>
                         <hr>
-                        <div class="comentario">
-                            <div class="autor">Otro Usuario</div>
-                            <div class="fecha">13 de febrero de 2024</div>
-                            <div class="texto">
-                                <p>cuerpo del comentario 2</p>
-                            </div>
-                        </div>
-                        <hr>
+                        {{/forums}}
                         <!-- Formulario para agregar nuevos comentarios -->
 
-                        <form id="formulario-comentario">
-                            <br></br>
+                        <form id="formulario-comentario" action="/subject_onesubj_student/{{subjectId}}" method="POST">
+                            <br><br>
                             <h2>Add Comment</h2>
                             <hr>
                             <div class="centered-div">
-                                    <textarea name="comment" class="form-control" id="comment" rows="5"
-                                              placeholder="Write here..."></textarea>
-
-                                <br></br>
+                                <textarea name="comment" class="form-control" id="comment" rows="5" placeholder="Write here..."></textarea>
+                                <br><br>
                                 <div class="main-button">
-                                    <a onclick="">Send</a>
+                                    <input type="submit" value="Send"/>
                                 </div>
                             </div>
+                            <input type="hidden" name="_csrf" value="{{token}}">
                         </form>
                     </div>
                 </div>

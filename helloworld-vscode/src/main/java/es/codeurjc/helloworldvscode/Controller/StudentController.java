@@ -1,9 +1,8 @@
 
 package es.codeurjc.helloworldvscode.Controller;
-import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.Entitys.*;
+import es.codeurjc.helloworldvscode.repository.ForumRepository;
+import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
@@ -30,6 +29,13 @@ public class StudentController {
     @Autowired
     ExamService examService;
 
+    @Autowired
+    SubjectRepository subjectRepository;
+
+    @Autowired
+    ForumRepository forumRepository;
+
+
     @GetMapping("/subject_onesubj_student/{subjectId}")
     public ModelAndView showSubjectDetails(HttpServletRequest request, @PathVariable Long subjectId) {
         Principal principal = request.getUserPrincipal();
@@ -43,11 +49,32 @@ public class StudentController {
             Long studentId = student.getId();
             Subject subject = subjectService.getSubjectById(subjectId);
             List<ExamStudent> examStudents =examService.findExamStudentsByStudentAndSubject(studentId, subjectId);
+            List<Forum> forums=forumRepository.findBySubjectId(subjectId);
             modelAndView.addObject("exams", subject.getExams());
             modelAndView.addObject("subject", subject);
             modelAndView.addObject("student", student);
             modelAndView.addObject("examStudents", examStudents);
+            modelAndView.addObject("forums", forums);
         }
         return modelAndView;
+    }
+
+    @PostMapping("/subject_onesubj_student/{subjectId}")
+    public String showSignup(HttpServletRequest request,
+                             Model model,
+                             @RequestParam String comment,@PathVariable Long subjectId) {
+        Subject subject = subjectService.getSubjectById(subjectId);
+        Principal principal = request.getUserPrincipal();
+
+
+        Forum forum=new Forum(principal.getName(), comment, subject);
+        subject.getForums().add(forum);
+
+        subjectRepository.save(subject);
+        forumRepository.save(forum);
+
+
+
+        return ("redirect:/subject_onesubj_student/"+subject.getId());
     }
 }

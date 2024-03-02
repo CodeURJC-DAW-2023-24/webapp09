@@ -54,12 +54,27 @@ public class SubjectController {
 			model.addAttribute("logged", false);
 		}
 	}
- 
+
     @GetMapping("/")
-    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable,HttpServletRequest request) {
         ModelAndView modelView = new ModelAndView();
+        Principal principal = request.getUserPrincipal();
         model.addAttribute("subjects",subjectsList.findAll());
         modelView.setViewName("main_page");
+        List<Subject> recommendedSubjects =new ArrayList<Subject>();
+        boolean show=false;
+        if (principal!=null){
+            if (request.isUserInRole("STUDENT")){
+                show=true;
+                Student student=studentService.getStudentByName(principal.getName());
+                recommendedSubjects = subjectService.recommendSubjects(student);
+            }
+        }else{
+            show=true;
+            recommendedSubjects = subjectService.recommendSubjects(null);
+        }
+        model.addAttribute("show", show);
+        model.addAttribute("recommendedSubjects", recommendedSubjects);
         return modelView;
     }
 
