@@ -16,8 +16,6 @@ public class Teacher extends User{
     @JsonBackReference
     private List<Subject> subjects;
 
-
-
     // Constructors
     public Teacher(){}
 

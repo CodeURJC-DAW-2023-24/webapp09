@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import es.codeurjc.helloworldvscode.Entitys.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
-    Optional<User> findByFirstName(String name);
+    Optional<User> findFirstByFirstName(String name);
     Optional<User> findById(Long id);
     
 }

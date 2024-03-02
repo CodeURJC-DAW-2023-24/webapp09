@@ -56,25 +56,10 @@ public class SubjectController {
 	}
  
     @GetMapping("/")
-    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable,HttpServletRequest request) {
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
         ModelAndView modelView = new ModelAndView();
-        Principal principal = request.getUserPrincipal();
         model.addAttribute("subjects",subjectsList.findAll());
         modelView.setViewName("main_page");
-        List<Subject> recommendedSubjects =new ArrayList<Subject>();
-        boolean show=false;
-        if (principal!=null){
-            if (request.isUserInRole("STUDENT")){
-                show=true;
-                Student student=studentService.getStudentByName(principal.getName());
-                recommendedSubjects = subjectService.recommendSubjects(student);
-            }
-        }else{
-            show=true;
-            recommendedSubjects = subjectService.recommendSubjects(null);
-        }
-        model.addAttribute("show", show);
-        model.addAttribute("recommendedSubjects", recommendedSubjects);
         return modelView;
     }
 
@@ -99,9 +84,6 @@ public class SubjectController {
 
     @GetMapping("/subjectUser")
     public List<Subject> getSubjectsUser(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
-        System.out.println("--------------------------------------------------------------------");
-        System.out.println("--------------------------------------------------------------------");
-        System.out.println("--------------------------------------------------------------------");
         Pageable pageable = PageRequest.of(page, size);
         return subjectService.getSubjectsUser(request, pageable);
     }

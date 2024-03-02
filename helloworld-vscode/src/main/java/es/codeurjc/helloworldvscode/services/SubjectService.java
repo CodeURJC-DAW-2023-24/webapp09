@@ -1,7 +1,6 @@
 package es.codeurjc.helloworldvscode.services;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Collectors;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
@@ -31,6 +31,8 @@ public class SubjectService {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
 
     public List<Subject> findAll() {
         return subjectRepository.findAll();
@@ -45,25 +47,44 @@ public class SubjectService {
         return subjectPage.getContent();
     }
 
-
     public List<Subject> getSubjectsUser(HttpServletRequest request, Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
+
         Principal principal = request.getUserPrincipal();
-        List<Subject> lista = studentService.findSubjectsByStudentName(principal.getName());
-    
-        List<Subject> subjects;
-    
-        if (startItem < lista.size()) {
-            int toIndex = Math.min(startItem + pageSize, lista.size());
-            subjects = lista.subList(startItem, toIndex);
-        } else {
-            subjects = Collections.emptyList();
+        Optional<User> u = userRepository.findFirstByFirstName(principal.getName());
+        User usuario = u.get();
+        String rol = usuario.getRole().toString();
+        if (rol == "ROLE_TEACHER") {
+            List<Subject> lista = teacherService.findSubjectsByTeacherName(principal.getName());
+            List<Subject> subjects;
+
+            if (startItem < lista.size()) {
+                int toIndex = Math.min(startItem + pageSize, lista.size());
+                subjects = lista.subList(startItem, toIndex);
+            } else {
+                subjects = Collections.emptyList();
+            }
+            System.out.println("--------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------" + lista);
+            return subjects;
+
+        } else if (rol == "ROLE_STUDENT") {
+            List<Subject> lista = studentService.findSubjectsByStudentName(principal.getName());
+            List<Subject> subjects;
+
+            if (startItem < lista.size()) {
+                int toIndex = Math.min(startItem + pageSize, lista.size());
+                subjects = lista.subList(startItem, toIndex);
+            } else {
+                subjects = Collections.emptyList();
+            }
+            return subjects;
         }
-        System.out.println("----------------------------------------------------------------"+subjects);
-    
-        return subjects;
+        return null;
+        
     }
 
     public Subject getSubjectById(Long studentId) {
@@ -89,7 +110,7 @@ public class SubjectService {
     }
 
     public List<Subject> recommendSubjects(Student student) {
-        if ((student == null)||student.getSubjects().size()==0) {
+        if ((student == null) || student.getSubjects().size() == 0) {
             // Devolver las 5 asignaturas más populares
             return subjectRepository.findAll().stream()
                     .sorted(Comparator.comparingInt((Subject s) -> s.getStudents().size()).reversed())
@@ -107,7 +128,8 @@ public class SubjectService {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
-        // Asegurar que al menos se incluyan asignaturas de los dos genders más frecuentes
+        // Asegurar que al menos se incluyan asignaturas de los dos genders más
+        // frecuentes
         List<Subject> recommendedSubjects = new ArrayList<>();
         for (String gender : gendersOrdered) {
             List<Subject> subjectsByGender = findByGenderAndNotStudent(gender, student)

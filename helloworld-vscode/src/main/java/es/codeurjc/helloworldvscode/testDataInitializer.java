@@ -193,16 +193,11 @@ public class testDataInitializer {
         examStudentRepository.saveAll(List.of(es1,es2,es3,es4,es5,es6));
 
         //////// TEACHER
-        Teacher t1 = new Teacher("Pepe", "Franco", "pfespania@gmail.com", "vivaespaña");
-        t1.setOneSubject(s4);
-        s4.setOneTeacher(t1);
 
-        Teacher t2 = new Teacher("Belen", "Esteban", "salavame@gmail.com", "andreita");
-        t2.setOneSubject(s4);
-        s4.setOneTeacher(t2);
-
-        teacherRepository.save(t1);
+        Teacher t2 = new Teacher("aa", "Esteban", "salavame@gmail.com", "aa");
         teacherRepository.save(t2);
+        
+        
 
 }
 }

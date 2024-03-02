@@ -1,6 +1,7 @@
 package es.codeurjc.helloworldvscode.Controller;
 
 import es.codeurjc.helloworldvscode.Entitys.*;
+import es.codeurjc.helloworldvscode.enumerate.Role;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
+    private static final Role ROLE_TEACHER = null;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -55,20 +57,21 @@ public class UserController {
     public ModelAndView showStudentSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
-
-        boolean isStudent = request.isUserInRole("STUDENT");
-        modelAndView.addObject("isStudent", isStudent);
-
-        if (isStudent) {
-            Student student = studentService.getStudentByName(principal.getName());
-            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
-            modelAndView.addObject("user", student);
-            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-        } else if (request.isUserInRole("TEACHER")) {
+        Optional<User> u = userRepository.findFirstByFirstName(principal.getName());
+        User usuario = u.get();
+        String rol =  usuario.getRole().toString();
+        if(rol == "ROLE_TEACHER"){
             Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            System.out.println("----------------------------------------------------");
+            System.out.println("----------------------------------------------------" + teacher.getRole());
+            System.out.println("----------------------------------------------------");
             modelAndView.addObject("user", teacher);
-            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
         }
+        else if (rol == "ROLE_STUDENT") {
+            Student student = studentService.getStudentByName(principal.getName());
+            modelAndView.addObject("user", student);
+        }
+
         return modelAndView;
     }
     
@@ -93,10 +96,10 @@ public class UserController {
             @RequestParam String password,
             @RequestParam String confirmPassword) {
                
-                List<Student> students =studentRepository.findAll();
+            List<Student> students =studentRepository.findAll();
         // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y
         // contraseñas coincidan
-        if (!email.equals(confirmEmail)||(studentService.existsByEmail(students, email))) {
+        if (!email.equals(confirmEmail)) {            
             model.addAttribute("error", "Emails do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }

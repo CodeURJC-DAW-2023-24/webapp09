@@ -49,13 +49,12 @@ public class SecurityConfiguration {
 					//PRIVATE PAGES
 
 					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
-					.requestMatchers("/subjectUser").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
-					.requestMatchers("/logout").hasAnyRole("STUDENT", "TEACHER", "ADMIN") 
+					.requestMatchers("/subjectUser").permitAll() 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")
-					.requestMatchers("/subject_onesubj_student").hasAnyRole("STUDENT")
-					.requestMatchers("/subject_onesubj_teacher").hasAnyRole("STUDENT")
+					.requestMatchers("/subject_onesubj_student/**").permitAll()
+					.requestMatchers("/subject_onesubj_teacher").permitAll()
 					
 			)
 			.formLogin(formLogin -> formLogin
