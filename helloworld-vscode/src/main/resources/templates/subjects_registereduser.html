@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
                 <!-- PARA EL ALGORITMO DE RECOMENDACIÓN -->
@@ -59,24 +60,26 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="sidebar-item recent-posts">
+                                    {{#isStudent}} <!-- Solo mostrar si es estudiante -->
                                     <div class="sidebar-heading">
                                         <h2>Recommended subjects</h2>
                                     </div>
                                     <div class="content">
                                         <ul>
-                                            <li><a href="#">
-                                                    <h5>Introducción a la programación</h5>
-                                                </a></li>
-                                            <li><a href="#">
-                                                    <h5>Álgebra</h5>
-                                                </a></li>
+                                            {{#recommendedSubjects}}
+                                            <li><a href="/subject/{{id}}">
+                                                <h5>{{name}}</h5>
+                                            </a></li>
+                                            {{/recommendedSubjects}}
                                         </ul>
                                     </div>
+                                    {{/isStudent}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

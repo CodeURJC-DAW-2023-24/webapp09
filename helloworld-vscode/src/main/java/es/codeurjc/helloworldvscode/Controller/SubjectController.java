@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
+import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +35,8 @@ public class SubjectController {
     SubjectRepository subjectsList;
     @Autowired
     SubjectService subjectService;
+    @Autowired
+    StudentService studentService;
 
 
     @ModelAttribute
@@ -52,10 +56,25 @@ public class SubjectController {
 	}
  
     @GetMapping("/")
-    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable) {
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable,HttpServletRequest request) {
         ModelAndView modelView = new ModelAndView();
+        Principal principal = request.getUserPrincipal();
         model.addAttribute("subjects",subjectsList.findAll());
         modelView.setViewName("main_page");
+        List<Subject> recommendedSubjects =new ArrayList<Subject>();
+        boolean show=false;
+        if (principal!=null){
+            if (request.isUserInRole("STUDENT")){
+                show=true;
+                Student student=studentService.getStudentByName(principal.getName());
+                recommendedSubjects = subjectService.recommendSubjects(student);
+            }
+        }else{
+            show=true;
+            recommendedSubjects = subjectService.recommendSubjects(null);
+        }
+        model.addAttribute("show", show);
+        model.addAttribute("recommendedSubjects", recommendedSubjects);
         return modelView;
     }
 

@@ -1,14 +1,12 @@
 package es.codeurjc.helloworldvscode.Controller;
 
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
-import es.codeurjc.helloworldvscode.Entitys.User;
+import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -34,7 +32,8 @@ public class UserController {
     private TeacherRepository teacherRepository;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private SubjectService subjectService;
     @Autowired
     private StudentService studentService;
     @Autowired
@@ -57,16 +56,22 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
 
-        if (request.isUserInRole("STUDENT")) {
+        boolean isStudent = request.isUserInRole("STUDENT");
+        modelAndView.addObject("isStudent", isStudent);
+
+        if (isStudent) {
             Student student = studentService.getStudentByName(principal.getName());
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
         } else if (request.isUserInRole("TEACHER")) {
             Teacher teacher = teacherService.getTeacherByName(principal.getName());
             modelAndView.addObject("user", teacher);
+            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
         }
-
         return modelAndView;
     }
+    
 
     @RequestMapping("/loginerror")
     public String loginerror() {
@@ -87,10 +92,11 @@ public class UserController {
             @RequestParam String confirmEmail,
             @RequestParam String password,
             @RequestParam String confirmPassword) {
-
+               
+                List<Student> students =studentRepository.findAll();
         // Aquí podrías incluir validaciones, por ejemplo, verificar que los correos y
         // contraseñas coincidan
-        if (!email.equals(confirmEmail)) {
+        if (!email.equals(confirmEmail)||(studentService.existsByEmail(students, email))) {
             model.addAttribute("error", "Emails do not match!");
             return "signup"; // Vuelve a la página de registro si hay un error
         }
