@@ -711,16 +711,7 @@ public class TeacherController {
 
 	}
 
-	@PostConstruct
-	public void init() {
 
-		Teacher t1 = new Teacher("Pepe","Franco","pfespania@gmail.com","vivaespaña");
-		Teacher t2 = new Teacher("Belen","Esteban","salavame@gmail.com","andreita");
-
-		teacherRepository.save(t1);
-		teacherRepository.save(t2);
-
-	}
 	
 	@GetMapping("/")
 	public Collection<Teacher> getItems() {

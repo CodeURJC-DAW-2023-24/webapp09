@@ -46,6 +46,14 @@ public class testDataInitializer {
         Student st9 = new Student("Pau", "Rios", "pau@gmail.com", "pau");
         Student st10 = new Student("Leo", "Conde", "leo@gmail.com", "leo");
 
+////////TEACHERS
+        Teacher t1 = new Teacher("aa", "Esteban", "salavele@gmail.com", "aa");
+        Teacher t3 = new Teacher("Pepe","Franco","pfespania@gmail.com","vivaespaña");
+        Teacher t2 = new Teacher("Belen","Esteban","salavame@gmail.com","andreita");
+
+
+
+
 ////////SUBJECTS
         Subject s1 = new Subject("Matemáticas",
                 "Estudio de los números, cantidades, y formas.",
@@ -175,6 +183,12 @@ public class testDataInitializer {
         s19.getStudents().addAll(List.of());
         s20.getStudents().addAll(List.of());
 
+        //teachers IN subjects
+        s4.getTeachers().addAll(List.of(t1));
+        s1.getTeachers().addAll(List.of(t2));
+        s20.getTeachers().addAll(List.of(t3));
+
+
         //subjects IN students
         st1.getSubjects().addAll(List.of(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10));
         st2.getSubjects().addAll(List.of(s1,s4));
@@ -185,17 +199,24 @@ public class testDataInitializer {
         st9.getSubjects().addAll(List.of(s4,s17));
         st10.getSubjects().addAll(List.of(s4,s17));
 
+
+        //subjects IN teachers
+
+        t1.getSubjects().addAll(List.of(s4));
+        t2.getSubjects().addAll(List.of(s1));
+        t3.getSubjects().addAll(List.of(s20));
+
         // Guardar todos los datos en listas
         studentRepository.saveAll(List.of(st1,st2,st3,st4,st5,st6,st7,st8,st9,st10));
-        studentRepository.saveAll(List.of(st1,st2,st3,st4,st5,st6));
+        teacherRepository.saveAll(List.of(t1,t2,t3));
         subjectRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20));
         examRepository.saveAll(List.of(e1,e2,e3,e4));
         examStudentRepository.saveAll(List.of(es1,es2,es3,es4,es5,es6));
 
         //////// TEACHER
 
-        Teacher t2 = new Teacher("aa", "Esteban", "salavame@gmail.com", "aa");
-        teacherRepository.save(t2);
+
+
         
         
 
