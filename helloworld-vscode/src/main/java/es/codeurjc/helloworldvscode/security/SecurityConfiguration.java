@@ -56,6 +56,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/subject_onesubj_student/**").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/subject_onesubj_teacher").permitAll()
 					.requestMatchers("/redirection/**").permitAll()
+					.requestMatchers("/teachers/subject/**/general-information").permitAll()
 					
 			)
 			.formLogin(formLogin -> formLogin

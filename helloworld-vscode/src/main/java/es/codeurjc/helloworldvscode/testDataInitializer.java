@@ -43,7 +43,7 @@ public class testDataInitializer {
         Student st10 = new Student("Leo", "Conde", "leo@gmail.com", "leo");
 
 ////////TEACHERS
-        Teacher t1 = new Teacher("aa", "Esteban", "salavele@gmail.com", "aa");
+        Teacher t1 = new Teacher("aa", "Esteban", "aa@gmail.com", "aa");
         Teacher t3 = new Teacher("Pepe","Franco","pfespania@gmail.com","vivaespaña");
         Teacher t2 = new Teacher("Belen","Esteban","salavame@gmail.com","andreita");
 
