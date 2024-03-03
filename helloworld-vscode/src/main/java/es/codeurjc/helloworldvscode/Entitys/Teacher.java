@@ -16,16 +16,18 @@ public class Teacher extends User{
     @JsonBackReference
     private List<Subject> subjects;
 
+    private final static Role rol = Role.ROLE_TEACHER;
+
     // Constructors
     public Teacher(){}
 
     public Teacher(String firstName, String lastName, String email, String password, Blob profile) {
-        super(firstName, lastName, email, password, profile, Role.ROLE_TEACHER);
+        super(firstName, lastName, email, password, profile, rol);
         this.subjects = new ArrayList<>();
     }
 
     public Teacher(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password, Role.ROLE_TEACHER);
+        super(firstName, lastName, email, password, rol);
         this.subjects = new ArrayList<>();
 
     }

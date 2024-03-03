@@ -53,12 +53,14 @@
                     </div>
                     
                 </div>
+                
+                {{#isStudent}}
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="sidebar-item recent-posts">
-                                    {{#isStudent}} <!-- Solo mostrar si es estudiante -->
+                                     <!-- Solo mostrar si es estudiante -->
                                     <div class="sidebar-heading">
                                         <h2>Recommended subjects</h2>
                                     </div>
@@ -71,12 +73,13 @@
                                             {{/recommendedSubjects}}
                                         </ul>
                                     </div>
-                                    {{/isStudent}}
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{/isStudent}}
 
                
 

@@ -3,6 +3,7 @@ package es.codeurjc.helloworldvscode.Controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,9 +22,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
+import es.codeurjc.helloworldvscode.Entitys.Teacher;
+import es.codeurjc.helloworldvscode.Entitys.User;
+import es.codeurjc.helloworldvscode.enumerate.Role;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
+import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
+import es.codeurjc.helloworldvscode.services.TeacherService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -37,45 +43,53 @@ public class SubjectController {
     SubjectService subjectService;
     @Autowired
     StudentService studentService;
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    TeacherService teacherService;
 
     @ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
+    public void addAttributes(Model model, HttpServletRequest request) {
 
-		Principal principal = request.getUserPrincipal();
+        Principal principal = request.getUserPrincipal();
 
-		if (principal != null) {
+        if (principal != null) {
 
-			model.addAttribute("logged", true);
-			model.addAttribute("username", principal.getName());
-			model.addAttribute("user", request.isUserInRole("USER"));
+            model.addAttribute("logged", true);
+            model.addAttribute("username", principal.getName());
+            model.addAttribute("user", request.isUserInRole("USER"));
 
-		} else {
-			model.addAttribute("logged", false);
-		}
-	}
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
     @GetMapping("/")
-    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable,HttpServletRequest request) {
-        ModelAndView modelView = new ModelAndView();
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("subjects",subjectsList.findAll());
-        modelView.setViewName("main_page");
-        List<Subject> recommendedSubjects =new ArrayList<Subject>();
-        boolean show=false;
-        if (principal!=null){
-            if (request.isUserInRole("STUDENT")){
-                show=true;
-                Student student=studentService.getStudentByName(principal.getName());
-                recommendedSubjects = subjectService.recommendSubjects(student);
+        model.addAttribute("subjects", subjectsList.findAll());
+        modelAndView.setViewName("main_page");
+
+        if (principal != null) {
+            Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+
+            if (user.get().getRole() == Role.ROLE_TEACHER) {
+                modelAndView.addObject("isStudent", false);
+                Teacher teacher = teacherService.getTeacherByName(principal.getName());
+                modelAndView.addObject("user", teacher);
+
+            } else {
+                modelAndView.addObject("isStudent", true);
+                Student student = studentService.getStudentByName(principal.getName());
+                List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
+                modelAndView.addObject("user", student);
+                modelAndView.addObject("recommendedSubjects", recommendedSubjects);
             }
-        }else{
-            show=true;
-            recommendedSubjects = subjectService.recommendSubjects(null);
+        } else {
+            modelAndView.addObject("isStudent", false);
         }
-        model.addAttribute("show", show);
-        model.addAttribute("recommendedSubjects", recommendedSubjects);
-        return modelView;
+        return modelAndView;
     }
 
     @GetMapping("/subject/{id}")
@@ -92,13 +106,15 @@ public class SubjectController {
     }
 
     @GetMapping("/subjectInfo")
-    public List<Subject> getSubjects(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public List<Subject> getSubjects(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return subjectService.getSubjects(pageable);
     }
 
     @GetMapping("/subjectUser")
-    public List<Subject> getSubjectsUser(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public List<Subject> getSubjectsUser(HttpServletRequest request, @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return subjectService.getSubjectsUser(request, pageable);
     }

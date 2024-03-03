@@ -29,7 +29,7 @@ public class User {
     private final Role role;
 
     public User(){
-        this.role = null;}
+        this.role = Role.ROLE_TEACHER;}
 
     public User(String firstName, String lastName, String email, String password, Blob profile, Role role) {
         this.firstName = firstName;

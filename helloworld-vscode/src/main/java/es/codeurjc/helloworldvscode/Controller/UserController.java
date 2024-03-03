@@ -27,7 +27,6 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
-    private static final Role ROLE_TEACHER = null;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -54,22 +53,27 @@ public class UserController {
     }
 
     @GetMapping("/subjects_registereduser")
-    public ModelAndView showStudentSubjects(HttpServletRequest request) {
+    public ModelAndView showSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
+        Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+        
+        System.out.println("---------------------------------------------");
+        System.out.println("---------------------------------------------" + user.get().getRole());
+        System.out.println("---------------------------------------------");
+        System.out.println("---------------------------------------------");
+        if (user.get().getRole() == Role.ROLE_TEACHER) {
+            modelAndView.addObject("isStudent", false);
 
-        boolean isStudent = request.isUserInRole("STUDENT");
-        modelAndView.addObject("isStudent", isStudent);
-
-        if (isStudent) {
+            Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            modelAndView.addObject("user", teacher);
+            
+        } else {
+            modelAndView.addObject("isStudent", true);
             Student student = studentService.getStudentByName(principal.getName());
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-        } else if (request.isUserInRole("TEACHER")) {
-            Teacher teacher = teacherService.getTeacherByName(principal.getName());
-            modelAndView.addObject("user", teacher);
-            // No hay necesidad de añadir 'recommendedSubjects' aquí ya que es específico de estudiantes.
         }
         return modelAndView;
     }
