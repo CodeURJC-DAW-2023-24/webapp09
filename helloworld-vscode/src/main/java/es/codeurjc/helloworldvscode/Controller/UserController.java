@@ -9,6 +9,7 @@ import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -40,6 +41,7 @@ public class UserController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+
 
     @GetMapping("/login")
     public String showLogin() {
@@ -126,8 +128,6 @@ public class UserController {
         return "redirect:/login";
     }
 
-
-
     @GetMapping("/profile")
     public ModelAndView personalArea(Model model, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("profile");
@@ -163,9 +163,31 @@ public class UserController {
     }
 
     @PostMapping("/editProfile")
-    public String editarPerfil(@ModelAttribute User usuario) {
-        // Lógica para actualizar los datos del usuario en la base de datos
-        userRepository.save(usuario);
-        return "redirect:/profile";
+    public String editarPerfil(HttpServletRequest request,
+                               Model model,
+                               @RequestParam("firstName") Optional<String> firstName,
+                               @RequestParam("lastName") Optional<String> lastName,
+                               @RequestParam("email") Optional<String> email,
+                               @RequestParam("password") Optional<String> password) throws ServletException {
+
+        Principal principal = request.getUserPrincipal();
+        Optional<User> user = userRepository.findByEmail(principal.getName());
+        System.out.println("COPIARPEGAR");
+        if (user.get().getRole() == Role.ROLE_TEACHER) {
+            Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
+            firstName.ifPresent(teacher::setFirstName);
+            lastName.ifPresent(teacher::setLastName);
+            email.ifPresent(teacher::setEmail);
+            password.ifPresent(teacher::setPassword);
+            teacherRepository.save(teacher);
+        }else if (user.get().getRole() == Role.ROLE_STUDENT) {
+            Student student = studentService.getStudentByEmail(principal.getName());
+            firstName.ifPresent(student::setFirstName);
+            lastName.ifPresent(student::setLastName);
+            email.ifPresent(student::setEmail);
+            password.ifPresent(student::setPassword);
+            studentRepository.save(student);
+        }
+        return showLogout();
     }
 }
