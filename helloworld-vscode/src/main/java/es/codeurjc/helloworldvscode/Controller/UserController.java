@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -51,8 +54,7 @@ public class UserController {
     @PostMapping("/logout")
     public String showLogout() {
         // Invalidar la sesión del usuario
-        SecurityContextHolder.getContext().setAuthentication(null);
-        return "redirect:/login?logout"; // Redireccionar a la página de login con un mensaje de logout
+        return "redirect:/login"; // Redireccionar a la página de login con un mensaje de logout
     }
 
     @GetMapping("/subjects_registereduser")
@@ -133,11 +135,11 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("profile");
         model.addAttribute("username", request.getUserPrincipal().getName());
         String role = "UNKNOWN"; // Por defecto
-        // if (request.isUserInRole("STUDENT")) {
-        //     role = "Student";
-        // } else if (request.isUserInRole("TEACHER")) {
-        //     role = "Teacher";
-        // }
+        if (request.isUserInRole("STUDENT")) {
+            role = "Student";
+         } else if (request.isUserInRole("TEACHER")) {
+             role = "Teacher";
+         }
 
         
         List<Subject> subjects = new ArrayList<>();
@@ -184,6 +186,17 @@ public class UserController {
             email.ifPresent(teacher::setEmail);
             password.ifPresent(teacher::setPassword);
             teacherRepository.save(teacher);
+
+
+            //esto vamos a tener q cambiarlo, pero funciona
+            List<GrantedAuthority> roles = new ArrayList<>();
+            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            roles.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+            roles.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+
+            SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(teacher.getEmail(), teacher.getPassword(), roles)
+        );
         }else if (user.get().getRole() == Role.ROLE_STUDENT) {
             Student student = studentService.getStudentByEmail(principal.getName());
             firstName.ifPresent(student::setFirstName);
@@ -191,7 +204,16 @@ public class UserController {
             email.ifPresent(student::setEmail);
             password.ifPresent(student::setPassword);
             studentRepository.save(student);
+
+            List<GrantedAuthority> roles = new ArrayList<>();
+            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            roles.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+            roles.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+
+            SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(student.getEmail(), student.getPassword(), roles)
+            );
         }
-        return showLogout();
+        return "redirect:/profile";
     }
 }
