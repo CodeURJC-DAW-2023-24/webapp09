@@ -114,4 +114,21 @@
 This diagram shows how you can move through the different pages according to the type of user you are.
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/DiagramaDeNavegaci%C3%B3n.png" width="500" height="400">
 
+## PHASE 2: Web with server-generated HTML and AJAX
 
+### Update navigation diagram and templates
+- **Forum**: We have created a new template "forum.html" which will show the forum of each subject in which the students and teachers are gonna be able to talk and solve any question.
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/forum.jpeg" width="500" height="400">
+
+So the new navigation diagram will be this one (the same as the other one but at the top we added forum.html): 
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/DiagramaDeNavegaci%C3%B3n2.png" width="500" height="400">
+
+### Navigation instructions
+Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench), in VSCode download extensions "Extension Pack for Java" and "Spring Boot Extension Pack"
+1. Download this repository
+2. Configure database in MySQLWorkbench, creating a local instance of the database
+3. In our navigator web (we recommend Chrome) we go to ""https://localhost:8443" and when it gives us the notice that the connection is not private we must click on "Advanced" and then on "Proceed to localhost (unsafe)"
+4. Now everything should work and you can enjoy our application :)
+
+### Diagram with database entities
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/DatabaseEntities.jpg">
