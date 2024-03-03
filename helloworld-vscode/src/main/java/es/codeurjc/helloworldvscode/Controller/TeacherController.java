@@ -79,7 +79,7 @@ public class TeacherController {
 	////////////////////////
 	// UPDATE DESCRIPTION //
 	////////////////////////
-	@GetMapping("/subject/{subjectId}/generalinformation")
+	@GetMapping("/subject/{subjectId}/general-information")
 	public ModelAndView subjectOneSubjAdmin(@PathVariable Long subjectId) {
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -110,6 +110,33 @@ public class TeacherController {
 	}
 
 
+	@PostMapping("/subject/{subjectId}/general-information")
+	public void subjectOneSubjAdmin(@PathVariable Long subjectId, HttpServletResponse response,
+			Model model,
+			@RequestParam(required = false) String description,
+			@RequestParam(required = false) String allInfo) throws IOException {
+
+		Optional<Subject> s = subjectRepository.findById(subjectId);
+
+		if (s.isPresent()) {
+			Subject subject = s.get();
+			if (!subject.getDescription().equals(description)) {
+				
+				if(description!=null){
+					subject.setDescription(description);
+				}
+				if(allInfo!=null){
+					subject.setAllInfo(allInfo);
+				}
+			
+				subjectRepository.save(subject);
+			}
+			
+			response.sendRedirect("/teachers/subject/"+subjectId+"/general-information");
+		}else{
+			response.sendRedirect("/error");
+		}
+	}
 
 
 
