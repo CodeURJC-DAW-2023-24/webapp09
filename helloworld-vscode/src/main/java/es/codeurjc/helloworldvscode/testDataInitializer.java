@@ -35,7 +35,7 @@ public class testDataInitializer {
         Student st2 = new Student("Ana", "López", "ana.lopez@example.com", "password456");
         Student st3 = new Student("Carlos", "García", "carlos.garcia@example.com", "password789");
         Student st4 = new Student("Luisa", "Martín", "luisa.martin@example.com", "password101");
-        Student st5 = new Student("Juann", "Gomez", "juan@gmail.com", "juan");
+        Student st5 = new Student("Juan", "Gomez", "juan@gmail.com", "juan");
         Student st6 = new Student("Pablo", "Rollo", "pablo@gmail.com", "pablo");
         Student st7= new Student("Cris", "Sanz", "cris@gmail.com", "cris");
         Student st8 = new Student("Lucas", "Pavo", "lucas@gmail.com", "pavo");

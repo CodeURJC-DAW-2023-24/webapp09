@@ -53,11 +53,11 @@ public class SubjectService {
         int startItem = currentPage * pageSize;
 
         Principal principal = request.getUserPrincipal();
-        Optional<User> u = userRepository.findFirstByFirstName(principal.getName());
+        Optional<User> u = userRepository.findByEmail(principal.getName());
         User usuario = u.get();
         String rol = usuario.getRole().toString();
         if (rol == "ROLE_TEACHER") {
-            List<Subject> lista = teacherService.findSubjectsByTeacherName(principal.getName());
+            List<Subject> lista = teacherService.findSubjectsByTeacherEmail(principal.getName());
             List<Subject> subjects;
 
             if (startItem < lista.size()) {
@@ -72,7 +72,7 @@ public class SubjectService {
             return subjects;
 
         } else if (rol == "ROLE_STUDENT") {
-            List<Subject> lista = studentService.findSubjectsByStudentName(principal.getName());
+            List<Subject> lista = studentService.findSubjectsByStudentEmail(principal.getName());
             List<Subject> subjects;
 
             if (startItem < lista.size()) {

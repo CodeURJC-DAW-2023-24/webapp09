@@ -72,16 +72,16 @@ public class SubjectController {
         modelAndView.setViewName("main_page");
 
         if (principal != null) {
-            Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+            Optional<User> user = userRepository.findByEmail(principal.getName());
 
             if (user.get().getRole() == Role.ROLE_TEACHER) {
                 modelAndView.addObject("isStudent", false);
-                Teacher teacher = teacherService.getTeacherByName(principal.getName());
+                Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else {
                 modelAndView.addObject("isStudent", true);
-                Student student = studentService.getStudentByName(principal.getName());
+                Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);

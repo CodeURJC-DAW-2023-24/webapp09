@@ -25,6 +25,16 @@ public class StudentService {
         }
     }
 
+    public List<Subject> findSubjectsByStudentEmail(String email) {
+        Optional<Student> student = studentRepository.findByEmail(email);
+
+        if (student.isPresent()) {
+            return new ArrayList<>(student.get().getSubjects());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
     public List<Subject> findSubjectsByStudentId(Long studentId) {
         Optional<Student> student = studentRepository.findById(studentId);
         if (student.isPresent()) {
@@ -34,10 +44,18 @@ public class StudentService {
         }
     }
 
+    
+
     public Student getStudentByName(String name) {
         // Retorna el estudiante o lanza una excepción si no se encuentra
         return studentRepository.findByFirstName(name)
                 .orElseThrow(() -> new RuntimeException("Student not found with name " + name));
+    }
+
+    public Student getStudentByEmail(String email) {
+        // Retorna el estudiante o lanza una excepción si no se encuentra
+        return studentRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Student not found with name " + email));
     }
 
     public Student getStudentById(Long studentId) {

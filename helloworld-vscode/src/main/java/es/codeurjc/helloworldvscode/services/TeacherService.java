@@ -37,8 +37,23 @@ public class TeacherService {
                 .orElseThrow(() -> new RuntimeException("Teacher not found with name " + name));
     }
 
+    public Teacher getTeacherByEmail(String email) {
+        return teacherRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with email " + email));
+    }
+
     public List<Subject> findSubjectsByTeacherName(String name) {
         Optional<Teacher> teacher = teacherRepository.findByFirstName(name);
+
+        if (teacher.isPresent()) {
+            return new ArrayList<>(teacher.get().getSubjects());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Subject> findSubjectsByTeacherEmail(String email) {
+        Optional<Teacher> teacher = teacherRepository.findByEmail(email);
 
         if (teacher.isPresent()) {
             return new ArrayList<>(teacher.get().getSubjects());

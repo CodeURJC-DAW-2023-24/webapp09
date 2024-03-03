@@ -57,16 +57,16 @@ public class UserController {
     public ModelAndView showSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
-        Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+        Optional<User> user = userRepository.findByEmail(principal.getName());
         if (user.get().getRole() == Role.ROLE_TEACHER) {
             modelAndView.addObject("isStudent", false);
 
-            Teacher teacher = teacherService.getTeacherByName(principal.getName());
+            Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
             modelAndView.addObject("user", teacher);
             
         } else {
             modelAndView.addObject("isStudent", true);
-            Student student = studentService.getStudentByName(principal.getName());
+            Student student = studentService.getStudentByEmail(principal.getName());
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
@@ -77,7 +77,7 @@ public class UserController {
     @GetMapping("/redirection/{subjectId}")
     public String redirectURL(HttpServletRequest request, @PathVariable Long subjectId) {
         Principal principal = request.getUserPrincipal();
-        Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+        Optional<User> user = userRepository.findByEmail(principal.getName());
         String url = "";
         if (user.get().getRole() == Role.ROLE_STUDENT){
             url = "/subject_onesubj_student/" + subjectId;
@@ -142,8 +142,8 @@ public class UserController {
         model.addAttribute("role", role);
         List<Subject> subjects = new ArrayList<>();
         String username = request.getUserPrincipal().getName();
-        Optional<Student> student = studentRepository.findByFirstName(username);
-        Optional<Teacher> teacher = teacherRepository.findByFirstName(username);
+        Optional<Student> student = studentRepository.findByEmail(username);
+        Optional<Teacher> teacher = teacherRepository.findByEmail(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
             subjects = studentService.findSubjectsByStudentId(student.get().getId());

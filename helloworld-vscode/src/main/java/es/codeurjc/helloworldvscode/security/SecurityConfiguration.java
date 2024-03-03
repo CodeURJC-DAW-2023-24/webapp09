@@ -60,6 +60,7 @@ public class SecurityConfiguration {
 			)
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
+					.usernameParameter("email")
 					.failureUrl("/error")
 					.defaultSuccessUrl("/")
 					.permitAll()
