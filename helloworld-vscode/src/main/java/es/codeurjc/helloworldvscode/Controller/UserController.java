@@ -84,7 +84,7 @@ public class UserController {
         if (user.get().getRole() == Role.ROLE_STUDENT){
             url = "/subject_onesubj_student/"+ subjectId;
         } else if (user.get().getRole() == Role.ROLE_TEACHER){
-            url = "/teachers/subject/" + subjectId + "/general-information";
+            url = "/teachers/subject/" + subjectId + "/generalinformation";
         }
         
         return ("redirect:" + url);
