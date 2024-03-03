@@ -43,7 +43,7 @@ public class StudentController {
 
         boolean isStudent = request.isUserInRole("STUDENT");
         if (isStudent) {
-            Student student = studentService.getStudentByName(principal.getName());
+            Student student = studentService.getStudentByEmail(principal.getName());
             modelAndView.addObject("user", student);
             
             Long studentId = student.getId();
