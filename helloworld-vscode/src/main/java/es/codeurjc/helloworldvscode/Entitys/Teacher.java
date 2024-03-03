@@ -12,7 +12,7 @@ import java.util.List;
 @Entity(name = "teacher")
 public class Teacher extends User{
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany(mappedBy = "teachers")
     @JsonBackReference
     private List<Subject> subjects;
 

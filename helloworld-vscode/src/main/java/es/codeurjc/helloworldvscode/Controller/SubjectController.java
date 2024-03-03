@@ -87,7 +87,9 @@ public class SubjectController {
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
             }
         } else {
-            modelAndView.addObject("isStudent", false);
+            modelAndView.addObject("isStudent", true);
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
         }
         return modelAndView;
     }

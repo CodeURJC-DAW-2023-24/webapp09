@@ -199,6 +199,8 @@ public class testDataInitializer {
 
         //teachers IN subjects
         s4.getTeachers().addAll(List.of(t1));
+        s5.getTeachers().addAll(List.of(t1));
+        s6.getTeachers().addAll(List.of(t1));
         s1.getTeachers().addAll(List.of(t2));
         s20.getTeachers().addAll(List.of(t3));
 
@@ -219,7 +221,7 @@ public class testDataInitializer {
 
         //subjects IN teachers
 
-        t1.getSubjects().addAll(List.of(s4));
+        t1.getSubjects().addAll(List.of(s4,s5,s6));
         t2.getSubjects().addAll(List.of(s1));
         t3.getSubjects().addAll(List.of(s20));
 
