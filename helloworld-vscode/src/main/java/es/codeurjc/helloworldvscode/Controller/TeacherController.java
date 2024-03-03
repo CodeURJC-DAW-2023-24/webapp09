@@ -407,9 +407,12 @@ public class TeacherController {
 		Optional<Subject> s = subjectRepository.findById(subjectId);
 
 		if (s.isPresent()) {
+			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------");
 			examRepository.deleteById(examId);
 			
-			response.sendRedirect("/teachers/subject/"+subjectId+"/type-exams");
+			response.sendRedirect("/redirection/" +subjectId);
 		
 		}
 

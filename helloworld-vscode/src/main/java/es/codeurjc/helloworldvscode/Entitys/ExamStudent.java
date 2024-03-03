@@ -21,7 +21,7 @@ public class ExamStudent {
 
 
     @ManyToOne
-    @JoinColumn(name = "exam_id", nullable = false)
+    @JoinColumn(name = "exam_id")
     private Exam exam;
 
     @ManyToOne
