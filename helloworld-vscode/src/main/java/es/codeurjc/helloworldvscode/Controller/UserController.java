@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Controller
 public class UserController {
     @Autowired
@@ -57,11 +58,6 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
         Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
-        
-        System.out.println("---------------------------------------------");
-        System.out.println("---------------------------------------------" + user.get().getRole());
-        System.out.println("---------------------------------------------");
-        System.out.println("---------------------------------------------");
         if (user.get().getRole() == Role.ROLE_TEACHER) {
             modelAndView.addObject("isStudent", false);
 
@@ -76,6 +72,20 @@ public class UserController {
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
         }
         return modelAndView;
+    }
+    
+    @GetMapping("/redirection/{subjectId}")
+    public String redirectURL(HttpServletRequest request, @PathVariable Long subjectId) {
+        Principal principal = request.getUserPrincipal();
+        Optional<User> user = userRepository.findFirstByFirstName(principal.getName());
+        String url = "";
+        if (user.get().getRole() == Role.ROLE_STUDENT){
+            url = "/subject_onesubj_student/" + subjectId;
+        } else if (user.get().getRole() == Role.ROLE_TEACHER){
+            url = "/subject/" + subjectId + "/general-information";
+        }
+        
+        return ("redirect:" + url);
     }
     
 
