@@ -133,24 +133,28 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("profile");
         model.addAttribute("username", request.getUserPrincipal().getName());
         String role = "UNKNOWN"; // Por defecto
-        if (request.isUserInRole("STUDENT")) {
-            role = "Student";
-        } else if (request.isUserInRole("TEACHER")) {
-            role = "Teacher";
-        }
+        // if (request.isUserInRole("STUDENT")) {
+        //     role = "Student";
+        // } else if (request.isUserInRole("TEACHER")) {
+        //     role = "Teacher";
+        // }
 
-        model.addAttribute("role", role);
+        
         List<Subject> subjects = new ArrayList<>();
         String username = request.getUserPrincipal().getName();
         Optional<Student> student = studentRepository.findByEmail(username);
         Optional<Teacher> teacher = teacherRepository.findByEmail(username);
         if (student.isPresent()) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
+            role = "Student";
             subjects = studentService.findSubjectsByStudentId(student.get().getId());
         } else if (teacher.isPresent()) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
+            role = "Teacher";
             subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
         }
+
+        model.addAttribute("role", role);
 
         // Crear el modelo y agregar las asignaturas
         modelAndView.addObject("subjects", subjects);
