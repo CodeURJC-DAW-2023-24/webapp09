@@ -166,11 +166,11 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
 
 
 - Name: Javier Rodriguez Salas
-    1.
-    2.
-    3.
-    4.
-    5. 
+    1. Security module: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d5cbaba004c81bb804d2ea3edaeef0f9a1c4f25b
+    2. Integration of administrator and teacher logic: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/15aa85d2f065ba05bd74fdc78a774f981235dfd7
+    3. Integration of administrator and teacher logic pt2: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a8c0595f92e97de0ca338d773cfb0efe17784793
+    4. Migrate to a mysql database: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/10176f33a61629a97bbbb192ef5c08ec05a6149e
+    5. AYAX: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/c009373eb28d14a5f6199ac41fece97135bfc904 
 
 - Name: Alejandro Romero Torres
     1.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/5cb54017b6a2ac4bc4cab7248188ad50fca1fc0c
