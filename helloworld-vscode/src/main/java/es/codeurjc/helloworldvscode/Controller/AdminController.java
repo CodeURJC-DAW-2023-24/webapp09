@@ -25,7 +25,7 @@ import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 
 @RestController
-@RequestMapping("/admins/")
+@RequestMapping("/admins/" )
 public class AdminController {
 
 	// REPOSITORY //
