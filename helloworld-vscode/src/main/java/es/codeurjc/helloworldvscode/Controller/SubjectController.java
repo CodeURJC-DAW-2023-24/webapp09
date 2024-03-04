@@ -79,26 +79,32 @@ public class SubjectController {
         ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
         model.addAttribute("subjects", subjectsList.findAll());
-        modelAndView.setViewName("main_page");
+        
 
         if (principal != null) {
             Optional<User> user = userRepository.findByEmail(principal.getName());
 
             if (user.get().getRole() == Role.ROLE_TEACHER) {
+                modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", false);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else if(user.get().getRole() == Role.ROLE_STUDENT){
+                modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
             } else{
+                modelAndView.setViewName("subjects_admin");
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
+                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.findAll(); 
+                modelAndView.addObject("subjects", subjects);
+
 
             }
         } else {
