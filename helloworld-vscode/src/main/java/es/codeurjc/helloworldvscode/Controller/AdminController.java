@@ -23,6 +23,7 @@ import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
+import es.codeurjc.helloworldvscode.services.SubjectService;
 
 @RestController
 @RequestMapping("/admins/" )
@@ -38,6 +39,9 @@ public class AdminController {
 	@Autowired
 	private StudentRepository studentRepository;
 
+	@Autowired
+	private SubjectService subjectService;
+
 
 	@GetMapping("/subject")
 	public ModelAndView showSubjects(@RequestParam Long subjectId) {
@@ -51,11 +55,11 @@ public class AdminController {
 
 
 	@GetMapping("/subject/delete")
-	public ModelAndView deleteOneSubjects(@RequestParam Long subjectId) {
+	public void deleteOneSubjects(@RequestParam Long subjectId, HttpServletResponse response) throws IOException {
 
-		ModelAndView modelAndView = new ModelAndView();
+		subjectService.deleteSubjectId(subjectId);
 	
-		return modelAndView;
+		response.sendRedirect("/");
 
 	}
 
