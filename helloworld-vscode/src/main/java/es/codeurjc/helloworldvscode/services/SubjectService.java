@@ -34,6 +34,12 @@ public class SubjectService {
     @Autowired
     TeacherService teacherService;
 
+    
+    @SuppressWarnings("null")
+    public void deleteSubjectId(Long id){
+        subjectRepository.deleteById(id);
+    }
+
     public List<Subject> findAll() {
         return subjectRepository.findAll();
     }

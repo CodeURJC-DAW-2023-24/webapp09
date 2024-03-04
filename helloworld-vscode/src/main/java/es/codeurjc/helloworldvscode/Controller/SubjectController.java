@@ -18,11 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import es.codeurjc.helloworldvscode.Entitys.Admin;
-import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.Entitys.Teacher;
-import es.codeurjc.helloworldvscode.Entitys.User;
 import es.codeurjc.helloworldvscode.enumerate.Role;
 import es.codeurjc.helloworldvscode.repository.AdminRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
@@ -78,39 +73,30 @@ public class SubjectController {
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
-        //model.addAttribute("subjects", subjectsList.findAll());
-        
+        model.addAttribute("subjects", subjectsList.findAll());
+        modelAndView.setViewName("main_page");
 
         if (principal != null) {
             Optional<User> user = userRepository.findByEmail(principal.getName());
 
             if (user.get().getRole() == Role.ROLE_TEACHER) {
-                model.addAttribute("subjects", subjectsList.findAll());
-                modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", false);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else if(user.get().getRole() == Role.ROLE_STUDENT){
-                model.addAttribute("subjects", subjectsList.findAll());
-                modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
             } else{
-                modelAndView.setViewName("subjects_admin");
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
-                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.findAll(); 
-                modelAndView.addObject("subjects", subjects);
-
 
             }
         } else {
-            model.addAttribute("subjects", subjectsList.findAll());
             modelAndView.addObject("isStudent", true);
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
