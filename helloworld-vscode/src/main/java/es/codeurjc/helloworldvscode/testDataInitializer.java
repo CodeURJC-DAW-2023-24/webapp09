@@ -47,7 +47,9 @@ public class testDataInitializer {
         Teacher t3 = new Teacher("Pepe","Franco","pfespania@gmail.com","vivaespaña");
         Teacher t2 = new Teacher("Belen","Esteban","salavame@gmail.com","andreita");
 
-
+////////ADMIN
+        Admin a1 = new Admin("ss","Sandra","ss@gmail.com","ss");
+        Admin a2 = new Admin("dd","Daniel","dd@gmail.com","dd");
 
 
 ////////SUBJECTS
@@ -239,6 +241,7 @@ public class testDataInitializer {
         forumRepository.saveAll(List.of(f1,f2,f3,f4));
         examRepository.saveAll(List.of(e1,e2,e3,e4));
         examStudentRepository.saveAll(List.of(es1,es2,es3,es4,es5,es6));
+        adminRepository.saveAll(List.of(a1,a2));
 
         //////// TEACHER
 

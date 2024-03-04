@@ -6,6 +6,7 @@ import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
+import es.codeurjc.helloworldvscode.services.AdminService;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
@@ -45,6 +46,9 @@ public class UserController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private AdminService adminService;
+
 
     @GetMapping("/login")
     public String showLogin() {
@@ -64,16 +68,20 @@ public class UserController {
         Optional<User> user = userRepository.findByEmail(principal.getName());
         if (user.get().getRole() == Role.ROLE_TEACHER) {
             modelAndView.addObject("isStudent", false);
-
             Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
             modelAndView.addObject("user", teacher);
             
-        } else {
+        } else if (user.get().getRole() == Role.ROLE_STUDENT){
             modelAndView.addObject("isStudent", true);
             Student student = studentService.getStudentByEmail(principal.getName());
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+        } else{
+            modelAndView.addObject("isStudent", false);
+            Admin admin = adminService.getAdminByEmail(principal.getName());
+            modelAndView.addObject("user", admin);
+
         }
         return modelAndView;
     }

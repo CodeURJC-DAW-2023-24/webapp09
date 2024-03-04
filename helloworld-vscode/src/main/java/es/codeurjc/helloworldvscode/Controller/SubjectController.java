@@ -20,13 +20,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import es.codeurjc.helloworldvscode.Entitys.Admin;
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
 import es.codeurjc.helloworldvscode.Entitys.Teacher;
 import es.codeurjc.helloworldvscode.Entitys.User;
 import es.codeurjc.helloworldvscode.enumerate.Role;
+import es.codeurjc.helloworldvscode.repository.AdminRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
+import es.codeurjc.helloworldvscode.services.AdminService;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
@@ -47,6 +50,12 @@ public class SubjectController {
     UserRepository userRepository;
     @Autowired
     TeacherService teacherService;
+
+    @Autowired
+    AdminRepository adminRepository;
+
+    @Autowired
+    AdminService adminService;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -79,12 +88,17 @@ public class SubjectController {
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
-            } else {
+            } else if(user.get().getRole() == Role.ROLE_STUDENT){
                 modelAndView.addObject("isStudent", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+            } else{
+                modelAndView.addObject("isStudent", false);
+                Admin admin = adminService.getAdminByEmail(principal.getName());
+                modelAndView.addObject("user", admin);
+
             }
         } else {
             modelAndView.addObject("isStudent", true);
