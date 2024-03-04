@@ -596,7 +596,7 @@ public class TeacherController {
 
 		if (s.isPresent()) {
 
-			Forum forum = new Forum("Insert URL name", comment);
+			Forum forum = new Forum("My comment", comment);
 			forum.setSubject(s.get());
 
 			forumRepository.save(forum);
