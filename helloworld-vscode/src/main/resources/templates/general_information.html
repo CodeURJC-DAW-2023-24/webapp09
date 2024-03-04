@@ -197,6 +197,64 @@
                 </div>
             </div>
         </div>
+        <div id="contenedorGrafico" style="width: 400px; height: 300px;">
+            <canvas id="myChart" width="400" height="300"></canvas>
+        </div>
+        <script>
+            // Obtener el contexto del lienzo (canvas)
+            var ctx = document.getElementById('myChart').getContext('2d');
+        
+            // Variables para almacenar los datos del gráfico
+            var data = {};
+            var options = {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1, // Especifica el tamaño del paso (en este caso, uno)
+                            max: 10, // Especifica el valor máximo del eje y
+                            min: 0 // Especifica el valor mínimo del eje y
+                        }
+                    }]
+                }
+            };
+        
+            // Realizar una solicitud para obtener los datos del backend
+            fetch('/subject/{subjectId}/generalinformation') // Ajusta la URL según la ruta de tu controlador
+            .then(response => response.json())
+            .then(dataFromBackend => {
+                // Datos para el gráfico obtenidos del backend
+                data = {
+                    labels: ['0-2', '2-4', '4-6', '6-8', '8-10'],
+                    datasets: [{
+                        label: 'Notas',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1,
+                        data: dataFromBackend // Utilizar los datos obtenidos del backend
+                    }]
+                };
+        
+                // Crear el gráfico de barras con los datos obtenidos del backend
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: options // Utilizar las opciones configuradas
+                });
+            });
+        </script>
     </section>
 
     {{>footer}}

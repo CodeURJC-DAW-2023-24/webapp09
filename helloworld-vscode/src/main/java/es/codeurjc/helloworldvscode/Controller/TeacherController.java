@@ -7,6 +7,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -101,6 +102,34 @@ public class TeacherController {
 			modelAndView.addObject("allInfo", allInfo);
 			modelAndView.addObject("name", name);
 			//modelAndView.addObject("csrfToken", csrfToken);
+
+			//obtain data for graphic
+            List<ExamStudent> exams = examStudentRepository.findAll();
+            int[] conteoNotas = new int[5];
+            for (ExamStudent exam : exams) {
+                double nota = exam.getMark();
+                if (nota >= 0 && nota < 2) {
+                    conteoNotas[0]++;
+                } else if (nota >= 2 && nota < 4) {
+                    conteoNotas[1]++;
+                } else if (nota >= 4 && nota < 6) {
+                    conteoNotas[2]++;
+                } else if (nota >= 6 && nota < 8) {
+                    conteoNotas[3]++;
+                } else if (nota >= 8 && nota <= 10) {
+                    conteoNotas[4]++;
+                }
+				System.out.println("NOTA EXAMEN: " + exam.getMark());
+            }
+
+			System.out.println("CONTEO DE NOTAS:");
+			System.out.println("0-2: " + conteoNotas[0]);
+			System.out.println("2-4: " + conteoNotas[1]);
+			System.out.println("4-6: " + conteoNotas[2]);
+			System.out.println("6-8: " + conteoNotas[3]);
+			System.out.println("8-10: " + conteoNotas[4]);
+
+			modelAndView.addObject("conteoNotas", conteoNotas);
 
 		} else {
 			modelAndView.addObject("error", "Subject not found");
