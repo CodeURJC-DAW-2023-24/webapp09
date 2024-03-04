@@ -50,6 +50,29 @@ public class AdminController {
 	////////////////////////
 	// UPDATE DESCRIPTION //
 	////////////////////////
+
+	@GetMapping("/admins/subjects")
+	public ModelAndView showSubjects(@RequestParam Long subjectId) {
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		return modelAndView;
+	
+
+	}
+
+
+	@GetMapping("/admins/subjects/delete")
+	public ModelAndView deleteOneSubjects(@RequestParam Long subjectId) {
+
+		ModelAndView modelAndView = new ModelAndView();
+	
+		return modelAndView;
+
+	}
+
+
+
 	@GetMapping("/subject/{subjectId}/general-information")
 	public ModelAndView subjectOneSubjAdmin(@PathVariable Long subjectId) {
 
@@ -123,16 +146,7 @@ public class AdminController {
 
 		if (s.isPresent()) {
 
-			if(student!=null){
-				Optional<Student> st = studentRepository.findById(student);
-				st.get().deleteSubjectId(subjectId);
-
-				s.get().deleteStudentId(student);
-
-				studentRepository.save(st.get());
-				subjectRepository.save(s.get());
-
-			}else if(teacher!=null){
+			if(teacher!=null){
 				Optional<Teacher> te = teacherRepository.findById(teacher);
 				te.get().deleteSubjectId(subjectId);
 
@@ -140,6 +154,8 @@ public class AdminController {
 				
 				teacherRepository.save(te.get());
 				subjectRepository.save(s.get());
+			}else{
+				response.sendRedirect("/error");
 			}
 
 		}
@@ -248,102 +264,4 @@ public class AdminController {
 			response.sendRedirect("/error");
 		}
 	}
-
-	//////////////////
-	// ADD STUDENT //
-	//////////////////
-
-	@GetMapping("/subject/{subjectId}/add-student")
-	public ModelAndView showCreateStudent(@PathVariable Long subjectId, @RequestParam String addorcreate, @RequestParam String info) {
-		ModelAndView modelAndView = new ModelAndView();
-
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) {
-
-			if (info.equals("true")) {
-				modelAndView.addObject("error", "");
-			} else if (info.equals("false")) {
-				modelAndView.addObject("error", "Student not found");
-			} else {
-				modelAndView.addObject("error", "Incomplete information");
-			}
-
-
-			if (addorcreate != null) {
-				if ("new".equals(addorcreate)) {
-					modelAndView.setViewName("add_teacher_new");
-
-				} else {
-					modelAndView.setViewName("add_teacher_notnew");
-
-				}
-			} else {
-				modelAndView.setViewName("add_teacher_notnew");
-
-			}
-
-			modelAndView.addObject("rol", "student"); // add description
-			modelAndView.addObject("name", s.get().getName());
-			
-
-		} else {
-			modelAndView.addObject("error", "Subject not found");
-			modelAndView.setViewName("loginerror");
-		}
-
-		return modelAndView;
-	}
-
-	@PostMapping("/subject/{subjectId}/add-student")
-	public void showCreateStudent(@RequestParam String addorcreate, @PathVariable Long subjectId, @RequestParam String info, HttpServletResponse response,
-			HttpServletRequest request,
-			Model model,
-			@RequestParam(required = false) String firstName,
-			@RequestParam(required = false) String lastName,
-			@RequestParam String email,
-			@RequestParam(required = false) String password) throws IOException {
-
-		
-		// Create new student
-		if (password == null) {
-			password = "1";
-		}
-		Student student = new Student(firstName, lastName, email, password);
-
-		// Find subject by name
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) { // if the subject exists in the db
-			Subject subject = s.get();
-
-			// if need to create a new student
-			if ("new".equals(addorcreate)) { 
-				if (firstName != null && password != null && lastName != null) { // if the data is complete
-					studentRepository.save(student); 
-					subject.setOneStudent(student);
-					subjectRepository.save(subject);
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
-				} else { // if the data isn't complete
-					response.sendRedirect("/subject/"+subjectId+"/add-student?addorcreate="+addorcreate+"&info=incomplete");
-				}
-
-			// if the student is created
-			} else { 
-				Optional<Student> existingEstudent = studentRepository.findByEmail(email); // find student for updated it
-
-				if (existingEstudent.isPresent()) { // if the student exists
-					student = existingEstudent.get(); 
-					subject.setOneStudent(student);
-					subjectRepository.save(subject);
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
-				} else { // if not exists
-					response.sendRedirect("/admins/subject/"+subjectId+"/add-student?addorcreate="+addorcreate+"&info=false");
-				}
-			}
-		}else{
-			response.sendRedirect("/error");
-		}
-	}
-
 }
