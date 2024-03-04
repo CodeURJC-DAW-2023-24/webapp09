@@ -164,8 +164,15 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
     5. 
 
 - Name: Alejandro Romero Torres
-    1.
-    2.
-    3.
-    4.
-    5. 
+    1.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/5cb54017b6a2ac4bc4cab7248188ad50fca1fc0c
+    2.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/79872cec4992325eea9a563d2a1d24d450932d56
+    3.  https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d2bd2451401d5d7373aba4b493f284c042a34877
+    4.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/19d0bf5c05de4fea778ccd9a05e320546b0bced4
+    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/eca592d8ec9d98dc4a7caea612ed5cb1235bbcef
+      files:
+https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/SubjectController.java
+https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/StudentController.java
+https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/UserController.java
+https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/services/SubjectService.java
+https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/resources/templates/subject_onesubj_student.html
+
