@@ -138,11 +138,11 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
 
 ### Main commits of the members
 - Name: Ismael Albert Aparicio
-    1.
-    2.
-    3.
-    4.
-    5. 
+    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/750003204f05c402f5b9daecdb172c050b5a256b
+    2. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/69875d4bfe97268ff2713b72ad4375a1e441f5d0
+    3. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/8f5ef8fb5da1a20a71a4793d20660969219fb6c9
+    4. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/738822c76dd6dd82fa00ac33491e0920e2b020cf
+    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/6940ddde367577731c921b2fe927e09946850afa
 - Name: Amanda Castro López
     1.
     2.
