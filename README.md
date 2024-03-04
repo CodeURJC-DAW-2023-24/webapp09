@@ -132,3 +132,6 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
 
 ### Diagram with database entities
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/DatabaseEntities.jpg">
+
+### Class diagram
+<img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/Diagrama%20de%20clases%20y%20templates.jpg">
