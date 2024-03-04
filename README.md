@@ -144,11 +144,11 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
     4. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/738822c76dd6dd82fa00ac33491e0920e2b020cf
     5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/6940ddde367577731c921b2fe927e09946850afa
 - Name: Amanda Castro López
-    1.
-    2.
-    3.
-    4.
-    5. 
+    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/0c2500d04bd78d19d272a2bca44e8b0541a677e8
+    2. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/289de07227354314e079c0a830da5acc62b03ee5
+    3. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/ce8e31f512859c0486a752ea206fbc00aae91473
+    4. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/be8142249fb5dc217452ca4c1ddae4a05dd2e692
+    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/4d45cc42261d078b044cb49abc19bf39c0a980f1
 
 - Name: Paula Cuenca
     - Name: Paula Cuenca
