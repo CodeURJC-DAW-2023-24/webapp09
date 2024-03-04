@@ -23,7 +23,7 @@ public class Forum {
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     // Constructors

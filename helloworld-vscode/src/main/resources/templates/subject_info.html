@@ -61,13 +61,13 @@
                                     </div>
                                 </div>
                             </div>
-
+                            {{#registered}}
                             <div class="col-lg-12">
                                 <div class="main-button">
-                                    <a id="mostrarModalBtn">Enroll Now!</a>
+                                    <a id="enrollButton">Enroll Now!</a>
                                 </div>
                             </div>
-
+                            {{/registered}}
                         </div>
                     </div>
                 </div>
@@ -77,45 +77,60 @@
 
 
     <script>
-
-        // COMPROBAR SI EL USUARIO TIENE LA SESION INICIADA O QUE EL BOTÓN PARA INSCRIBIRSE SOLO SE MUESTRE SI TIENE LA SESION INICIADA
-
         document.addEventListener('DOMContentLoaded', function () {
             var modal = document.getElementById('myModal');
-            var span = document.getElementsByClassName('close')[0];
-            var mostrarModalBtn = document.getElementById('mostrarModalBtn');
+            var mostrarModalBtn = document.getElementById('enrollButton');
+            var csrfToken = "{{token}}"; // Asegúrate de que el token CSRF esté disponible en tu plantilla
 
             // Función para mostrar el modal
             function mostrarModal() {
-                // Mostrar el cuadro pop-up
                 modal.style.display = 'block';
             }
 
             // Función para cerrar el modal
             function cerrarModal() {
                 modal.style.display = 'none';
-                window.location.href = "/"
+                window.location.href = "/";
             }
 
-            // Evento clic del botón para mostrar el mensaje de alerta y el modal
+            // Evento clic del botón para enviar la solicitud de inscripción y mostrar el modal
             mostrarModalBtn.addEventListener('click', function () {
-                // Mostrar el mensaje de alerta
-                var opcion = confirm("Are you sure you want enroll in this subject?");
-                if (opcion == true) {
+                var confirmacion = confirm("Are you sure you want enroll in this subject?");
+                if (confirmacion) {
+                    var subjectId = "{{subject.id}}"; // Asume que el ID del sujeto está disponible en tu plantilla
 
-                    //RECOGER DATOS DEL USUARIO PARA AÑADIRLO A LA ASIGNATURA
+                    // Prepara el cuerpo de la solicitud. Aquí, solo necesitamos enviar el comentario.
+                    var body = JSON.stringify({
+                        comment: "The student wants to enroll this subject: " + "{{subject.name}}"
+                    });
 
-                    // Si el usuario pulsa "Aceptar", mostrar el modal
-                    mostrarModal();
-
-                    // Cerrar el cuadro pop-up después de 2 segundos
-                    setTimeout(cerrarModal, 2000);
+                    // Envía la solicitud fetch al servidor
+                    fetch(`/subject/${subjectId}/enroll`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken // Incluye el token CSRF en la cabecera
+                        },
+                        body: body
+                    })
+                    .then(response => {
+                        if(response.ok) {
+                            return response.text();
+                        }
+                        throw new Error('Network response was not ok.');
+                    })
+                    .then(data => {
+                        console.log(data);
+                        mostrarModal();
+                        setTimeout(cerrarModal, 2000); // Muestra el modal y redirige después de 2 segundos
+                    })
+                    .catch(error => console.error('Error:', error));
                 }
             });
-
-
         });
     </script>
+
+
 
     {{>footer}}
 
