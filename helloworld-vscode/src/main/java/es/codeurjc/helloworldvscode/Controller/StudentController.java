@@ -9,6 +9,8 @@ import es.codeurjc.helloworldvscode.repository.StudentRepository;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,11 +47,9 @@ public class StudentController {
         if (isStudent) {
             Student student = studentService.getStudentByEmail(principal.getName());
             modelAndView.addObject("user", student);
-            
-            Long studentId = student.getId();
             Subject subject = subjectService.getSubjectById(subjectId);
-            List<ExamStudent> examStudents =examService.findExamStudentsByStudentAndSubject(studentId, subjectId);
-            List<Forum> forums=forumRepository.findBySubjectId(subjectId);
+            List<ExamStudent> examStudents = student.getExamStudents();
+            List<Forum> forums = subject.getForums();
             modelAndView.addObject("exams", subject.getExams());
             modelAndView.addObject("subject", subject);
             modelAndView.addObject("student", student);
@@ -77,4 +77,16 @@ public class StudentController {
 
         return ("redirect:/subject_onesubj_student/"+subject.getId());
     }
+
+    @GetMapping("/subject_onesubj_student/{subjectId}/download")
+	public ResponseEntity<byte[]> downloadFile(@PathVariable Long subjectId, @RequestParam Long examId) {
+        System.out.println("----------------------------------------------------------");
+        System.out.println("----------------------------------------------------------");
+        System.out.println("----------------------------------------------------------");
+		Exam exam = examService.getFile(examId);
+
+    	return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + "." + exam.getType() +"\"")
+        .body(exam.getData());
+  	}
 }
