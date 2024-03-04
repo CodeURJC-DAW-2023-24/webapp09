@@ -8,7 +8,6 @@ public class ExamStudent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="examStudentId")
     private Long id;
 
     @Lob

@@ -476,7 +476,9 @@ public class TeacherController {
 	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/type-exams/{examId}/correct-exams")
 	public ModelAndView showStudentExam(@PathVariable Long subjectId, @PathVariable Long examId) {
-
+		System.out.println("------------------------------------------------");
+		System.out.println("------------------------------------------------");
+		
 		ModelAndView modelAndView = new ModelAndView();
 
 		Optional<Subject> s = subjectRepository.findById(subjectId);
