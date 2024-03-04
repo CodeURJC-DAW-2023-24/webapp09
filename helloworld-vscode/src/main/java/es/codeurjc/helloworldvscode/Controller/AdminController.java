@@ -38,6 +38,28 @@ public class AdminController {
 	@Autowired
 	private StudentRepository studentRepository;
 
+
+	@GetMapping("/subject")
+	public ModelAndView showSubjects(@RequestParam Long subjectId) {
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		return modelAndView;
+	
+
+	}
+
+
+	@GetMapping("/subject/delete")
+	public ModelAndView deleteOneSubjects(@RequestParam Long subjectId) {
+
+		ModelAndView modelAndView = new ModelAndView();
+	
+		return modelAndView;
+
+	}
+
+
 	////////////////////////
 	// UPDATE DESCRIPTION //
 	////////////////////////

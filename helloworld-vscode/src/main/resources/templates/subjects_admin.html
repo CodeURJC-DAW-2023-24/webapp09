@@ -8,7 +8,6 @@
     {{>header}}
 
     <!--  ########## PAGE CONTENT ##########  -->
-    <!-- Title -->
     <div class="heading-page header-text">
         <section class="page-heading">
             <div class="container">
@@ -51,14 +50,14 @@
                         </thead>
                         <tbody>
 
-                            <!--{{#subjects}}
+                           <!-- {{#subjects}}-->
                             <tr>
                                 <td>{{name}}</td>
 
                                 <td>
                                     <div class="col-2">
                                         <div class="main-button">
-                                            <a class="nav-link" href="/admins/subjects?subjectId={{subjectId}}">View</a>
+                                            <a class="nav-link" href="/admins/subject?subjectId={{id}}">View</a>
                                         </div>
                                     </div>
                                 </td>
@@ -66,13 +65,13 @@
                                     <div class="col-2">
                                         <div class="main-button">
                                             <a class="nav-link"
-                                                href="/admins/subjects/delete?subjectId={{subjectId}}">Delete</a>
+                                                href="/admins/subject/delete?subjectId={{id}}">Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
 
-                            {{/subjects}}-->
+                            <!-- {{/subjects}} -->
                         </tbody>
                     </table>
 

@@ -78,19 +78,21 @@ public class SubjectController {
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("subjects", subjectsList.findAll());
+        //model.addAttribute("subjects", subjectsList.findAll());
         
 
         if (principal != null) {
             Optional<User> user = userRepository.findByEmail(principal.getName());
 
             if (user.get().getRole() == Role.ROLE_TEACHER) {
+                model.addAttribute("subjects", subjectsList.findAll());
                 modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", false);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else if(user.get().getRole() == Role.ROLE_STUDENT){
+                model.addAttribute("subjects", subjectsList.findAll());
                 modelAndView.setViewName("main_page");
                 modelAndView.addObject("isStudent", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
@@ -108,6 +110,7 @@ public class SubjectController {
 
             }
         } else {
+            model.addAttribute("subjects", subjectsList.findAll());
             modelAndView.addObject("isStudent", true);
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
