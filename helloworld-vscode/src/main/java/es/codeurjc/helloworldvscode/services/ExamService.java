@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -56,12 +57,15 @@ public class ExamService {
         examStudentService.createExamsStudent(s, exam);
     }
 
-    @SuppressWarnings("null")
     public Exam getFile(Long id) {
         return examRepository.findById(id).get();
     }
 
     public Stream<Exam> getAllFiles() {
         return examRepository.findAll().stream();
+    }
+
+    public Optional<Exam> findById(Long examId) {
+        return examRepository.findById(examId);
     }
 }

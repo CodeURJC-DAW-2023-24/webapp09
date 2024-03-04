@@ -13,5 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ExamRepository extends JpaRepository<Exam, Long>{
     ArrayList<Exam> findAllBySubjectId(Long subjectId);
     Optional<Exam> findById(String examId);
+    @SuppressWarnings("null")
+    Optional<Exam> findById(Long examId);
     Optional<Exam> findBySubjectIdAndExamId(Long subjectId, Long examId);
 }

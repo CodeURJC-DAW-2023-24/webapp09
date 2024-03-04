@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class StudentController {
@@ -40,6 +42,8 @@ public class StudentController {
     ForumRepository forumRepository;
     @Autowired
     ExamStudentRepository examstudentRepository;
+    @Autowired
+    ExamStudentService examStudentService;
 
 
     @GetMapping("/subject_onesubj_student/{subjectId}")
@@ -92,14 +96,18 @@ public class StudentController {
   	}
     
     @PostMapping("/subject_onesubj_student/{subjectId}/upload")
-    public String uploadFile(HttpServletRequest request, @PathVariable("subjectId") Long subjectId, @RequestParam Long examId, @RequestParam("file") MultipartFile file) {
+    public String uploadFile(HttpServletRequest request, @PathVariable("subjectId") Long subjectId, @RequestParam Long examId, @RequestParam("file") MultipartFile file) throws IOException {
         Principal principal = request.getUserPrincipal();
         Student student = studentService.getStudentByEmail(principal.getName());
+        Optional<Exam> exam = examService.findById(examId);
+
+
+        examStudentService.store(file, exam.get(), 0, student);
 
         ///////////////////////////////////////////////////////////////////////////////////
         //Retrieve the exam of the student from whom the file is being uploaded and save it
         ///////////////////////////////////////////////////////////////////////////////////
         
-        return "Archivo subido correctamente para la materia con ID: " + subjectId;
+        return ("redirect:/subject_onesubj_student/"+subjectId);
     }
 }
