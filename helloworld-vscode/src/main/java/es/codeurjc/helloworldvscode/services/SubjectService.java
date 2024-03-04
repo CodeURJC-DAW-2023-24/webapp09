@@ -66,9 +66,6 @@ public class SubjectService {
             } else {
                 subjects = Collections.emptyList();
             }
-            System.out.println("--------------------------------------------------------------------");
-        System.out.println("--------------------------------------------------------------------");
-        System.out.println("--------------------------------------------------------------------" + lista);
             return subjects;
 
         } else if (rol == "ROLE_STUDENT") {

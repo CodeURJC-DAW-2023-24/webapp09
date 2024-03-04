@@ -8,7 +8,6 @@ public class ExamStudent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="examStudentId")
     private Long id;
 
     @Lob
@@ -21,7 +20,7 @@ public class ExamStudent {
 
 
     @ManyToOne
-    @JoinColumn(name = "exam_id", nullable = false)
+    @JoinColumn(name = "exam_id")
     private Exam exam;
 
     @ManyToOne
