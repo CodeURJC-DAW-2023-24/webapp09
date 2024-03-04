@@ -206,10 +206,10 @@ public class TeacherController {
 					modelAndView.setViewName("add_student_new");
 
 				} else {
-					modelAndView.setViewName("add_student_notnew");
+					modelAndView.setViewName("add_teacher_notnew");
 				}
 			} else {
-				modelAndView.setViewName("add_student_notnew");
+				modelAndView.setViewName("add_teacher_notnew");
 
 			}
 
