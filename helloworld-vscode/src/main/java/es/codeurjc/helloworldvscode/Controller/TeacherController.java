@@ -169,9 +169,9 @@ public class TeacherController {
 	}
 
 
-	///////////////////////////////
-	// DELETE TEACHER OR STUDENT //
-	///////////////////////////////
+	/////////////////////
+	// DELETE  STUDENT //
+	/////////////////////
 
 	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/general-information/delete")
@@ -232,7 +232,7 @@ public class TeacherController {
 
 			if (addorcreate != null) {
 				if ("new".equals(addorcreate)) {
-					modelAndView.setViewName("add_student_new");
+					modelAndView.setViewName("add_teacher_new");
 
 				} else {
 					modelAndView.setViewName("add_teacher_notnew");
@@ -242,7 +242,8 @@ public class TeacherController {
 
 			}
 
-			modelAndView.addObject("rol", "student"); // add description
+			modelAndView.addObject("rol", "teachers"); 
+			modelAndView.addObject("user", "student");
 			modelAndView.addObject("name", s.get().getName());
 			
 
@@ -254,7 +255,6 @@ public class TeacherController {
 		return modelAndView;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	@PostMapping("/subject/{subjectId}/add-student")
 	public void showCreateStudent(@RequestParam String addorcreate, @PathVariable Long subjectId, @RequestParam String info, HttpServletResponse response,
 			HttpServletRequest request,

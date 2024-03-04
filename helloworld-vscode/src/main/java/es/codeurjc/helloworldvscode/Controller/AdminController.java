@@ -131,7 +131,8 @@ public class AdminController {
 
 			}
 
-			modelAndView.addObject("rol", "admins"); // add description
+			modelAndView.addObject("rol", "admins");
+			modelAndView.addObject("user", "teacher");
 			modelAndView.addObject("name", s.get().getName());
 
 
