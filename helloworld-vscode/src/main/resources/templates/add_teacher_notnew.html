@@ -47,12 +47,10 @@
                           <fieldset>
                             <input name="email" type="email" id="email" placeholder="Email" required="">
                           </fieldset>
-                        </div>
-
-                        <div class="row">
                           <div class="main-button">
-                            <a class="nav-link" href="/teachers/subject/{{subjectId}}/add-student?addorcreate=new&info=true">Create {{rol}}</a>
+                            <input type="submit" value="Save" />
                           </div>
+                          <input type="hidden" name="_csrf" value="{{token}}">
                         </div>
                       </div>
                   </div>
