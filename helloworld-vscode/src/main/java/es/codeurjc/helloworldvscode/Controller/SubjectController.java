@@ -91,9 +91,12 @@ public class SubjectController {
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
             } else{
+                modelAndView.setViewName("subjects_admin");
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
+                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.findAll(); 
+                modelAndView.addObject("subjects", subjects);
 
             }
         } else {

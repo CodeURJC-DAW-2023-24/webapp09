@@ -66,18 +66,10 @@ public class AdminController {
 	}
 
 
-	////////////////////////
-	// UPDATE DESCRIPTION //
-	////////////////////////
-	
 
-
-
-
-
-	///////////////////////////////
-	// DELETE TEACHER OR STUDENT //
-	///////////////////////////////
+	////////////////////
+	// DELETE TEACHER //
+	////////////////////
 
 	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/general-information/delete")
@@ -113,7 +105,7 @@ public class AdminController {
 	public ModelAndView showCreateTeacher(@PathVariable Long subjectId, @RequestParam String addorcreate, @RequestParam(required = false) String info) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		Optional<Subject> s = subjectRepository.findById(subjectId);
+ 		Optional<Subject> s = subjectRepository.findById(subjectId);
 
 		if (s.isPresent()) {
 
@@ -139,7 +131,7 @@ public class AdminController {
 
 			}
 
-			modelAndView.addObject("rol", "teacher"); // add description
+			modelAndView.addObject("rol", "admins"); // add description
 			modelAndView.addObject("name", s.get().getName());
 
 
@@ -180,7 +172,7 @@ public class AdminController {
 					subject.setOneTeacher(teacher);
 					subjectRepository.save(subject);
 
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
+					response.sendRedirect("/admins/subject?subjectId="+subjectId);
 				} else { // if the data isn't complete
 					response.sendRedirect("/admins/subject/"+subjectId+"/add-teacher?addorcreate="+addorcreate+"&info=incomplete");
 				}
@@ -194,106 +186,9 @@ public class AdminController {
 					subject.setOneTeacher(teacher);
 					subjectRepository.save(subject);
 
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
+					response.sendRedirect("/admins/subject?subjectId="+subjectId);
 				} else { // if not exists
 					response.sendRedirect("/admins/subject/"+subjectId+"/add-teacher?addorcreate="+addorcreate+"&info=false");
-				}
-			}
-		}else{
-			response.sendRedirect("/error");
-		}
-	}
-
-	//////////////////
-	// ADD STUDENT //
-	//////////////////
-
-	@GetMapping("/subject/{subjectId}/add-student")
-	public ModelAndView showCreateStudent(@PathVariable Long subjectId, @RequestParam String addorcreate, @RequestParam String info) {
-		ModelAndView modelAndView = new ModelAndView();
-
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) {
-
-			if (info.equals("true")) {
-				modelAndView.addObject("error", "");
-			} else if (info.equals("false")) {
-				modelAndView.addObject("error", "Student not found");
-			} else {
-				modelAndView.addObject("error", "Incomplete information");
-			}
-
-
-			if (addorcreate != null) {
-				if ("new".equals(addorcreate)) {
-					modelAndView.setViewName("add_teacher_new");
-
-				} else {
-					modelAndView.setViewName("add_teacher_notnew");
-
-				}
-			} else {
-				modelAndView.setViewName("add_teacher_notnew");
-
-			}
-
-			modelAndView.addObject("rol", "student"); // add description
-			modelAndView.addObject("name", s.get().getName());
-
-
-		} else {
-			modelAndView.addObject("error", "Subject not found");
-			modelAndView.setViewName("loginerror");
-		}
-
-		return modelAndView;
-	}
-
-	@PostMapping("/subject/{subjectId}/add-student")
-	public void showCreateStudent(@RequestParam String addorcreate, @PathVariable Long subjectId, @RequestParam String info, HttpServletResponse response,
-			HttpServletRequest request,
-			Model model,
-			@RequestParam(required = false) String firstName,
-			@RequestParam(required = false) String lastName,
-			@RequestParam String email,
-			@RequestParam(required = false) String password) throws IOException {
-
-
-		// Create new student
-		if (password == null) {
-			password = "1";
-		}
-		Student student = new Student(firstName, lastName, email, password);
-
-		// Find subject by name
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) { // if the subject exists in the db
-			Subject subject = s.get();
-
-			// if need to create a new student
-			if ("new".equals(addorcreate)) { 
-				if (firstName != null && password != null && lastName != null) { // if the data is complete
-					studentRepository.save(student); 
-					subject.setOneStudent(student);
-					subjectRepository.save(subject);
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
-				} else { // if the data isn't complete
-					response.sendRedirect("/subject/"+subjectId+"/add-student?addorcreate="+addorcreate+"&info=incomplete");
-				}
-
-			// if the student is created
-			} else { 
-				Optional<Student> existingEstudent = studentRepository.findByEmail(email); // find student for updated it
-
-				if (existingEstudent.isPresent()) { // if the student exists
-					student = existingEstudent.get(); 
-					subject.setOneStudent(student);
-					subjectRepository.save(subject);
-					response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
-				} else { // if not exists
-					response.sendRedirect("/admins/subject/"+subjectId+"/add-student?addorcreate="+addorcreate+"&info=false");
 				}
 			}
 		}else{
