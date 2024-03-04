@@ -134,23 +134,18 @@
 
             <div class="row">
 
-                <div class="col-lg-5 centered-div">
+                <div class="col-lg-12 centered-div">
                     <h4>Students</h4>
-                </div>
-                <div class="col-lg-2 centered-div"></div>
-                <div class="col-lg-5 centered-div">
-                    <h4>Teachers</h4>
                 </div>
 
             </div>
-
 
 
             </br>
             </br>
 
             <div class="row">
-                <div class="col-lg-5 centered-div">
+                <div class="col-lg-12 centered-div">
                     <!--STUDENTS-->
                     <div class="row">
                         <table class="table">
@@ -172,7 +167,7 @@
                                         <div class="col-2">
                                             <div class="main-button">
                                                 <a class="nav-link"
-                                                    href="/admins/subject/{{subjectId}}/general-information/delete?student={{id}}">Delete</a>
+                                                    href="/teachers/subject/{{subjectId}}/general-information/delete?student={{id}}">Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -189,7 +184,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="main-button">
-                                <a href="/admins/subject/{{subjectId}}/add-student?addorcreate=notnew&info=true">Add
+                                <a href="/teachers/subject/{{subjectId}}/add-student?addorcreate=notnew&info=true">Add
                                     Student</a>
                             </div>
                         </div>
@@ -198,53 +193,6 @@
                 </div>
 
 
-                <div class="col-lg-2 centered-div"></div>
-
-                <!--TEACHER-->
-
-                <div class="col-lg-5 centered-div">
-                    <div class="row">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                {{#teachers}}
-                                <tr>
-                                    <td>{{firstName}}</td>
-                                    <td>{{lastName}}</td>
-
-                                    <td>
-                                        <div class="col-2">
-                                            <div class="main-button">
-                                                <a class="nav-link"
-                                                    href="/admins/subject/{{subjectId}}/general-information/delete?teacher={{id}}">Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                <tr>
-                                    {{/teachers}}
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    </br>
-                    </br>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="main-button">
-                                <a href="/admins/subject/{{subjectId}}/add-teacher?addorcreate=notnew&info=true">Add
-                                    Teacher</a>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
