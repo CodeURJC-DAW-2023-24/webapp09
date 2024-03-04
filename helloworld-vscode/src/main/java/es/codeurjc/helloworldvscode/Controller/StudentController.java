@@ -1,6 +1,7 @@
 
 package es.codeurjc.helloworldvscode.Controller;
 import es.codeurjc.helloworldvscode.Entitys.*;
+import es.codeurjc.helloworldvscode.repository.ExamStudentRepository;
 import es.codeurjc.helloworldvscode.repository.ForumRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.services.*;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -36,6 +38,8 @@ public class StudentController {
 
     @Autowired
     ForumRepository forumRepository;
+    @Autowired
+    ExamStudentRepository examstudentRepository;
 
 
     @GetMapping("/subject_onesubj_student/{subjectId}")
@@ -80,13 +84,22 @@ public class StudentController {
 
     @GetMapping("/subject_onesubj_student/{subjectId}/download")
 	public ResponseEntity<byte[]> downloadFile(@PathVariable Long subjectId, @RequestParam Long examId) {
-        System.out.println("----------------------------------------------------------");
-        System.out.println("----------------------------------------------------------");
-        System.out.println("----------------------------------------------------------");
 		Exam exam = examService.getFile(examId);
 
     	return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + "." + exam.getType() +"\"")
         .body(exam.getData());
   	}
+    
+    @PostMapping("/subject_onesubj_student/{subjectId}/upload")
+    public String uploadFile(HttpServletRequest request, @PathVariable("subjectId") Long subjectId, @RequestParam Long examId, @RequestParam("file") MultipartFile file) {
+        Principal principal = request.getUserPrincipal();
+        Student student = studentService.getStudentByEmail(principal.getName());
+
+        ///////////////////////////////////////////////////////////////////////////////////
+        //Retrieve the exam of the student from whom the file is being uploaded and save it
+        ///////////////////////////////////////////////////////////////////////////////////
+        
+        return "Archivo subido correctamente para la materia con ID: " + subjectId;
+    }
 }
