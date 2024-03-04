@@ -156,10 +156,14 @@
                                                     <div class="col-md-7">
                                                     <!-- Formulario para subir archivos -->
                                                     <form id="uploadForm"
-                                                        action="/subject_onesubj_student/{subjectId}/upload?examId={{exam.id}}"
+                                                        action="/subject_onesubj_student/{{subjectId}}/upload?examId={{exam.id}}"
                                                         method="POST" enctype="multipart/form-data">
                                                         <input type="file" name="file" accept=".pdf">
-                                                        <button type="submit">Subir</button>
+                                                        <div class="main-button">
+                                                            <input type="submit" value="Up"/>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="_csrf" value="{{token}}">
                                                     </form>
                                                 </div>
                                                 </td>
