@@ -135,3 +135,37 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
 
 ### Class diagram
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/Diagrama%20de%20clases%20y%20templates.jpg">
+
+### Main commits of the members
+- Name: Ismael Albert Aparicio
+    1.
+    2.
+    3.
+    4.
+    5. 
+- Name: Amanda Castro López
+    1.
+    2.
+    3.
+    4.
+    5. 
+
+- Name: Paula Cuenca
+    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/06e8ab33b036690f3eebeca70aeeead14c590314
+    2.
+    3.
+    4.
+    5. 
+- Name: Javier Rodriguez Salas
+    1.
+    2.
+    3.
+    4.
+    5. 
+
+- Name: Alejandro Romero Torres
+    1.
+    2.
+    3.
+    4.
+    5. 
