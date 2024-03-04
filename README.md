@@ -151,11 +151,20 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
     5. 
 
 - Name: Paula Cuenca
-    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/06e8ab33b036690f3eebeca70aeeead14c590314
-    2.
-    3.
-    4.
-    5. 
+    - Name: Paula Cuenca
+    1. We solve problems with signup and login, we started the algorithm and solve somme bbdd problems
+    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/06e8ab33b036690f3eebeca70aeeead14c590314
+    2. Merge from other branch (commits before this one): hide/show buttons if registered or not, show user data in profile, logout and login.
+    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/973166e09661bc83121ade0e25ca565b91e790fd
+    3. Solve problems with view subjects_registered_user
+    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a22a7a17bd342234ce26c087cf80d61ac31f5d46
+    4. Graphic + english comments
+    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/2d43d384d105846b79fe38d1af47691bb3136172
+    5. I was in charge of the readme: 
+    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d415ee369abfa202902f2807fa00e71ff0b7506e
+
+
+
 - Name: Javier Rodriguez Salas
     1.
     2.
