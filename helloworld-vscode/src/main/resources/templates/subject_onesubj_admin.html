@@ -28,7 +28,6 @@
 
     <br></br>
 
-    {{>navbar_subjects}}
 
 
     <section>
@@ -74,7 +73,7 @@
                             </thead>
                             <tbody>
 
-                                {{#students}}
+                                {{#teachers}}
                                 <tr>
                                     <td>{{firstName}}</td>
                                     <td>{{lastName}}</td>
@@ -83,12 +82,12 @@
                                         <div class="col-2">
                                             <div class="main-button">
                                                 <a class="nav-link"
-                                                    href="/admin/subject/{{subjectId}}/general-information/delete?teacher={{id}}">Delete</a>
+                                                    href="/admins/subject/{{subjectId}}/general-information/delete?teacherId={{id}}">Delete</a>
                                             </div>
                                         </div>
                                     </td>
                                 <tr>
-                                    {{/students}}
+                                    {{/teachers}}
 
                             </tbody>
                         </table>
@@ -97,14 +96,7 @@
                     </br>
                     </br>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="main-button">
-                                <a href="/admins/subject/{{subjectId}}/add-teacher?addorcreate=notnew&info=true">Add
-                                    Student</a>
-                            </div>
-                        </div>
-                    </div>
+                
 
                 </div>
 

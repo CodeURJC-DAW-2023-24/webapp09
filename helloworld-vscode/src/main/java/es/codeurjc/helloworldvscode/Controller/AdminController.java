@@ -41,12 +41,14 @@ public class AdminController {
 
 	@GetMapping("/subject")
 	public ModelAndView showSubjects(@RequestParam Long subjectId) {
-
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("subject_onesubj_admin");
+		ArrayList<Teacher> teachers = teacherRepository.findAllBySubjectsId(subjectId);
+		modelAndView.addObject("teachers", teachers);
+		modelAndView.addObject("name", subjectRepository.findById(subjectId).get().getName());
+		modelAndView.addObject("subjectId", subjectId);
 
 		return modelAndView;
-	
-
 	}
 
 
@@ -63,64 +65,9 @@ public class AdminController {
 	////////////////////////
 	// UPDATE DESCRIPTION //
 	////////////////////////
-	@GetMapping("/subject/{subjectId}/general-information")
-	public ModelAndView subjectOneSubjAdmin(@PathVariable Long subjectId) {
-
-		ModelAndView modelAndView = new ModelAndView();
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) {
-			String description = s.get().getDescription();
-			String allInfo = s.get().getAllInfo();
-			String name = s.get().getName();
-
-			ArrayList<Student> students = (ArrayList<Student>) studentRepository.findAllBySubjectsId(subjectId);
-			ArrayList<Teacher> teachers = (ArrayList<Teacher>) teacherRepository.findAllBySubjectsId(subjectId);
-
-			modelAndView.setViewName("general_information");
-
-			modelAndView.addObject("students", students);
-			modelAndView.addObject("teachers", teachers);
-			modelAndView.addObject("description", description);
-			modelAndView.addObject("allInfo", allInfo);
-			modelAndView.addObject("name", name);
-
-		} else {
-			modelAndView.addObject("error", "Subject not found");
-			modelAndView.setViewName("error_view");
-		}
-
-		return modelAndView;
-	}
+	
 
 
-	@PostMapping("/subject/{subjectId}/general-information")
-	public void subjectOneSubjAdmin(@PathVariable Long subjectId, HttpServletResponse response,
-			Model model,
-			@RequestParam(required = false) String description,
-			@RequestParam(required = false) String allInfo) throws IOException {
-
-		Optional<Subject> s = subjectRepository.findById(subjectId);
-
-		if (s.isPresent()) {
-			Subject subject = s.get();
-			if (!subject.getDescription().equals(description)) {
-
-				if(description!=null){
-					subject.setDescription(description);
-				}
-				if(allInfo!=null){
-					subject.setAllInfo(allInfo);
-				}
-
-				subjectRepository.save(subject);
-			}
-
-			response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
-		}else{
-			response.sendRedirect("/error");
-		}
-	}
 
 
 
@@ -130,26 +77,17 @@ public class AdminController {
 
 	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/general-information/delete")
-	public void deleteStudent(@PathVariable Long subjectId, @RequestParam(required = false) Long student, @RequestParam(required = false) Long teacher, HttpServletResponse response) throws IOException {
+	public void deleteStudent(@PathVariable Long subjectId,  @RequestParam(required = false) Long teacherId, HttpServletResponse response) throws IOException {
 
 		Optional<Subject> s = subjectRepository.findById(subjectId);
 
 		if (s.isPresent()) {
 
-			if(student!=null){
-				Optional<Student> st = studentRepository.findById(student);
-				st.get().deleteSubjectId(subjectId);
-
-				s.get().deleteStudentId(student);
-
-				studentRepository.save(st.get());
-				subjectRepository.save(s.get());
-
-			}else if(teacher!=null){
-				Optional<Teacher> te = teacherRepository.findById(teacher);
+			if(teacherId!=null){
+				Optional<Teacher> te = teacherRepository.findById(teacherId);
 				te.get().deleteSubjectId(subjectId);
 
-				s.get().deleteTeacherId(teacher);
+				s.get().deleteTeacherId(teacherId);
 
 				teacherRepository.save(te.get());
 				subjectRepository.save(s.get());
@@ -157,7 +95,7 @@ public class AdminController {
 
 		}
 
-		response.sendRedirect("/admins/subject/"+subjectId+"/general-information");
+		response.sendRedirect("/admins/subject?subjectId="+subjectId);
 
 	}
 
