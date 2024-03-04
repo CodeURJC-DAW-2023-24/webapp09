@@ -44,12 +44,12 @@ public class Subject {
     private List<Teacher> teachers;
 
 
-    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Exam> exams;
 
     //@JsonBackReference
-    @OneToMany(mappedBy = "subject")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Forum> forums;
 

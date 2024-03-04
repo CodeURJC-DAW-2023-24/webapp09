@@ -3,6 +3,7 @@ package es.codeurjc.helloworldvscode.Entitys;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import es.codeurjc.helloworldvscode.enumerate.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -18,7 +19,7 @@ public class Student extends User{
     @JsonManagedReference
     private List<Subject> subjects;
 
-    @OneToMany(mappedBy = "student")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<ExamStudent> examStudents;
 

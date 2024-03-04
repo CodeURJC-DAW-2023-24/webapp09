@@ -55,7 +55,7 @@
                             {{#examsStudent}}
                             <tr>
                                 <form id="examStudentForm"
-                                    action="/admins/subject/{{subjectId}}/type-exams/{{examId}}/correct-exams"
+                                    action="/teachers/subject/{{subjectId}}/type-exams/{{examId}}/correct-exams"
                                     method="post">
 
                                     <td>{{student.firstName}} {{student.lastName}}</td>
@@ -73,7 +73,7 @@
                                             <div class="col-8">
                                                 <div class="main-button">
                                                     <a
-                                                        href="/admins/subject/{{subjectId}}/type-exams/{{examId}}/download?examStudentId={{examStudentId}}">Open</a>
+                                                        href="/teachers/subject/{{subjectId}}/type-exams/{{examId}}/download?examStudentId={{examStudentId}}">Open</a>
                                                 </div>
                                             </div>
                                         </div>
