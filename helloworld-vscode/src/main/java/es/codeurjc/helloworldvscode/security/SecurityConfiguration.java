@@ -45,7 +45,8 @@ public class SecurityConfiguration {
 					.requestMatchers("/error").permitAll()
 					.requestMatchers("/subject/**").permitAll()
 					.requestMatchers("/subjectInfo").permitAll()
-
+					.requestMatchers("/chart/**").permitAll()
+				
 					//PRIVATE PAGES
 
 					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
