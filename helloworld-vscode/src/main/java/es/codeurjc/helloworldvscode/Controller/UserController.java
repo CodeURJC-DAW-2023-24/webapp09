@@ -28,6 +28,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -139,6 +140,22 @@ public class UserController {
 
     @GetMapping("/profile")
     public ModelAndView personalArea(Model model, HttpServletRequest request) {
+
+        Principal principal = request.getUserPrincipal();
+        Optional<User> userOptional = userRepository.findByEmail(principal.getName());
+    
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            String firstName = user.getFirstName();
+            model.addAttribute("firstName", firstName);
+
+            String lastName = user.getLastName();
+            model.addAttribute("lastName", lastName);
+
+            String email = user.getEmail();
+            model.addAttribute("email", email);
+        }
         ModelAndView modelAndView = new ModelAndView("profile");
         model.addAttribute("username", request.getUserPrincipal().getName());
         String role = "UNKNOWN"; // Por defecto
@@ -147,6 +164,7 @@ public class UserController {
          } else if (request.isUserInRole("TEACHER")) {
              role = "Teacher";
          }
+         
 
         
         List<Subject> subjects = new ArrayList<>();
@@ -200,41 +218,22 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userRepository.findByEmail(principal.getName());
         System.out.println("COPIARPEGAR");
-        if (user.get().getRoles().contains("TEACHER")) {
-            Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
-            firstName.ifPresent(teacher::setFirstName);
-            lastName.ifPresent(teacher::setLastName);
-            email.ifPresent(teacher::setEmail);
-            password.ifPresent(teacher::setPassword);
-            teacherRepository.save(teacher);
+        if (user.isPresent()) {
+        User currentUser = user.get();
+        currentUser.setFirstName(firstName.orElse(currentUser.getFirstName()));
+        currentUser.setLastName(lastName.orElse(currentUser.getLastName()));
+        currentUser.setEmail(email.orElse(currentUser.getEmail()));
+        currentUser.setPassword(password.orElse(currentUser.getPassword()));
+        userRepository.save(currentUser);
 
+        List<GrantedAuthority> authorities = currentUser.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
 
-            //esto vamos a tener q cambiarlo, pero funciona
-            List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            roles.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
-            roles.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
-
-            SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(teacher.getEmail(), teacher.getPassword(), roles)
+        SecurityContextHolder.getContext().setAuthentication(
+            new UsernamePasswordAuthenticationToken(currentUser.getEmail(), currentUser.getPassword(), authorities)
         );
-        }else if (user.get().getRoles().contains("STUDENT")) {
-            Student student = studentService.getStudentByEmail(principal.getName());
-            firstName.ifPresent(student::setFirstName);
-            lastName.ifPresent(student::setLastName);
-            email.ifPresent(student::setEmail);
-            password.ifPresent(student::setPassword);
-            studentRepository.save(student);
-
-            List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            roles.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
-            roles.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
-
-            SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(student.getEmail(), student.getPassword(), roles)
-            );
-        }
+    }
         return "redirect:/profile";
     }
 }
