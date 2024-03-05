@@ -2,10 +2,10 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,28 +25,29 @@ public class User {
     @Column
     @Lob
     private Blob profilePicture;
-    @Enumerated(EnumType.STRING)
-    private final Role role;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
 
     public User(){
-        this.role = Role.ROLE_TEACHER;}
+    }
 
-    public User(String firstName, String lastName, String email, String password, Blob profile, Role role) {
+    public User(String firstName, String lastName, String email, String password, Blob profile, String... role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         setPassword(password);
         this.profilePicture = profile;
-        this.role = role;
+        this.roles = List.of(role);
     }
 
-    public User(String firstName, String lastName, String email, String password, Role role) {
+    public User(String firstName, String lastName, String email, String password, String... role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         setPassword(password);
         this.profilePicture = null;
-        this.role = role;
+        this.roles = List.of(role);
     }
 
     public User(User t) {
@@ -55,7 +56,7 @@ public class User {
         this.email = t.email;
         this.password = "";
         this.profilePicture = t.profilePicture;
-        this.role = t.role;
+        this.roles = t.roles;
     }
 
     public String getFirstName() {
@@ -79,9 +80,9 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public Role getRole() {
-        return role;
-    }
+    public List<String> getRoles() {
+		return roles;
+	}
     public void setPassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);

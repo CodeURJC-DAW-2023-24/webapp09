@@ -61,7 +61,7 @@ public class SubjectService {
         Principal principal = request.getUserPrincipal();
         Optional<User> u = userRepository.findByEmail(principal.getName());
         User usuario = u.get();
-        String rol = usuario.getRole().toString();
+        String rol = usuario.getRoles().toString();
         if (rol == "ROLE_TEACHER") {
             List<Subject> lista = teacherService.findSubjectsByTeacherEmail(principal.getName());
             List<Subject> subjects;

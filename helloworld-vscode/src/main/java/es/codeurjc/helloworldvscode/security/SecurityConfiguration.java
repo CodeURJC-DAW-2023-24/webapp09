@@ -50,8 +50,8 @@ public class SecurityConfiguration {
 
 					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/subjectUser").permitAll() 
-					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER")
-					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER")
+					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")
 					.requestMatchers("/subject_onesubj_student/**").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/subject_onesubj_teacher").permitAll()

@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.helloworldvscode.Entitys.User;
-import es.codeurjc.helloworldvscode.enumerate.Role;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
 
 @Service
@@ -24,13 +23,12 @@ public class RepositoryUserDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 		List<GrantedAuthority> roles = new ArrayList<>();
-		roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		roles.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
-		roles.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+		for (String role : user.getRoles()) {
+			roles.add(new SimpleGrantedAuthority("ROLE_" + role));
+		}
 
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), 
 				user.getPassword(), roles);

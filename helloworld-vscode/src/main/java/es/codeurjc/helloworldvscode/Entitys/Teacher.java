@@ -1,7 +1,6 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 
@@ -16,7 +15,7 @@ public class Teacher extends User{
     @JsonBackReference
     private List<Subject> subjects;
 
-    private final static Role rol = Role.ROLE_TEACHER;
+    private final static String rol = "TEACHER";
 
     // Constructors
     public Teacher(){}

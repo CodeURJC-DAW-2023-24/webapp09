@@ -1,7 +1,6 @@
 package es.codeurjc.helloworldvscode.Controller;
 
 import es.codeurjc.helloworldvscode.Entitys.*;
-import es.codeurjc.helloworldvscode.enumerate.Role;
 import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.TeacherRepository;
@@ -66,18 +65,18 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
         Optional<User> user = userRepository.findByEmail(principal.getName());
-        if (user.get().getRole() == Role.ROLE_TEACHER) {
+        if (user.get().getRoles().contains("TEACHER")) {
             modelAndView.addObject("isStudent", false);
             Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
             modelAndView.addObject("user", teacher);
             
-        } else if (user.get().getRole() == Role.ROLE_STUDENT){
+        } else if (user.get().getRoles().contains("STUDENT")){
             modelAndView.addObject("isStudent", true);
             Student student = studentService.getStudentByEmail(principal.getName());
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-        } else{
+        } else if (user.get().getRoles().contains("ADMIN")){
             modelAndView.addObject("isStudent", false);
             Admin admin = adminService.getAdminByEmail(principal.getName());
             modelAndView.addObject("user", admin);
@@ -91,9 +90,9 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userRepository.findByEmail(principal.getName());
         String url = "";
-        if (user.get().getRole() == Role.ROLE_STUDENT){
+        if (user.get().getRoles().contains("STUDENT")){
             url = "/subject_onesubj_student/"+ subjectId;
-        } else if (user.get().getRole() == Role.ROLE_TEACHER){
+        } else if (user.get().getRoles().contains("TEACHER")){
             url = "/teachers/subject/" + subjectId + "/general-information";
         }
         
@@ -154,20 +153,24 @@ public class UserController {
         String username = request.getUserPrincipal().getName();
         Optional<Student> student = studentRepository.findByEmail(username);
         Optional<Teacher> teacher = teacherRepository.findByEmail(username);
-        if (student.isPresent()) {
+        if (request.isUserInRole("STUDENT")) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
             role = "Student";
             subjects = studentService.findSubjectsByStudentId(student.get().getId());
-        } else if (teacher.isPresent()) {
+            modelAndView.addObject("subjects", subjects);
+        } else if (request.isUserInRole("TEACHER")) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
             role = "Teacher";
             subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
+            modelAndView.addObject("subjects", subjects);
+        }else if (request.isUserInRole("ADMIN")) {
+            // Si se encuentra un profesor, obtener las asignaturas asociadas
+            role = "Admin";
         }
 
         model.addAttribute("role", role);
 
         // Crear el modelo y agregar las asignaturas
-        modelAndView.addObject("subjects", subjects);
         return modelAndView;
     }
 
@@ -197,7 +200,7 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userRepository.findByEmail(principal.getName());
         System.out.println("COPIARPEGAR");
-        if (user.get().getRole() == Role.ROLE_TEACHER) {
+        if (user.get().getRoles().contains("TEACHER")) {
             Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
             firstName.ifPresent(teacher::setFirstName);
             lastName.ifPresent(teacher::setLastName);
@@ -215,7 +218,7 @@ public class UserController {
             SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(teacher.getEmail(), teacher.getPassword(), roles)
         );
-        }else if (user.get().getRole() == Role.ROLE_STUDENT) {
+        }else if (user.get().getRoles().contains("STUDENT")) {
             Student student = studentService.getStudentByEmail(principal.getName());
             firstName.ifPresent(student::setFirstName);
             lastName.ifPresent(student::setLastName);

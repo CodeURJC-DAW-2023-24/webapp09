@@ -2,7 +2,6 @@ package es.codeurjc.helloworldvscode.Entitys;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import es.codeurjc.helloworldvscode.enumerate.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -27,14 +26,14 @@ public class Student extends User{
     public Student() {}
 
     public Student(String firstName, String lastName, String email, String password, Blob profile) {
-        super(firstName, lastName, email, password, profile, Role.ROLE_STUDENT);
+        super(firstName, lastName, email, password, profile, "STUDENT");
         this.subjects = new ArrayList<>();
         this.examStudents = new ArrayList<>();
 
     }
 
     public Student(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password, Role.ROLE_STUDENT);
+        super(firstName, lastName, email, password, "STUDENT");
         this.subjects = new ArrayList<>();
         this.examStudents = new ArrayList<>();
     }

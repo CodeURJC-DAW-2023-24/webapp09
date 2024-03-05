@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import es.codeurjc.helloworldvscode.enumerate.Role;
+
 import es.codeurjc.helloworldvscode.repository.AdminRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
@@ -79,18 +79,18 @@ public class SubjectController {
         if (principal != null) {
             Optional<User> user = userRepository.findByEmail(principal.getName());
 
-            if (user.get().getRole() == Role.ROLE_TEACHER) {
+            if (user.get().getRoles().contains("TEACHER")) {
                 modelAndView.addObject("isStudent", false);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
-            } else if(user.get().getRole() == Role.ROLE_STUDENT){
+            } else if(user.get().getRoles().contains("STUDENT")){
                 modelAndView.addObject("isStudent", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-            } else{
+            } else if (user.get().getRoles().contains("ADMIN")){
                 modelAndView.setViewName("subjects_admin");
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
