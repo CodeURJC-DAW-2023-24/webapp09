@@ -5,7 +5,6 @@ import es.codeurjc.helloworldvscode.Entitys.Subject;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
     public Optional<Subject> findSubjectById(long id);
@@ -18,7 +17,4 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
     // NO TIENE SENTIDO
     @SuppressWarnings("null")
     Optional<Subject> findById(Long subjectId);
-
-    @Query("SELECT s.gender, COUNT(s) FROM Subject s GROUP BY s.gender")
-    List<Object[]> countSubjectsByGender();
 }
