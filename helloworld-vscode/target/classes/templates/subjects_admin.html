@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+    {{>header}}
+
+    <!--  ########## PAGE CONTENT ##########  -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
+                            alt="Imagen de Perfil" style="width: 100px; height: 100px">
+                        <br></br>
+                        <div class="text-content">
+                            <h2>Name</h2>
+                            <br></br>
+                            <h4>Subjects</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <br></br>
+
+
+
+    <section class="blog-posts grid-system" id="exams_student_subject">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {{#subjects}}
+                            <tr>
+                                <td>{{name}}</td>
+
+                                <td>
+                                    <div class="col-6">
+                                        <div class="main-button">
+                                            <a class="nav-link" href="/admins/subject?subjectId={{id}}">View</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-6">
+                                        <div class="main-button">
+                                            <a class="nav-link"
+                                                href="/admins/subject/delete?subjectId={{id}}">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                             {{/subjects}} 
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {{>footer}}
+
+</body>
+
+</html>

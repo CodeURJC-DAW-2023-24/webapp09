@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+  {{>header}}
+
+  <!-- Page Content -->
+  <!-- Banner Starts Here -->
+  <div class="heading-page header-text">
+    <section class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-content">
+              <h2>New {{rol}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  </br>
+  {{>navbar_subjects}}
+
+  <section class="contact-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="down-contact">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="sidebar-item contact-form">
+
+
+                  <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                      <div class="main-button">
+                        <a class="nav-link"
+                          href="/{{rol}}/subject/{{subjectId}}/add-{{user}}?addorcreate=new&info=true">Add New</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="sidebar-heading">
+                    <h2>Complete the following information</h2>
+                  </div>
+
+                  <!-- FORM -->
+                  <div class="content">
+                    <form id="signupForm" action="" method="post">
+
+                      <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                          <fieldset>
+                            <input name="email" type="email" id="email" placeholder="Email" required="">
+                          </fieldset>
+                          <div class="main-button">
+                            <input type="submit" value="Save" />
+                          </div>
+                          <input type="hidden" name="_csrf" value="{{token}}">
+                        </div>
+                      </div>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <!-- Add any additional content or information on the right side if needed -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    {{>footer}}
+
+</body>
+
+</html>
