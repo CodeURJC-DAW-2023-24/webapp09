@@ -38,8 +38,6 @@ public class AdminController {
 	@Autowired
 	private SubjectRepository subjectRepository;
 
-	@Autowired
-	private StudentRepository studentRepository;
 
 	@Autowired
 	private SubjectService subjectService;
@@ -62,6 +60,9 @@ public class AdminController {
 		modelAndView.addObject("teachers", teachers);
 		modelAndView.addObject("name", subjectRepository.findById(subjectId).get().getName());
 		modelAndView.addObject("subjectId", subjectId);
+
+		modelAndView.addObject("rol", "admins");
+		modelAndView.addObject("user", "teacher");
 
 		return modelAndView;
 	}
