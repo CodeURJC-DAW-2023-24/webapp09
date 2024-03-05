@@ -137,51 +137,103 @@ Requirements: JDK 17, SprinBoot 3.0.0, MYSQL database (we used MySql Workbench),
 <img src="https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/screenshots/Diagrama%20de%20clases%20y%20templates.jpg">
 
 ### Main commits of the members
-- Name: Ismael Albert Aparicio
-    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/750003204f05c402f5b9daecdb172c050b5a256b
-    2. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/69875d4bfe97268ff2713b72ad4375a1e441f5d0
-    3. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/8f5ef8fb5da1a20a71a4793d20660969219fb6c9
-    4. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/738822c76dd6dd82fa00ac33491e0920e2b020cf
-    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/6940ddde367577731c921b2fe927e09946850afa
-- Name: Amanda Castro López
-    1. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/0c2500d04bd78d19d272a2bca44e8b0541a677e8
-    2. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/289de07227354314e079c0a830da5acc62b03ee5
-    3. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/ce8e31f512859c0486a752ea206fbc00aae91473
-    4. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/be8142249fb5dc217452ca4c1ddae4a05dd2e692
-    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/4d45cc42261d078b044cb49abc19bf39c0a980f1
+#### Ismael Albert Aparicio  
+| Commit 💻      | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/750003204f05c402f5b9daecdb172c050b5a256b)    | Celda 1,2    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/69875d4bfe97268ff2713b72ad4375a1e441f5d0)    | Celda 2,2    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/8f5ef8fb5da1a20a71a4793d20660969219fb6c9)    | Celda 2,2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/738822c76dd6dd82fa00ac33491e0920e2b020cf)    | Celda 2,2    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/6940ddde367577731c921b2fe927e09946850afa)    | Celda 2,2    |
 
-- Name: Paula Cuenca
-    - Name: Paula Cuenca
-    1. We solve problems with signup and login, we started the algorithm and solve somme bbdd problems
-    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/06e8ab33b036690f3eebeca70aeeead14c590314
-    2. Merge from other branch (commits before this one): hide/show buttons if registered or not, show user data in profile, logout and login.
-    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/973166e09661bc83121ade0e25ca565b91e790fd
-    3. Solve problems with view subjects_registered_user
-    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a22a7a17bd342234ce26c087cf80d61ac31f5d46
-    4. Graphic + english comments
-    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/2d43d384d105846b79fe38d1af47691bb3136172
-    5. I was in charge of the readme: 
-    https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d415ee369abfa202902f2807fa00e71ff0b7506e
+| Files 📁       | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/750003204f05c402f5b9daecdb172c050b5a256b)    | Celda 1,2    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/69875d4bfe97268ff2713b72ad4375a1e441f5d0)    | Celda 2,2    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/8f5ef8fb5da1a20a71a4793d20660969219fb6c9)    | Celda 2,2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/738822c76dd6dd82fa00ac33491e0920e2b020cf)    | Celda 2,2    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/6940ddde367577731c921b2fe927e09946850afa)    | Celda 2,2    |
+ 
+ 
+#### Amanda Castro López 
+| Commit 💻      | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/0c2500d04bd78d19d272a2bca44e8b0541a677e8)    | Celda 1,2    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/289de07227354314e079c0a830da5acc62b03ee5)    | Celda 2,2    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/ce8e31f512859c0486a752ea206fbc00aae91473)    | Celda 2,2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/be8142249fb5dc217452ca4c1ddae4a05dd2e692)    | Celda 2,2    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/4d45cc42261d078b044cb49abc19bf39c0a980f1)    | Celda 2,2    |
+
+| Files 📁       | Description |
+|--------------|--------------|
+| [1]()    | Celda 1,2    | 
+| [2]()    | Celda 2,2    | 
+| [3]()    | Celda 2,2    |
+| [4]()    | Celda 2,2    |
+| [5]()    | Celda 2,2    |
+
+#### Paula Cuenca Gil
+| Commit 💻      | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/06e8ab33b036690f3eebeca70aeeead14c590314)    | We solve problems with signup and login, we started the algorithm and solve somme bbdd problems    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/973166e09661bc83121ade0e25ca565b91e790fd)    | Merge from other branch (commits before this one): hide/show buttons if registered or not, show user data in profile, logout and login.    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a22a7a17bd342234ce26c087cf80d61ac31f5d46)    | Solve problems with view subjects_registered_user    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/2d43d384d105846b79fe38d1af47691bb3136172)    | Graphic + english comments  |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d415ee369abfa202902f2807fa00e71ff0b7506e)    | I was in charge of the readme:    |
+
+| Files 📁       | Description |
+|--------------|--------------|
+| [1]()    | Celda 1,2    | 
+| [2]()    | Celda 2,2    | 
+| [3]()    | Celda 2,2    |
+| [4]()    | Celda 2,2    |
+| [5]()    | Celda 2,2    |
+
+#### Javier Rodriguez Salas 
+| Commit 💻      | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d5cbaba004c81bb804d2ea3edaeef0f9a1c4f25b)    | Security module    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/15aa85d2f065ba05bd74fdc78a774f981235dfd7)    | Integration of administrator and teacher logic    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a8c0595f92e97de0ca338d773cfb0efe17784793)    | Integration of administrator and teacher logic pt2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/10176f33a61629a97bbbb192ef5c08ec05a6149e)    | Migrate to a mysql database    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/c009373eb28d14a5f6199ac41fece97135bfc904)    | AYAX  |
+
+| Files 📁       | Description |
+|--------------|--------------|
+| [1]()    | Celda 1,2    | 
+| [2]()    | Celda 2,2    | 
+| [3]()    | Celda 2,2    |
+| [4]()    | Celda 2,2    |
+| [5]()    | Celda 2,2    |
+
+
+#### Alejandro Romero Torres 
+| Commit 💻      | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/5cb54017b6a2ac4bc4cab7248188ad50fca1fc0c)    | Celda 1,2    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/79872cec4992325eea9a563d2a1d24d450932d56)    | Celda 2,2    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d2bd2451401d5d7373aba4b493f284c042a34877)    | Celda 2,2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/19d0bf5c05de4fea778ccd9a05e320546b0bced4)    | Celda 2,2    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/eca592d8ec9d98dc4a7caea612ed5cb1235bbcef)    | Celda 2,2    |
+
+| Files 📁       | Description |
+|--------------|--------------|
+| [1](https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/SubjectController.java)    | Celda 1,2    | 
+| [2](https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/StudentController.java)    | Celda 2,2    | 
+| [3](https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/UserController.java)    | Celda 2,2    |
+| [4](https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/services/SubjectService.java)    | Celda 2,2    |
+| [5](https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/resources/templates/subject_onesubj_student.html)    | Celda 2,2    |
+ 
 
 
 
-- Name: Javier Rodriguez Salas
-    1. Security module: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d5cbaba004c81bb804d2ea3edaeef0f9a1c4f25b
-    2. Integration of administrator and teacher logic: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/15aa85d2f065ba05bd74fdc78a774f981235dfd7
-    3. Integration of administrator and teacher logic pt2: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/a8c0595f92e97de0ca338d773cfb0efe17784793
-    4. Migrate to a mysql database: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/10176f33a61629a97bbbb192ef5c08ec05a6149e
-    5. AYAX: https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/c009373eb28d14a5f6199ac41fece97135bfc904 
 
-- Name: Alejandro Romero Torres
-    1.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/5cb54017b6a2ac4bc4cab7248188ad50fca1fc0c
-    2.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/79872cec4992325eea9a563d2a1d24d450932d56
-    3.  https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/d2bd2451401d5d7373aba4b493f284c042a34877
-    4.https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/19d0bf5c05de4fea778ccd9a05e320546b0bced4
-    5. https://github.com/CodeURJC-DAW-2023-24/webapp09/commit/eca592d8ec9d98dc4a7caea612ed5cb1235bbcef
-      files:   /  
-https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/SubjectController.java   /   
-https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/StudentController.java   /  
-https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/Controller/UserController.java   /  
-https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/java/es/codeurjc/helloworldvscode/services/SubjectService.java   /  
-https://github.com/CodeURJC-DAW-2023-24/webapp09/blob/main/helloworld-vscode/src/main/resources/templates/subject_onesubj_student.html   /  
+
+
+
+
+
+
+
+
 
