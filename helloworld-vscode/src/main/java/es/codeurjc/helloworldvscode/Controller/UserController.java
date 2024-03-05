@@ -171,6 +171,16 @@ public class UserController {
         return modelAndView;
     }
 
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            model.addAttribute("logged", true);
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
+
     @GetMapping("/editProfile")
     public String showEditProfile() {
         return "editProfile";

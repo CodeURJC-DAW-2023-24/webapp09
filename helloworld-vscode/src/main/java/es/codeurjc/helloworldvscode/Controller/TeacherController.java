@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -79,6 +81,16 @@ public class TeacherController {
 	////////////////////////
 	// UPDATE DESCRIPTION //
 	////////////////////////
+
+	@ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            model.addAttribute("logged", true);
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
 	@GetMapping("/subject/{subjectId}/general-information")
 	public ModelAndView subjectOneSubjAdmin(@PathVariable Long subjectId) {

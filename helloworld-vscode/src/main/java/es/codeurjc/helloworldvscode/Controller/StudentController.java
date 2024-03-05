@@ -45,6 +45,15 @@ public class StudentController {
     @Autowired
     ExamStudentService examStudentService;
 
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            model.addAttribute("logged", true);
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
     @GetMapping("/subject_onesubj_student/{subjectId}")
     public ModelAndView showSubjectDetails(HttpServletRequest request, @PathVariable Long subjectId) {
@@ -81,8 +90,6 @@ public class StudentController {
         subjectRepository.save(subject);
         forumRepository.save(forum);
 
-
-
         return ("redirect:/subject_onesubj_student/"+subject.getId());
     }
 
@@ -91,7 +98,7 @@ public class StudentController {
 		Exam exam = examService.getFile(examId);
 
     	return ResponseEntity.ok()
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + "." + exam.getType() +"\"")
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + ".pdf"+"\"")
         .body(exam.getData());
   	}
     

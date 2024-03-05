@@ -1,6 +1,7 @@
 package es.codeurjc.helloworldvscode.Controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,15 @@ public class AdminController {
 	@Autowired
 	private SubjectService subjectService;
 
+	@ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            model.addAttribute("logged", true);
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
 	@GetMapping("/subject")
 	public ModelAndView showSubjects(@RequestParam Long subjectId) {
