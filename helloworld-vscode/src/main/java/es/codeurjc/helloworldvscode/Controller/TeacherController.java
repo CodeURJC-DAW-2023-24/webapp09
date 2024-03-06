@@ -104,16 +104,12 @@ public class TeacherController {
 			String name = s.get().getName();
 
 			ArrayList<Student> students = (ArrayList<Student>) studentRepository.findAllBySubjectsId(subjectId);
-			//ArrayList<Teacher> teachers = (ArrayList<Teacher>) teacherRepository.findAllBySubjectsId(subjectId);
 
 			modelAndView.setViewName("general_information");
-
 			modelAndView.addObject("students", students);
-			//modelAndView.addObject("teachers", teachers);
 			modelAndView.addObject("description", description);
 			modelAndView.addObject("allInfo", allInfo);
 			modelAndView.addObject("name", name);
-			//modelAndView.addObject("csrfToken", csrfToken);
 
 			//obtain data for graphic
             List<ExamStudent> exams = examStudentRepository.findAll();

@@ -55,16 +55,50 @@ public class AdminController {
 	@GetMapping("/subject")
 	public ModelAndView showSubjects(@RequestParam Long subjectId) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("subject_onesubj_admin");
+		Subject subject = subjectRepository.findById(subjectId).get();
 		ArrayList<Teacher> teachers = teacherRepository.findAllBySubjectsId(subjectId);
+		
+		modelAndView.setViewName("subject_onesubj_admin");
+		
+		modelAndView.addObject("description", subject.getDescription());
+		modelAndView.addObject("allInfo", subject.getAllInfo());
+
 		modelAndView.addObject("teachers", teachers);
-		modelAndView.addObject("name", subjectRepository.findById(subjectId).get().getName());
+		modelAndView.addObject("name", subject.getName());
 		modelAndView.addObject("subjectId", subjectId);
 
 		modelAndView.addObject("rol", "admins");
 		modelAndView.addObject("user", "teacher");
 
 		return modelAndView;
+	}
+
+	@PostMapping("/subject")
+	public void subjectOneSubjAdmin(@RequestParam Long subjectId, HttpServletResponse response,
+			Model model,
+			@RequestParam(required = false) String description,
+			@RequestParam(required = false) String allInfo) throws IOException {
+
+		Optional<Subject> s = subjectRepository.findById(subjectId);
+
+		if (s.isPresent()) {
+			Subject subject = s.get();
+			if (!subject.getDescription().equals(description)) {
+				
+				if(description!=null){
+					subject.setDescription(description);
+				}
+				if(allInfo!=null){
+					subject.setAllInfo(allInfo);
+				}
+			
+				subjectRepository.save(subject);
+			}
+			
+			response.sendRedirect("/admins/subject?subjectId="+subjectId);
+		}else{
+			response.sendRedirect("/error");
+		}
 	}
 
 
