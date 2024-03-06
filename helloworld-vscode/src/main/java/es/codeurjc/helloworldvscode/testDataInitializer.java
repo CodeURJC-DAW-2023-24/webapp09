@@ -31,7 +31,7 @@ public class testDataInitializer {
     public void init() throws Exception {
 
 ////////STUDENTS
-        Student st1 = new Student("Juan", "Pérez", "juan.perez@example.com", "password123");
+        Student st1 = new Student("Juan", "Pérez", "jj@gmail.com", "jj");
         Student st2 = new Student("Ana", "López", "ana.lopez@example.com", "password456");
         Student st3 = new Student("Carlos", "García", "carlos.garcia@example.com", "password789");
         Student st4 = new Student("Luisa", "Martín", "luisa.martin@example.com", "password101");
@@ -163,18 +163,18 @@ public class testDataInitializer {
         );
 
 ////////EXAMS
-        Exam e1 = new Exam("Exam 1", null, null, s4);
-        Exam e2 = new Exam("Exam 2", null, null, s4);
-        Exam e3 = new Exam("Exam 3", null, null, s4);
-        Exam e4 = new Exam("Final Exam", null, null, s4);
+        Exam e1 = new Exam("Exam 1", "pdf", null, s4);
+        Exam e2 = new Exam("Exam 2", "pdf", null, s4);
+        Exam e3 = new Exam("Exam 3", "pdf", null, s4);
+        Exam e4 = new Exam("Final Exam", "pdf", null, s4);
 
 ////////EXAMSTUDENTS
-        ExamStudent es1 = new ExamStudent(3.45, null, null, e1, st1);
-        ExamStudent es2 = new ExamStudent(10, null, null, e2, st1);
-        ExamStudent es3 = new ExamStudent(8.35, null, null, e3, st1);
-        ExamStudent es4 = new ExamStudent(5.04, null, null, e4, st1);
-        ExamStudent es5 = new ExamStudent(2.45, null, null, e1, st2);
-        ExamStudent es6 = new ExamStudent(0, null, null, e1, st2);
+        ExamStudent es1 = new ExamStudent(3.45, "pdf", null, e1, st1);
+        ExamStudent es2 = new ExamStudent(10, "pdf", null, e2, st1);
+        ExamStudent es3 = new ExamStudent(8.35, "pdf", null, e3, st1);
+        ExamStudent es4 = new ExamStudent(5.04, "pdf", null, e4, st1);
+        ExamStudent es5 = new ExamStudent(2.45, "pdf", null, e1, st2);
+        ExamStudent es6 = new ExamStudent(0, "pdf", null, e1, st2);
 
         //students IN subjects
 

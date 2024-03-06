@@ -141,14 +141,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{#examStudents}}
+                                            {{#exams}}
                                             <tr>
-                                                <td>{{exam.name}}</td>
+                                                <td>{{name}}</td>
                                                 <td>
 
                                                     <div class="main-button">
                                                         <a
-                                                            href="/subject_onesubj_student/{{subject.id}}/download?examId={{exam.id}}">Open</a>
+                                                            href="/subject_onesubj_student/{{subject.id}}/download?examId={{id}}">Open</a>
                                                     </div>
 
                                                 </td>
@@ -156,7 +156,7 @@
                                                     <div class="col-md-7">
                                                     <!-- Formulario para subir archivos -->
                                                     <form id="uploadForm"
-                                                        action="/subject_onesubj_student/{{subjectId}}/upload?examId={{exam.id}}"
+                                                        action="/subject_onesubj_student/{{subjectId}}/upload?examId={{id}}"
                                                         method="POST" enctype="multipart/form-data">
                                                         <input type="file" name="file" accept=".pdf">
                                                         <div class="main-button">
@@ -168,7 +168,7 @@
                                                 </div>
                                                 </td>
                                             </tr>
-                                            {{/examStudents}}
+                                            {{/exams}}
                                         </tbody>
                                     </table>
                                 </div>

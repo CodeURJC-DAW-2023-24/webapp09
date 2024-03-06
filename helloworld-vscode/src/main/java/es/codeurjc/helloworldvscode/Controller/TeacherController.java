@@ -522,7 +522,7 @@ public class TeacherController {
 		ExamStudent examStudent = examStudentService.getFile(examStudentId);
 
     	return ResponseEntity.ok()
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + examStudent.getNameStudent() + "\"")
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + examStudent.getNameStudent() + "." + examStudent.getType() +"\"")
         .body(examStudent.getData());
   	}
 

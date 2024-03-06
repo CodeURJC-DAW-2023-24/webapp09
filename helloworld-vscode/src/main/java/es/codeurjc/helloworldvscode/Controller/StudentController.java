@@ -63,11 +63,16 @@ public class StudentController {
         boolean isStudent = request.isUserInRole("STUDENT");
         if (isStudent) {
             Student student = studentService.getStudentByEmail(principal.getName());
-            modelAndView.addObject("user", student);
+            
             Subject subject = subjectService.getSubjectById(subjectId);
             List<ExamStudent> examStudents = student.getExamStudents();
             List<Forum> forums = subject.getForums();
-            modelAndView.addObject("exams", subject.getExams());
+            List<Exam> exams = examStudentService.getIncompleteExamsStudent(student,subject);
+
+            //show only the empty exams
+            
+            modelAndView.addObject("user", student);
+            modelAndView.addObject("exams", exams);
             modelAndView.addObject("subject", subject);
             modelAndView.addObject("student", student);
             modelAndView.addObject("examStudents", examStudents);
@@ -98,7 +103,7 @@ public class StudentController {
 		Exam exam = examService.getFile(examId);
 
     	return ResponseEntity.ok()
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + ".pdf"+"\"")
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + exam.getName() + "." + exam.getType() +"\"")
         .body(exam.getData());
   	}
     

@@ -2,6 +2,7 @@ package es.codeurjc.helloworldvscode.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,37 @@ public class ExamStudentService {
         return examStudentRepository.findAll().stream();
     }
 
-    public void createExamsStudent(Subject s, Exam exam){
+    public void createExamsStudent(Subject s, Exam exam) {
 
         ArrayList<Student> studentsList = studentRepository.findAllBySubjectsId(s.getId());
 
         ExamStudent examStudent = null;
 
-        for(Student student: studentsList){
+        for (Student student : studentsList) {
 
             examStudent = new ExamStudent(0, null, null, exam, student);
             examStudentRepository.save(examStudent);
         }
+
+    }
+
+    // return the incomplete examsStudent
+    public List<Exam> getIncompleteExamsStudent(Student student, Subject subject) {
+
+        List<Exam> exams = subject.getExams();
+        ArrayList<ExamStudent> examsStudent = examStudentRepository.findAllByStudentId(student.getId());
+
+        for (ExamStudent examStudent : examsStudent) {
+
+            if (exams.contains(examStudent.getExam())) {
+
+                if (examStudent.getData() != null) {
+                    exams.remove(examStudent.getExam());
+                }
+            }
+        }
+
+        return exams;
 
     }
 
