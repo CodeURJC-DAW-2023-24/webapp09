@@ -26,7 +26,8 @@ public class ExamStudentService {
 
     public ExamStudent store(MultipartFile file, Exam e, int note, Student s) throws IOException {
 
-        ExamStudent examStudent = new ExamStudent(note, file.getContentType(), file.getBytes(), e, s);
+        ExamStudent examStudent = examStudentRepository.findByStudentIdAndExamId(s.getId(), e.getId());
+        examStudent.setData(file.getBytes());
 
         return examStudentRepository.save(examStudent);
     }
@@ -48,7 +49,7 @@ public class ExamStudentService {
 
         for (Student student : studentsList) {
 
-            examStudent = new ExamStudent(0, null, null, exam, student);
+            examStudent = new ExamStudent(0, "pdf", null, exam, student);
             examStudentRepository.save(examStudent);
         }
 

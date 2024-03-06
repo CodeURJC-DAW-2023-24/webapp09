@@ -14,4 +14,5 @@ public interface ExamStudentRepository extends JpaRepository<ExamStudent, Long>{
     ArrayList<ExamStudent> findByExamId(Long examId);
     ArrayList<ExamStudent> findAllByExamId(Long subjectId);
     ArrayList<ExamStudent> findAllByStudentId(Long id);
+    ExamStudent findByStudentIdAndExamId(Long id, Long id2);
 }
