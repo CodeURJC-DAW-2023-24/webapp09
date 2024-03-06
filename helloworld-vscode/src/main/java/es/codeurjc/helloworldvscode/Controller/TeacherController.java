@@ -381,9 +381,6 @@ public class TeacherController {
 		Optional<Subject> s = subjectRepository.findById(subjectId);
 
 		if (s.isPresent()) {
-			System.out.println("------------------------------------------------------------------------------------");
-			System.out.println("------------------------------------------------------------------------------------");
-			System.out.println("------------------------------------------------------------------------------------");
 			examRepository.deleteById(examId);
 			
 			response.sendRedirect("/redirection/" +subjectId);
@@ -632,8 +629,11 @@ public class TeacherController {
 		Optional<Subject> s = subjectRepository.findById(subjectId);
 
 		if (s.isPresent()) {
+			Principal principal = request.getUserPrincipal();
+			Optional<Teacher> t = teacherRepository.findByEmail(principal.getName());
+			String name = t.get().getFirstName() + " " + t.get().getLastName();
 
-			Forum forum = new Forum("My comment", comment);
+			Forum forum = new Forum(name, comment);
 			forum.setSubject(s.get());
 
 			forumRepository.save(forum);
