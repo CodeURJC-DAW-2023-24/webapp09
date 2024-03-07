@@ -49,6 +49,8 @@ public class testDataInitializer {
                 Teacher t3 = new Teacher("Pepe", "Franco", "pfespania@gmail.com", "vivaespaña");
                 Teacher t2 = new Teacher("Belen", "Esteban", "salavame@gmail.com", "andreita");
 
+                Teacher t4 = new Teacher("Belen", "Esteban", "aaaaurjc@gmail.com", "aaaaurjc.09");
+
                 //////// ADMIN
                 Admin a1 = new Admin("ss", "Sandra", "ss@gmail.com", "ss");
                 Admin a2 = new Admin("dd", "Daniel", "dd@gmail.com", "dd");
@@ -208,11 +210,11 @@ public class testDataInitializer {
                 s20.getStudents().addAll(List.of());
 
                 // teachers IN subjects
-                s4.getTeachers().addAll(List.of(t1));
-                s5.getTeachers().addAll(List.of(t1));
-                s6.getTeachers().addAll(List.of(t1));
-                s1.getTeachers().addAll(List.of(t2));
-                s20.getTeachers().addAll(List.of(t3));
+                s4.getTeachers().addAll(List.of(t1,t4));
+                s5.getTeachers().addAll(List.of(t1,t4));
+                s6.getTeachers().addAll(List.of(t1,t4));
+                s1.getTeachers().addAll(List.of(t2,t4));
+                s20.getTeachers().addAll(List.of(t3,t4));
 
                 // forums IN subjects
                 s4.getForums().addAll(List.of(f1, f2, f3, f4));
@@ -255,7 +257,7 @@ public class testDataInitializer {
 
 
         private byte[] getFile() throws IOException{
-                String filePath = "C:\\Users\\Usuario\\Documents\\GitHub\\webapp09\\helloworld-vscode\\src\\main\\java\\es\\codeurjc\\helloworldvscode\\blanco.pdf";
+                String filePath = "C:\\Users\\amand\\Documents\\GitHub\\webapp09\\helloworld-vscode\\src\\main\\java\\es\\codeurjc\\helloworldvscode\\testDataInitializer.java";
                 File pdfFile = new File(filePath);
 
                 byte[] fileBytes = Files.readAllBytes(pdfFile.toPath());
