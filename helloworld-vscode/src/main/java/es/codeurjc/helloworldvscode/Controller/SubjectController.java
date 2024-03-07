@@ -1,12 +1,9 @@
 package es.codeurjc.helloworldvscode.Controller;
 
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +12,6 @@ import javax.swing.JFrame;
 import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.ForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.rsocket.server.RSocketServer.Transport;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -24,27 +19,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.cj.Session;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 
 import es.codeurjc.helloworldvscode.repository.AdminRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.repository.UserRepository;
 import es.codeurjc.helloworldvscode.services.AdminService;
+import es.codeurjc.helloworldvscode.services.MailService;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import es.codeurjc.helloworldvscode.services.SubjectService;
 import es.codeurjc.helloworldvscode.services.TeacherService;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
 
 @RestController
-public class SubjectController extends  JFrame {
+public class SubjectController{
 
     @Autowired
     SubjectRepository subjectsList;
@@ -66,9 +56,10 @@ public class SubjectController extends  JFrame {
     @Autowired
     AdminService adminService;
 
+    @Autowired 
+    MailService mailService;
 
-    //Email
-    private JButton sendButton;
+
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -145,18 +136,12 @@ public class SubjectController extends  JFrame {
     @PostMapping("/subject/{id}/enroll")
     @ResponseBody
     public ResponseEntity<String> enrollInSubject(@PathVariable Long id, Principal principal) {
-        //String comment="The student wants to enroll this subject: "+subjectService.getSubjectById(id).getName();
-        //Forum forum = new Forum(principal.getName(), comment, null); // Asume que tienes un constructor adecuado
-        //forumRepository.save(forum);
 
         Student student = studentService.getStudentByEmail(principal.getName());
+        Subject subject = subjectService.getSubjectById(id);
+        Teacher teacher = subject.getTeachers().get(0);
 
-        
-
-        //send email
-        
-
-
+        mailService.enviarCorreo(teacher.getEmail(), student, subject);
         
         return ResponseEntity.ok("Enrolled successfully");
     }

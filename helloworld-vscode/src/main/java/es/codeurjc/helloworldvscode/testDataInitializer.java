@@ -210,11 +210,27 @@ public class testDataInitializer {
                 s20.getStudents().addAll(List.of());
 
                 // teachers IN subjects
-                s4.getTeachers().addAll(List.of(t1,t4));
-                s5.getTeachers().addAll(List.of(t1,t4));
-                s6.getTeachers().addAll(List.of(t1,t4));
-                s1.getTeachers().addAll(List.of(t2,t4));
-                s20.getTeachers().addAll(List.of(t3,t4));
+                s2.getTeachers().addAll(List.of(t4));
+                s3.getTeachers().addAll(List.of(t4));
+                s7.getTeachers().addAll(List.of(t4));
+                s8.getTeachers().addAll(List.of(t4));
+                s9.getTeachers().addAll(List.of(t4));
+                s10.getTeachers().addAll(List.of(t4));
+                s11.getTeachers().addAll(List.of(t4));
+                s12.getTeachers().addAll(List.of(t4));
+                s13.getTeachers().addAll(List.of(t4));
+                s14.getTeachers().addAll(List.of(t4));
+                s15.getTeachers().addAll(List.of(t4));
+                s16.getTeachers().addAll(List.of(t4));
+                s17.getTeachers().addAll(List.of(t4));
+                s18.getTeachers().addAll(List.of(t4));
+                s19.getTeachers().addAll(List.of(t4));
+
+                s1.getTeachers().addAll(List.of(t4,t2));
+                s4.getTeachers().addAll(List.of(t4,t1));
+                s5.getTeachers().addAll(List.of(t4,t1));
+                s6.getTeachers().addAll(List.of(t4,t1));
+                s20.getTeachers().addAll(List.of(t4,t3));
 
                 // forums IN subjects
                 s4.getForums().addAll(List.of(f1, f2, f3, f4));
@@ -243,7 +259,7 @@ public class testDataInitializer {
 
                 // Guardar todos los datos en listas
                 studentRepository.saveAll(List.of(st1, st2, st3, st4, st5, st6, st7, st8, st9, st10));
-                teacherRepository.saveAll(List.of(t1, t2, t3));
+                teacherRepository.saveAll(List.of(t1, t2, t3, t4));
                 subjectRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16,
                                 s17, s18, s19, s20));
                 forumRepository.saveAll(List.of(f1, f2, f3, f4));
