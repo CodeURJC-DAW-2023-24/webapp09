@@ -243,4 +243,42 @@ public class AdminController {
 		}
 	}
 
+	@GetMapping("/add-subject")
+	public ModelAndView createSubject() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("add_subject");
+
+		return modelAndView;
+	}
+
+	@PostMapping("/add-subject")
+	public void createSubject( 
+		HttpServletResponse response,
+		@RequestParam(required = false) String nameSubject,
+		@RequestParam(required = false) String gender,
+		@RequestParam(required = false) String allInfo,
+		@RequestParam(required = false) String description,
+		@RequestParam(required = false) String teacherEmail) throws IOException {
+
+		//Subject s = subjectRepository.findByName(nameSubject).get();
+		boolean a = subjectService.isNameUnique(nameSubject);
+		if (subjectService.isNameUnique(nameSubject)){
+			Subject subject = new Subject(nameSubject,gender,allInfo,description);
+	
+			Optional<Teacher> existingTeacher = teacherRepository.findByEmail(teacherEmail);
+			
+			Teacher teacher = existingTeacher.get();
+	
+			subject.setOneTeacher(teacher);
+			subjectRepository.save(subject);
+	
+			
+			response.sendRedirect("/");
+			
+		}else{// Create new subject
+			response.sendRedirect("/error");	
+		}
+		
+	}
+
 }

@@ -148,4 +148,9 @@ public class SubjectService {
         return recommendedSubjects.stream().limit(5).collect(Collectors.toList());
     }
 
+    public boolean isNameUnique(String name){
+        return subjectRepository.findByName(name).isEmpty();
+
+    }
+
 }
