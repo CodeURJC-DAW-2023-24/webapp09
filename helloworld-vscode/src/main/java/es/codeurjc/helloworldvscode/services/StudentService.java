@@ -15,6 +15,19 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    public boolean emailRepeat(String email){
+
+        List<Student> students = studentRepository.findAll();
+        
+        for(Student student: students){
+            if(student.getEmail().equals(email)){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
     public List<Subject> findSubjectsByStudentName(String name) {
         Optional<Student> student = studentRepository.findByFirstName(name);
 
