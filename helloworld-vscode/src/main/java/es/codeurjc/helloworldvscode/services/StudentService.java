@@ -49,6 +49,7 @@ public class StudentService {
     }
 
     public List<Subject> findSubjectsByStudentId(Long studentId) {
+        @SuppressWarnings("null")
         Optional<Student> student = studentRepository.findById(studentId);
         if (student.isPresent()) {
             return new ArrayList<>(student.get().getSubjects());
@@ -71,6 +72,7 @@ public class StudentService {
                 .orElseThrow(() -> new RuntimeException("Student not found with name " + email));
     }
 
+    @SuppressWarnings("null")
     public Student getStudentById(Long studentId) {
         // Retorna el estudiante o lanza una excepción si no se encuentra
         return studentRepository.findById(studentId)

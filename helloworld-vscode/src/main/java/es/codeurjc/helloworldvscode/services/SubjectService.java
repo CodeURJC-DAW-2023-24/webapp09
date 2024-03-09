@@ -3,15 +3,11 @@ package es.codeurjc.helloworldvscode.services;
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.Entitys.Subject;
@@ -49,6 +45,7 @@ public class SubjectService {
     }
 
     public List<Subject> getSubjects(Pageable pageable) {
+        @SuppressWarnings("null")
         Page<Subject> subjectPage = subjectRepository.findAll(pageable);
         return subjectPage.getContent();
     }

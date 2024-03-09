@@ -67,23 +67,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="blog-post">
-                                    <h2>Presentación de la asignatura</h2>
-                                    <p>Estimado/a alumno/a,</p>
-                                    <p>te doy la bienvenida a la asignatura de Estructuras de Datos, comprendida dentro
-                                        del Grado en Ingeniería del Software en la que estás matriculado/a.</p>
-                                    <p>En la guía docente adjunta en este apartado encontrarás toda la información
-                                        inicial necesaria para su seguimiento, así como las instrucciones específicas
-                                        para su desarrollo, la planificación temporal, aspectos relativos a la
-                                        evaluación o los objetivos.</p>
-                                    <p>Es conveniente que leas la guía docente antes de comenzar a desarrollar la
-                                        asignatura. Una vez concluyas la lectura, te sugerimos que revises el correo con
-                                        el objeto de comprobar si ya dispones de alguna comunicación mía. Por otro lado,
-                                        si una vez leída toda la información que te adjuno en este apartado, tienes
-                                        alguna duda concreta, te sugiero que me la consultes a través del bloque de
-                                        "Correo" que tienes disponible en la parte izquierda de la pantalla o bien
-                                        enviándome un correo electrónico, para que pueda ayudarte a comenzar tu
-                                        formación de la manera más adecuada.
-                                    </p>
+                                    <h2>Presentation</h2>
+                                    <p>{{description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -190,15 +175,24 @@
                         <div class="blog-post">
                             <!-- Sección de Comentarios -->
                             {{#forums}}
-                            <hr>
-                            <div class="comentario">
-                                <div class="autor">{{username}}</div>
-                                <div class="fecha">{{date}}</div>
-                                <div class="texto">
-                                    <p>{{comment}}</p>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h6>{{username}}</h6>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p>{{date}}</p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <p>{{comment}}</p>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
+                            <br>
                             {{/forums}}
                             <!-- Formulario para agregar nuevos comentarios -->
 

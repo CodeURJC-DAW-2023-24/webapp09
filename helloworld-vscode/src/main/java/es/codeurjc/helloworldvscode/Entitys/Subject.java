@@ -57,6 +57,7 @@ public class Subject {
     public Subject() {
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Subject(String name, String description, String allInfo, String gender) {
         this.name = name;
         this.description = description;
@@ -69,6 +70,7 @@ public class Subject {
         this.teachers= new ArrayList();
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Subject(String name, String description, String allInfo, String gender, String banner) {
         this.name = name;
         this.description = description;

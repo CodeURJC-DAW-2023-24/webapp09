@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
@@ -25,8 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
 import es.codeurjc.helloworldvscode.Entitys.Student;
-import es.codeurjc.helloworldvscode.Entitys.Subject;
-import es.codeurjc.helloworldvscode.repository.StudentRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.services.StudentService;
 import jakarta.servlet.http.HttpServletRequest;

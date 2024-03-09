@@ -1,9 +1,7 @@
 package es.codeurjc.helloworldvscode.Entitys;
 
 import java.sql.Blob;
-import java.util.ArrayList;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 @Entity

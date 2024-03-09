@@ -1,6 +1,5 @@
 package es.codeurjc.helloworldvscode.repository;
 
-import es.codeurjc.helloworldvscode.Entitys.Exam;
 import es.codeurjc.helloworldvscode.Entitys.ExamStudent;
 
 import java.util.ArrayList;

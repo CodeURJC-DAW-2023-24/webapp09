@@ -6,9 +6,7 @@ import es.codeurjc.helloworldvscode.repository.ForumRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
 import es.codeurjc.helloworldvscode.services.*;
 import jakarta.servlet.http.HttpServletRequest;
-import es.codeurjc.helloworldvscode.repository.StudentRepository;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +67,7 @@ public class StudentController {
             List<Exam> exams = examStudentService.getIncompleteExamsStudent(student,subject);
 
             //show only the empty exams
-            
+            modelAndView.addObject("description", subject.getDescription());
             modelAndView.addObject("user", student);
             modelAndView.addObject("exams", exams);
             modelAndView.addObject("subject", subject);
@@ -88,11 +85,7 @@ public class StudentController {
         Subject subject = subjectService.getSubjectById(subjectId);
         Principal principal = request.getUserPrincipal();
 
-
-        Forum forum=new Forum(principal.getName(), comment, subject);
-        subject.getForums().add(forum);
-
-        subjectRepository.save(subject);
+        Forum forum = new Forum(principal.getName(), comment, subject);
         forumRepository.save(forum);
 
         return ("redirect:/subject_onesubj_student/"+subject.getId());
@@ -115,10 +108,6 @@ public class StudentController {
 
 
         examStudentService.store(file, exam.get(), 0, student);
-
-        ///////////////////////////////////////////////////////////////////////////////////
-        //Retrieve the exam of the student from whom the file is being uploaded and save it
-        ///////////////////////////////////////////////////////////////////////////////////
         
         return ("redirect:/subject_onesubj_student/"+subjectId);
     }
