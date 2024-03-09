@@ -273,7 +273,7 @@ public class testDataInitializer {
 
 
         private byte[] getFile() throws IOException{
-                String filePath = "C:\\Users\\amand\\Documents\\GitHub\\webapp09\\helloworld-vscode\\src\\main\\java\\es\\codeurjc\\helloworldvscode\\testDataInitializer.java";
+                String filePath = "C:\\Users\\paula\\OneDrive - Universidad Rey Juan Carlos\\UNI\\4º AÑO\\2º CUATRI\\DAW\\webapp09\\helloworld-vscode\\src\\main\\java\\es\\codeurjc\\helloworldvscode\\blanco.pdf";;
                 File pdfFile = new File(filePath);
 
                 byte[] fileBytes = Files.readAllBytes(pdfFile.toPath());

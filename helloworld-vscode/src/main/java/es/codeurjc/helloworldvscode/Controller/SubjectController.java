@@ -89,17 +89,21 @@ public class SubjectController{
 
             if (user.get().getRoles().contains("TEACHER")) {
                 modelAndView.addObject("isStudent", false);
+                modelAndView.addObject("isNotAdmin", true);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else if(user.get().getRoles().contains("STUDENT")){
                 modelAndView.addObject("isStudent", true);
+                modelAndView.addObject("isNotAdmin", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+
             } else if (user.get().getRoles().contains("ADMIN")){
                 modelAndView.setViewName("subjects_admin");
+                modelAndView.addObject("isNotAdmin", false);
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
