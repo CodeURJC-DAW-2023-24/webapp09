@@ -15,16 +15,22 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -168,6 +174,8 @@ public class UserController {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            boolean hasImage=!(user.getProfilePicture()==null);
+            model.addAttribute("hasImage", hasImage);
 
             String firstName = user.getFirstName();
             model.addAttribute("firstName", firstName);
@@ -177,6 +185,7 @@ public class UserController {
 
             String email = user.getEmail();
             model.addAttribute("email", email);
+
         }
 
         ModelAndView modelAndView = new ModelAndView("profile");
@@ -234,17 +243,26 @@ public class UserController {
             @RequestParam("firstName") Optional<String> firstName,
             @RequestParam("lastName") Optional<String> lastName,
             @RequestParam("email") Optional<String> email,
-            @RequestParam("password") Optional<String> password) throws ServletException {
+            @RequestParam("password") Optional<String> password,
+            @RequestParam("file") Optional <MultipartFile> file) throws ServletException, IOException {
 
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userRepository.findByEmail(principal.getName());
-        System.out.println("COPIARPEGAR");
         if (user.isPresent()) {
             User currentUser = user.get();
             currentUser.setFirstName(firstName.orElse(currentUser.getFirstName()));
             currentUser.setLastName(lastName.orElse(currentUser.getLastName()));
             currentUser.setEmail(email.orElse(currentUser.getEmail()));
             currentUser.setPassword(password.orElse(currentUser.getPassword()));
+            if (file.isPresent()){
+                try{
+                    byte[] foto =file.get().getBytes();
+                    currentUser.setProfilePicture(foto);
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
             userRepository.save(currentUser);
 
             List<GrantedAuthority> authorities = currentUser.getRoles().stream()
@@ -257,4 +275,40 @@ public class UserController {
         }
         return "redirect:/profile";
     }
+
+    @GetMapping("/user/photo")
+    public ResponseEntity<byte[]> getCurrentUserPhoto(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            Optional<User> userOptional = userRepository.findByEmail(principal.getName());
+            if (userOptional.isPresent()) {
+                byte[] imageBytes = userOptional.get().getProfilePicture();
+                if (imageBytes != null && imageBytes.length > 0) {
+                    return ResponseEntity
+                            .ok()
+                            .contentType(MediaType.IMAGE_JPEG) // Ajusta según el formato de tu imagen
+                            .body(imageBytes);
+                }
+            }
+        }
+        // Si el usuario no tiene foto de perfil o no está logueado, retorna la imagen predeterminada
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(loadDefaultImage());
+    }
+
+
+    private byte[] loadDefaultImage() {
+        try {
+            // Asegúrate de que el path a tu imagen predeterminada sea correcto
+            Path path = Paths.get("src\\main\\resources\\static\\images\\imagenFotoPerfil.jpg");
+            return Files.readAllBytes(path);
+        } catch (IOException e) {
+            // Log the exception and consider an appropriate fallback
+            e.printStackTrace();
+            return new byte[0];
+        }
+    }
+
 }

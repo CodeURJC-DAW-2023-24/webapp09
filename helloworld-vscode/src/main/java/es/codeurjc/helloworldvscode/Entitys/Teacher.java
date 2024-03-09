@@ -20,7 +20,7 @@ public class Teacher extends User{
     // Constructors
     public Teacher(){}
 
-    public Teacher(String firstName, String lastName, String email, String password, Blob profile) {
+    public Teacher(String firstName, String lastName, String email, String password, byte[] profile) {
         super(firstName, lastName, email, password, profile, rol);
         this.subjects = new ArrayList<>();
     }

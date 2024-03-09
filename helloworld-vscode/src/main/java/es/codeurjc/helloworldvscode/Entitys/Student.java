@@ -25,7 +25,7 @@ public class Student extends User{
     // Constructors
     public Student() {}
 
-    public Student(String firstName, String lastName, String email, String password, Blob profile) {
+    public Student(String firstName, String lastName, String email, String password, byte[] profile) {
         super(firstName, lastName, email, password, profile, "STUDENT");
         this.subjects = new ArrayList<>();
         this.examStudents = new ArrayList<>();

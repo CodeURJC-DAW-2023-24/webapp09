@@ -31,13 +31,24 @@
         <!-- Sección de datos personales -->
         <!-- Sección de datos personales con botón de editar perfil -->
         <div class="card">
-
+          {{^hasImage}}
           <div class="container mt-5">
             <div class="row">
               <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
                 alt="Imagen de Perfil" style="width: 100px; height: 100px">
             </div>
           </div>
+          {{/hasImage}}
+          {{#hasImage}}
+          <div class="container mt-5">
+            <div class="row">
+              <img src="/user/photo" class="card-img-top rounded-circle img-fluid mx-auto"
+                   alt="Imagen de Perfil" style="width: 100px; height: 100px">
+            </div>
+          </div>
+          {{/hasImage}}
+
+
 
           <div class="container mt-5">
             <div class="card-body">

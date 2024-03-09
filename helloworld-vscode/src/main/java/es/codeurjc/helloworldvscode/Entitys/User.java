@@ -22,9 +22,9 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column
+    @Column(length = 1000000)
     @Lob
-    private Blob profilePicture;
+    private byte[] profilePicture;
 
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -32,7 +32,7 @@ public class User {
     public User(){
     }
 
-    public User(String firstName, String lastName, String email, String password, Blob profile, String... role) {
+    public User(String firstName, String lastName, String email, String password, byte[] profile, String... role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -87,10 +87,10 @@ public class User {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }
-    public Blob getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
-    public void setProfilePicture(Blob profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
     public Long getId() {
