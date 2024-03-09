@@ -29,6 +29,7 @@ public class testDataInitializer {
         @Autowired
         private ForumRepository forumRepository;
 
+        @SuppressWarnings("null")
         @PostConstruct
         public void init() throws Exception {
 
@@ -267,12 +268,12 @@ public class testDataInitializer {
                 examStudentRepository.saveAll(List.of(es1, es2, es3, es4, es5, es6));
                 adminRepository.saveAll(List.of(a1, a2));
 
-                //////// TEACHER
+
         }
 
 
         private byte[] getFile() throws IOException{
-                String filePath = "helloworld-vscode\\src\\main\\java\\es\\codeurjc\\helloworldvscode\\blanco.pdf";
+                String filePath = "helloworld-vscode\\src\\main\\blanco.pdf";;
                 File pdfFile = new File(filePath);
 
                 byte[] fileBytes = Files.readAllBytes(pdfFile.toPath());

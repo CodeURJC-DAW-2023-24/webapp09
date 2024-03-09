@@ -258,8 +258,6 @@ public class AdminController {
 		@RequestParam(required = false) String description,
 		@RequestParam(required = false) String teacherEmail) throws IOException {
 
-		//Subject s = subjectRepository.findByName(nameSubject).get();
-		boolean a = subjectService.isNameUnique(nameSubject);
 		if (subjectService.isNameUnique(nameSubject)){
 			Subject subject = new Subject(nameSubject,gender,allInfo,description);
 	

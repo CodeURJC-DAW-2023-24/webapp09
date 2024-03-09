@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.helloworldvscode.Entitys.Admin;
-import es.codeurjc.helloworldvscode.Entitys.Student;
 import es.codeurjc.helloworldvscode.repository.AdminRepository;
 
 @Service

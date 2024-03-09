@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CSRFHandlerConfiguration implements WebMvcConfigurer {
 
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+	public void addInterceptors(@SuppressWarnings("null") InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
 }
@@ -21,8 +21,8 @@ public class CSRFHandlerConfiguration implements WebMvcConfigurer {
 class CSRFHandlerInterceptor implements HandlerInterceptor {
 
 	@Override
-	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-			final ModelAndView modelAndView) throws Exception {
+	public void postHandle(@SuppressWarnings("null") final HttpServletRequest request, @SuppressWarnings("null") final HttpServletResponse response, @SuppressWarnings("null") final Object handler,
+			@SuppressWarnings("null") final ModelAndView modelAndView) throws Exception {
 
 		if (modelAndView != null) {
 

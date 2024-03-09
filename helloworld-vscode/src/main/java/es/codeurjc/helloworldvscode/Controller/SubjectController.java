@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-
 import es.codeurjc.helloworldvscode.Entitys.*;
 import es.codeurjc.helloworldvscode.repository.ForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import es.codeurjc.helloworldvscode.repository.AdminRepository;
 import es.codeurjc.helloworldvscode.repository.SubjectRepository;
@@ -89,17 +84,21 @@ public class SubjectController{
 
             if (user.get().getRoles().contains("TEACHER")) {
                 modelAndView.addObject("isStudent", false);
+                modelAndView.addObject("isNotAdmin", true);
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
 
             } else if(user.get().getRoles().contains("STUDENT")){
                 modelAndView.addObject("isStudent", true);
+                modelAndView.addObject("isNotAdmin", true);
                 Student student = studentService.getStudentByEmail(principal.getName());
                 List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+
             } else if (user.get().getRoles().contains("ADMIN")){
                 modelAndView.setViewName("subjects_admin");
+                modelAndView.addObject("isNotAdmin", false);
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);

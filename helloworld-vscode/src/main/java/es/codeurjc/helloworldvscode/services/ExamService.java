@@ -35,6 +35,7 @@ public class ExamService {
 
     public List<ExamStudent> findExamStudentsByStudentAndSubject(Long studentId, Long subjectId) {
         // Obtener el estudiante y la asignatura por sus IDs
+        @SuppressWarnings("null")
         Student student = studentRepository.findById(studentId).orElse(null);
         Subject subject = subjectRepository.findById(subjectId).orElse(null);
 

@@ -444,7 +444,6 @@ public class TeacherController {
 	//////////////////
 
 	//	SHOW THE STUDENT EXAMS //
-	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/type-exams/{examId}/correct-exams")
 	public ModelAndView showStudentExam(@PathVariable Long subjectId, @PathVariable Long examId) {
 		System.out.println("------------------------------------------------");
