@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.codeurjc.backend.Entitys.*;
+import es.codeurjc.backend.model.*;
 import es.codeurjc.backend.repository.ExamStudentRepository;
 import es.codeurjc.backend.repository.ForumRepository;
 import es.codeurjc.backend.repository.SubjectRepository;

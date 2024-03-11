@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.codeurjc.backend.Entitys.Forum;
+import es.codeurjc.backend.model.Forum;
 
 
 

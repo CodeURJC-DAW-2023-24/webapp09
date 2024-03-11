@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.codeurjc.backend.Entitys.Subject;
-import es.codeurjc.backend.Entitys.Teacher;
+import es.codeurjc.backend.model.Subject;
+import es.codeurjc.backend.model.Teacher;
 import es.codeurjc.backend.repository.SubjectRepository;
 import es.codeurjc.backend.repository.TeacherRepository;
 import es.codeurjc.backend.services.SubjectService;

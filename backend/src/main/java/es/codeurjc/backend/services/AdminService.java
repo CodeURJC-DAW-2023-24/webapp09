@@ -3,7 +3,7 @@ package es.codeurjc.backend.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.backend.Entitys.Admin;
+import es.codeurjc.backend.model.Admin;
 import es.codeurjc.backend.repository.AdminRepository;
 
 @Service

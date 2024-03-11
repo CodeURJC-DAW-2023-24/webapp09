@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.codeurjc.backend.Entitys.Exam;
-import es.codeurjc.backend.Entitys.ExamStudent;
-import es.codeurjc.backend.Entitys.Student;
-import es.codeurjc.backend.Entitys.Subject;
+import es.codeurjc.backend.model.Exam;
+import es.codeurjc.backend.model.ExamStudent;
+import es.codeurjc.backend.model.Student;
+import es.codeurjc.backend.model.Subject;
 import es.codeurjc.backend.repository.ExamRepository;
 import es.codeurjc.backend.repository.ExamStudentRepository;
 import es.codeurjc.backend.repository.StudentRepository;

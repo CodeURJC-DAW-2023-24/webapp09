@@ -29,6 +29,16 @@
             "projectName": "webapp09",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HelloworldVscodeApplication<webapp09>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "es.codeurjc.backend.HelloworldVscodeApplication",
+            "projectName": "webapp09",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

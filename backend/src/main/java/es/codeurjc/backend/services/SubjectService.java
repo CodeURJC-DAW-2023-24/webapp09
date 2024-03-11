@@ -9,9 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.backend.Entitys.Student;
-import es.codeurjc.backend.Entitys.Subject;
-import es.codeurjc.backend.Entitys.User;
+import es.codeurjc.backend.model.Student;
+import es.codeurjc.backend.model.Subject;
+import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.SubjectRepository;
 import es.codeurjc.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;

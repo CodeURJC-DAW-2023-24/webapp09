@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.backend.Entitys.Subject;
-import es.codeurjc.backend.Entitys.Teacher;
+import es.codeurjc.backend.model.Subject;
+import es.codeurjc.backend.model.Teacher;
 import es.codeurjc.backend.repository.TeacherRepository;
 
 @Service

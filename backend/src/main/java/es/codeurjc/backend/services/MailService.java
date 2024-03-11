@@ -4,8 +4,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.backend.Entitys.Student;
-import es.codeurjc.backend.Entitys.Subject;
+import es.codeurjc.backend.model.Student;
+import es.codeurjc.backend.model.Subject;
 
 @Service
 public class MailService {

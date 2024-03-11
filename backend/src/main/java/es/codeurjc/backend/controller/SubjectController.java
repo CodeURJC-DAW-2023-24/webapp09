@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.codeurjc.backend.Entitys.*;
+import es.codeurjc.backend.model.*;
 import es.codeurjc.backend.repository.AdminRepository;
 import es.codeurjc.backend.repository.ForumRepository;
 import es.codeurjc.backend.repository.SubjectRepository;

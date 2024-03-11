@@ -20,8 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import es.codeurjc.backend.Entitys.ExamStudent;
-import es.codeurjc.backend.Entitys.Student;
+import es.codeurjc.backend.model.ExamStudent;
+import es.codeurjc.backend.model.Student;
 import es.codeurjc.backend.repository.SubjectRepository;
 import es.codeurjc.backend.services.StudentService;
 import jakarta.servlet.http.HttpServletRequest;

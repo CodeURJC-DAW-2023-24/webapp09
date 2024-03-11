@@ -4,8 +4,8 @@ package es.codeurjc.backend.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.backend.Entitys.Student;
-import es.codeurjc.backend.Entitys.Subject;
+import es.codeurjc.backend.model.Student;
+import es.codeurjc.backend.model.Subject;
 import es.codeurjc.backend.repository.StudentRepository;
 
 import java.util.List;

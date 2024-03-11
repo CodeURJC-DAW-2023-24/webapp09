@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.codeurjc.backend.Entitys.Teacher;
+import es.codeurjc.backend.model.Teacher;
 
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long>{

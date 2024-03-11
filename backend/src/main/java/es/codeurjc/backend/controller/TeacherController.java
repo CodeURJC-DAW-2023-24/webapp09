@@ -33,12 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.codeurjc.backend.Entitys.Exam;
-import es.codeurjc.backend.Entitys.ExamStudent;
-import es.codeurjc.backend.Entitys.Forum;
-import es.codeurjc.backend.Entitys.Student;
-import es.codeurjc.backend.Entitys.Subject;
-import es.codeurjc.backend.Entitys.Teacher;
+import es.codeurjc.backend.model.Exam;
+import es.codeurjc.backend.model.ExamStudent;
+import es.codeurjc.backend.model.Forum;
+import es.codeurjc.backend.model.Student;
+import es.codeurjc.backend.model.Subject;
+import es.codeurjc.backend.model.Teacher;
 import es.codeurjc.backend.repository.ExamRepository;
 import es.codeurjc.backend.repository.ExamStudentRepository;
 import es.codeurjc.backend.repository.ForumRepository;

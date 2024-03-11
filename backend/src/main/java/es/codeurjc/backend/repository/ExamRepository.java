@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.codeurjc.backend.Entitys.Exam;
+import es.codeurjc.backend.model.Exam;
 
 
 
