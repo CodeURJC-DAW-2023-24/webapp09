@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+    {{>header}}
+
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="/images/imagenFotoPerfil.jpg" class="card-img-top rounded-circle img-fluid mx-auto"
+                            alt="Imagen de Perfil" style="width: 100px; height: 100px">
+                        <br></br>
+                        <div class="text-content">
+                            <h2>Name</h2>
+                            <br></br>
+                            <h4>{{name}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <br></br>
+
+    <section>
+        <div class="row">
+            <div class="container">
+
+
+                <h4>Presentation</h4>
+                </br>
+
+                <form id="signupForm" action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <p>Description:</p>
+                            <textarea name="description" class="form-control" id="description"
+                                rows="5">{{description}}</textarea>
+                        </div>
+
+                    </div>
+
+                    </br>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <input type="submit" value="Update" />
+                            </div>
+                            <input type="hidden" name="_csrf" value="{{token}}">
+                        </div>
+                    </div>
+                </form>
+
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+
+                <h4>Information</h4>
+                </br>
+
+                <form id="signupForm" action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <p>Information:</p>
+                            <textarea name="allInfo" class="form-control" id="allInfo" rows="5">{{allInfo}}</textarea>
+                        </div>
+
+                    </div>
+
+                    </br>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <input type="submit" value="Update" />
+                            </div>
+                            <input type="hidden" name="_csrf" value="{{token}}">
+                        </div>
+                    </div>
+                </form>
+
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+        </div>
+    </section>
+
+    <section id="students">
+        <div class="container">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2 text-right">
+                    <div class="main-button">
+                        <a class="nav-link"
+                            href="/{{rol}}/subject/{{subjectId}}/add-{{user}}?addorcreate=notnew&info=true">Add
+                            {{user}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 centered-div">
+                    <h4>Teachers</h4>
+                </div>
+            </div>
+
+            </br>
+            </br>
+
+            <div class="row">
+                <div class="col-lg-12 centered-div">
+                    <!--STUDENTS-->
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#teachers}}
+                                <tr>
+                                    <td>{{firstName}}</td>
+                                    <td>{{lastName}}</td>
+                                    <td>
+                                        <div class="col-2">
+                                            <div class="main-button">
+                                                <a class="nav-link"
+                                                    href="/admins/subject/{{subjectId}}/general-information/delete?teacherId={{id}}">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                <tr>
+                                    {{/teachers}}
+                            </tbody>
+                        </table>
+                    </div>
+                    </br>
+                    </br>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    {{>footer}}
+
+</body>
+
+</html>

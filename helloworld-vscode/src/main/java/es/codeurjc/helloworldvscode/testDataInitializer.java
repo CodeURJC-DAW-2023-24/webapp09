@@ -273,7 +273,11 @@ public class testDataInitializer {
 
 
         private byte[] getFile() throws IOException{
+<<<<<<< HEAD
                 String filePath = "D:\\DESCARGAS\\blanco.pdf";;
+=======
+                String filePath = "helloworld-vscode\\src\\main\\blanco.pdf";;
+>>>>>>> fix
                 File pdfFile = new File(filePath);
 
                 byte[] fileBytes = Files.readAllBytes(pdfFile.toPath());
