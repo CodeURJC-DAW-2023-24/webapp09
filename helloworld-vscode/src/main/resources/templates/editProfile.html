@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+    {{>header}}
+
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-content">
+                            <h2>PROFILE</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Banner Ends Here -->
+
+
+
+    <!-- ########## Page Content ########## -->
+    <section class="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="down-contact">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="sidebar-item contact-form">
+
+                                    <div class="sidebar-heading">
+                                        <h2>Edit Profile</h2>
+                                    </div>
+                                    <!-- FORM -->
+                                    <div class="content">
+                                        <form id="editProfile" action="/editProfile" method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="content">
+                                                    <div>
+                                                        <label for="firstName">First Name:</label>
+                                                        <input type="text" id="firstName" name="firstName" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="lastName">Last Name:</label>
+                                                        <input type="text" id="lastName" name="lastName" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="email">Email:</label>
+                                                        <input type="email" id="email" name="email" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="confirmEmail">Confirm Email:</label>
+                                                        <input type="email" id="confirmEmail" name="confirmEmail" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="password">Password:</label>
+                                                        <input type="password" id="password" name="password" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="confirmPassword">Confirm Password:</label>
+                                                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="profilePicture">Profile Picture:</label>
+                                                        <input type="file" id="profilePicture" name="file" accept="image/*">
+                                                    </div>
+                                                    <div>
+                                                        <input type="submit" value="Confirm Changes">
+                                                        <input type="hidden" name="_csrf" value="{{token}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{>footer}}
+
+</body>
+
+</html>

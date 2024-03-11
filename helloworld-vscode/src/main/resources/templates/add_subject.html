@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+{{>head}}
+
+<body>
+
+  {{>header}}
+
+  <!-- Page Content -->
+  <!-- Banner Starts Here -->
+  <div class="heading-page header-text">
+    <section class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-content">
+              <h2>New Subject</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  </br>
+
+  <section class="contact-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="down-contact">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="sidebar-item contact-form">
+                  <div class="sidebar-heading">
+                    <h2>Complete the following information</h2>
+                  </div>
+
+                  <!-- FORM -->
+                  <div class="content">
+                    <form id="createSubject" method="post" >
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                          <fieldset>
+                            <input name="nameSubject" type="text" id="nameSubject" placeholder="Name">
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <fieldset>
+                              <input name="gender" type="text" id="gender" placeholder="Gender">
+                            </fieldset>
+                          </div>
+
+                          <div class="col-md-6 col-sm-12">
+                            <fieldset>
+                              <input name="allInfo" type="text" id="allInfo" placeholder="AllInfo">
+                            </fieldset>
+                          </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <fieldset>
+                            <input type="text" id="description" name="description"  placeholder="Description"/>
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <fieldset>
+                              <input type="text" id="teacherEmail" name="teacherEmail"  placeholder="Teacher Email"/>
+                            </fieldset>
+                          </div>
+
+                        <div class="col-lg-12">
+                          <fieldset>
+                            <button type="submit" id="signup-submit" class="main-button">Save</button>
+                            <input type="hidden" name="_csrf" value="{{token}}">
+                          </fieldset>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{>footer}}
+
+</body>
+
+</html>
