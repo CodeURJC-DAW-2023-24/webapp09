@@ -22,17 +22,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.codeurjc.backend.model.ExamStudent;
 import es.codeurjc.backend.model.Student;
-import es.codeurjc.backend.repository.SubjectRepository;
 import es.codeurjc.backend.services.StudentService;
+import es.codeurjc.backend.services.SubjectService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ChartController {
 
     @Autowired
-    StudentService studentRepository;
+    SubjectService subjectService;
     @Autowired
-    SubjectRepository subjectsList;
+    StudentService studentService;
+
 
     @GetMapping("/chart/exams")
     public ResponseEntity<byte[]> generateChart(HttpServletRequest request) {
@@ -46,7 +47,7 @@ public class ChartController {
 
     private byte[] createChartImage(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-        Student student = studentRepository.getStudentByEmail(principal.getName());
+        Student student = studentService.getStudentByEmail(principal.getName());
         List<ExamStudent> exams = student.getExamStudents();
 
         int numAprobados = 0;
@@ -112,7 +113,7 @@ public class ChartController {
 
     public byte[] createChartImage2(HttpServletRequest request) {
         // QUERY
-        List<Object[]> list = subjectsList.countSubjectsByGender();
+        List<Object[]> list = subjectService.countSubjectsByGender();
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 

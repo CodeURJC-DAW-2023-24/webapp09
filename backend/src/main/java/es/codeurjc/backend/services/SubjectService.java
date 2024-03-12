@@ -36,12 +36,13 @@ public class SubjectService {
         subjectRepository.deleteById(id);
     }
 
-    public List<Subject> findAll() {
+    public List<Subject> getAll() {
         return subjectRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     public Optional<Subject> unique(Long id) {
-        return subjectRepository.findSubjectById(id);
+        return subjectRepository.findById(id);
     }
 
     public List<Subject> getSubjects(Pageable pageable) {
@@ -59,7 +60,7 @@ public class SubjectService {
         Optional<User> user = userRepository.findByEmail(principal.getName());
         
         if (user.get().getRoles().contains("TEACHER")) {
-            List<Subject> lista = teacherService.findSubjectsByTeacherEmail(principal.getName());
+            List<Subject> lista = teacherService.getSubjectsByTeacherEmail(principal.getName());
             List<Subject> subjects;
 
             if (startItem < lista.size()) {
@@ -71,7 +72,7 @@ public class SubjectService {
             return subjects;
 
         } else if (user.get().getRoles().contains("STUDENT")) {
-            List<Subject> lista = studentService.findSubjectsByStudentEmail(principal.getName());
+            List<Subject> lista = studentService.getSubjectsByStudentEmail(principal.getName());
             List<Subject> subjects;
 
             if (startItem < lista.size()) {
@@ -86,6 +87,7 @@ public class SubjectService {
         
     }
 
+    @SuppressWarnings("null")
     public Subject getSubjectById(Long studentId) {
         // Retorna el estudiante o lanza una excepción si no se encuentra
         return subjectRepository.findById(studentId)
@@ -148,6 +150,23 @@ public class SubjectService {
     public boolean isNameUnique(String name){
         return subjectRepository.findByName(name).isEmpty();
 
+    }
+
+    @SuppressWarnings("null")
+    public Subject getById(Long id){
+
+        return subjectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with email " + id));
+
+    }
+
+    @SuppressWarnings("null")
+    public void setSubject(Subject subject){
+        subjectRepository.save(subject);
+    }
+
+    public List<Object[]> countSubjectsByGender(){
+        return subjectRepository.countSubjectsByGender();
     }
 
 }

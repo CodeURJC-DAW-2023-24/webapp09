@@ -17,13 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.backend.model.*;
-import es.codeurjc.backend.repository.StudentRepository;
-import es.codeurjc.backend.repository.TeacherRepository;
-import es.codeurjc.backend.repository.UserRepository;
+
 import es.codeurjc.backend.services.AdminService;
 import es.codeurjc.backend.services.StudentService;
 import es.codeurjc.backend.services.SubjectService;
 import es.codeurjc.backend.services.TeacherService;
+import es.codeurjc.backend.services.UserService;
 
 import org.springframework.ui.Model;
 
@@ -39,21 +38,18 @@ import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private TeacherRepository teacherRepository;
-    @Autowired
-    private UserRepository userRepository;
+
     @Autowired
     private SubjectService subjectService;
     @Autowired
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
-
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/login")
     public String showLogin() {
@@ -69,7 +65,7 @@ public class UserController {
     public ModelAndView showSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
-        Optional<User> user = userRepository.findByEmail(principal.getName());
+        Optional<User> user = userService.getByEmail(principal.getName());
         
         if (user.get().getRoles().contains("TEACHER")) {
             modelAndView.addObject("isStudent", false);
@@ -95,7 +91,7 @@ public class UserController {
     @GetMapping("/redirection/{subjectId}")
     public String redirectURL(HttpServletRequest request, @PathVariable Long subjectId) {
         Principal principal = request.getUserPrincipal();
-        Optional<User> user = userRepository.findByEmail(principal.getName());
+        Optional<User> user = userService.getByEmail(principal.getName());
         String url = "";
         
         if (user.get().getRoles().contains("STUDENT")) {
@@ -156,7 +152,7 @@ public class UserController {
 
             // Save new user
             Student newStudent = new Student(firstName, lastName, email, password);
-            studentRepository.save(newStudent);
+            studentService.setStudent(newStudent);
             response.sendRedirect("/login");
 
         }else{
@@ -168,8 +164,10 @@ public class UserController {
     @GetMapping("/profile")
     public ModelAndView personalArea(Model model, HttpServletRequest request) {
 
+        ModelAndView modelAndView = new ModelAndView("profile");
+        
         Principal principal = request.getUserPrincipal();
-        Optional<User> userOptional = userRepository.findByEmail(principal.getName());
+        Optional<User> userOptional = userService.getByEmail(principal.getName());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -187,29 +185,35 @@ public class UserController {
 
         }
 
-        ModelAndView modelAndView = new ModelAndView("profile");
+        
         model.addAttribute("username", request.getUserPrincipal().getName());
         String role = "UNKNOWN"; // Por defecto
-        if (request.isUserInRole("STUDENT")) {
+       
+        String username = request.getUserPrincipal().getName();
+        /*if (request.isUserInRole("STUDENT")) {
             role = "Student";
+            Student student = studentService.getStudentByEmail(username);
         } else if (request.isUserInRole("TEACHER")) {
             role = "Teacher";
-        }
+            Teacher teacher = teacherService.getByEmail(username);
+        }*/
 
         List<Subject> subjects = new ArrayList<>();
-        String username = request.getUserPrincipal().getName();
-        Optional<Student> student = studentRepository.findByEmail(username);
-        Optional<Teacher> teacher = teacherRepository.findByEmail(username);
+        
+        
+        
         if (request.isUserInRole("STUDENT")) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
+            Student student = studentService.getStudentByEmail(username);
             role = "Student";
-            subjects = studentService.findSubjectsByStudentId(student.get().getId());
+            subjects = studentService.getSubjectsByStudentId(student.getId());
             modelAndView.addObject("subjects", subjects);
         
         } else if (request.isUserInRole("TEACHER")) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
+            Teacher teacher = teacherService.getByEmail(username);
             role = "Teacher";
-            subjects = teacherService.findSubjectsByTeacherId(teacher.get().getId());
+            subjects = teacherService.getSubjectsByTeacherId(teacher.getId());
             modelAndView.addObject("subjects", subjects);
         
         } else if (request.isUserInRole("ADMIN")) {
@@ -248,7 +252,7 @@ public class UserController {
             @RequestParam("file") Optional <MultipartFile> file) throws ServletException, IOException {
 
         Principal principal = request.getUserPrincipal();
-        Optional<User> user = userRepository.findByEmail(principal.getName());
+        Optional<User> user = userService.getByEmail(principal.getName());
         if (user.isPresent()) {
             User currentUser = user.get();
             currentUser.setFirstName(firstName.orElse(currentUser.getFirstName()));
@@ -264,7 +268,7 @@ public class UserController {
                     e.printStackTrace();
                 }
             }
-            userRepository.save(currentUser);
+            userService.setUser(currentUser);
 
             List<GrantedAuthority> authorities = currentUser.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
@@ -277,11 +281,12 @@ public class UserController {
         return "redirect:/profile";
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/user/photo")
     public ResponseEntity<byte[]> getCurrentUserPhoto(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
-            Optional<User> userOptional = userRepository.findByEmail(principal.getName());
+            Optional<User> userOptional = userService.getByEmail(principal.getName());
             if (userOptional.isPresent()) {
                 byte[] imageBytes = userOptional.get().getProfilePicture();
                 if (imageBytes != null && imageBytes.length > 0) {

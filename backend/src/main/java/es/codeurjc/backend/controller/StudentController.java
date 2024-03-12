@@ -12,15 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.backend.model.*;
-import es.codeurjc.backend.repository.ExamStudentRepository;
-import es.codeurjc.backend.repository.ForumRepository;
-import es.codeurjc.backend.repository.SubjectRepository;
 import es.codeurjc.backend.services.*;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class StudentController {
@@ -29,17 +26,10 @@ public class StudentController {
     StudentService studentService;
     @Autowired
     SubjectService subjectService;
-
     @Autowired
     ExamService examService;
-
     @Autowired
-    SubjectRepository subjectRepository;
-
-    @Autowired
-    ForumRepository forumRepository;
-    @Autowired
-    ExamStudentRepository examstudentRepository;
+    ForumService forumService;
     @Autowired
     ExamStudentService examStudentService;
 
@@ -87,7 +77,7 @@ public class StudentController {
         Principal principal = request.getUserPrincipal();
 
         Forum forum = new Forum(principal.getName(), comment, subject);
-        forumRepository.save(forum);
+        forumService.setForum(forum);
 
         return ("redirect:/subject_onesubj_student/"+subject.getId());
     }
@@ -105,10 +95,10 @@ public class StudentController {
     public String uploadFile(HttpServletRequest request, @PathVariable("subjectId") Long subjectId, @RequestParam Long examId, @RequestParam("file") MultipartFile file) throws IOException {
         Principal principal = request.getUserPrincipal();
         Student student = studentService.getStudentByEmail(principal.getName());
-        Optional<Exam> exam = examService.findById(examId);
+        Exam exam = examService.getById(examId);
 
 
-        examStudentService.store(file, exam.get(), 0, student);
+        examStudentService.store(file, exam, 0, student);
         
         return ("redirect:/subject_onesubj_student/"+subjectId);
     }

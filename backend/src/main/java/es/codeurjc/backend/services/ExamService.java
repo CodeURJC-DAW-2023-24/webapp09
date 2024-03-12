@@ -16,7 +16,6 @@ import es.codeurjc.backend.repository.SubjectRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,6 +32,8 @@ public class ExamService {
     private ExamRepository examRepository;
     @Autowired
     private ExamStudentService examStudentService;
+    @Autowired
+    private SubjectService subjectService;
 
     public List<ExamStudent> findExamStudentsByStudentAndSubject(Long studentId, Long subjectId) {
         // Obtener el estudiante y la asignatura por sus IDs
@@ -67,7 +68,18 @@ public class ExamService {
         return examRepository.findAll().stream();
     }
 
-    public Optional<Exam> findById(Long examId) {
-        return examRepository.findById(examId);
+    public Exam getById(Long examId) {
+        return examRepository.findById(examId)
+                .orElseThrow(() -> new RuntimeException("Student not found with name " + examId));
+    }
+
+    public List<Exam> getAllBySubjectId(Long subjectId){
+        Subject subject = subjectService.getSubjectById(subjectId);
+        return subject.getExams();
+    }
+
+    @SuppressWarnings("null")
+    public void deleteById(Long examId){
+        examRepository.deleteById(examId);
     }
 }

@@ -19,7 +19,7 @@ public class Subject {
     private String description;
     @Column(length = 1000000)
     private String allInfo;
-    @Column() //NO DEBE SER NULL
+    @Column() 
     private String gender;
     @Column
     private String banner;

@@ -55,6 +55,27 @@ public class ExamStudentService {
 
     }
 
+    public List<ExamStudent> getAll(){
+        return examStudentRepository.findAll();
+    }
+
+    public List<ExamStudent> getByExamId(Long examId){
+        return examStudentRepository.findAllByExamId(examId);
+
+    }
+
+    @SuppressWarnings("null")
+    public ExamStudent getById(Long id){
+        return examStudentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("ExamStudent not found with name " + id));
+    }
+
+
+    @SuppressWarnings("null")
+    public void setExamStudent(ExamStudent examStudent){
+        examStudentRepository.save(examStudent);
+    }
+
     // return the incomplete examsStudent
     public List<Exam> getIncompleteExamsStudent(Student student, Subject subject) {
 

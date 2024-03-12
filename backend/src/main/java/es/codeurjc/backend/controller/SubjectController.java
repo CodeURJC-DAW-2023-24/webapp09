@@ -14,47 +14,31 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.codeurjc.backend.model.*;
-import es.codeurjc.backend.repository.AdminRepository;
-import es.codeurjc.backend.repository.ForumRepository;
-import es.codeurjc.backend.repository.SubjectRepository;
-import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.services.AdminService;
 import es.codeurjc.backend.services.MailService;
 import es.codeurjc.backend.services.StudentService;
 import es.codeurjc.backend.services.SubjectService;
 import es.codeurjc.backend.services.TeacherService;
+import es.codeurjc.backend.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 
 
 @RestController
 public class SubjectController{
 
     @Autowired
-    SubjectRepository subjectsList;
-    @Autowired
     SubjectService subjectService;
     @Autowired
     StudentService studentService;
     @Autowired
-    UserRepository userRepository;
-    @Autowired
     TeacherService teacherService;
-
-    @Autowired
-    ForumRepository forumRepository;
-
-    @Autowired
-    AdminRepository adminRepository;
-
     @Autowired
     AdminService adminService;
-
     @Autowired 
     MailService mailService;
-
-
+    @Autowired 
+    UserService userService;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -76,11 +60,11 @@ public class SubjectController{
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("subjects", subjectsList.findAll());
+        model.addAttribute("subjects", subjectService.getAll());
         modelAndView.setViewName("main_page");
 
         if (principal != null) {
-            Optional<User> user = userRepository.findByEmail(principal.getName());
+            Optional<User> user = userService.getByEmail(principal.getName());
 
             if (user.get().getRoles().contains("TEACHER")) {
                 modelAndView.addObject("isStudent", false);
@@ -102,7 +86,7 @@ public class SubjectController{
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
-                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.findAll(); 
+                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.getAll(); 
                 modelAndView.addObject("subjects", subjects);
 
             }

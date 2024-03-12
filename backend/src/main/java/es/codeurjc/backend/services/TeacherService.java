@@ -16,7 +16,7 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public List<Subject> findSubjectsByTeacherId(Long teacherId) {
+    public List<Subject> getSubjectsByTeacherId(Long teacherId) {
         @SuppressWarnings("null")
         Optional<Teacher> teacher = teacherRepository.findById(teacherId);
         if (teacher.isPresent()) {
@@ -42,7 +42,7 @@ public class TeacherService {
                 .orElseThrow(() -> new RuntimeException("Teacher not found with email " + email));
     }
 
-    public List<Subject> findSubjectsByTeacherName(String name) {
+    public List<Subject> getSubjectsByTeacherName(String name) {
         Optional<Teacher> teacher = teacherRepository.findByFirstName(name);
 
         if (teacher.isPresent()) {
@@ -52,7 +52,7 @@ public class TeacherService {
         }
     }
 
-    public List<Subject> findSubjectsByTeacherEmail(String email) {
+    public List<Subject> getSubjectsByTeacherEmail(String email) {
         Optional<Teacher> teacher = teacherRepository.findByEmail(email);
 
         if (teacher.isPresent()) {
@@ -61,4 +61,32 @@ public class TeacherService {
             return new ArrayList<>();
         }
     }
+
+    public List<Teacher> getAllBySubjectsId(Long id){
+        return teacherRepository.findAllBySubjectsId(id);
+    }
+
+    @SuppressWarnings("null")
+    public Teacher getById(Long id){
+
+        return teacherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with email " + id));
+
+    }
+
+    public Optional<Teacher> getOptionalByEmail(String email){
+        return teacherRepository.findByEmail(email);
+
+    }
+
+    public Teacher getByEmail(String email){
+        return teacherRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with email " + email));
+    }
+
+    @SuppressWarnings("null")
+    public void setTeacher(Teacher teacher){
+        teacherRepository.save(teacher);
+    }
+
 }

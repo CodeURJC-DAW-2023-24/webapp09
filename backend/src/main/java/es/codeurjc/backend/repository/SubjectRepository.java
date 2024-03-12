@@ -8,17 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import es.codeurjc.backend.model.Subject;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
-    public Optional<Subject> findSubjectById(long id);
-    // public Optional<Subject> findSubjectByName(String name);
-    // public List<Subject> findSubjectsByGender(String gender); //ALG
+    Optional<Subject> findById(long id);
+    
     List<Subject> findByGender(String gender);
 
     Optional<Subject> findByName(String name);
 
-    // NO TIENE SENTIDO
-    @SuppressWarnings("null")
-    Optional<Subject> findById(Long subjectId);
-
     @Query("SELECT s.gender, COUNT(s) FROM Subject s GROUP BY s.gender")
     List<Object[]> countSubjectsByGender();
+
 }

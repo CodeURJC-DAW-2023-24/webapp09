@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 

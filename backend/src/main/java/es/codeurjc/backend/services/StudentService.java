@@ -17,7 +17,6 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     public boolean emailRepeat(String email){
-
         List<Student> students = studentRepository.findAll();
         
         for(Student student: students){
@@ -26,10 +25,9 @@ public class StudentService {
             }
         }
         return true;
-
     }
 
-    public List<Subject> findSubjectsByStudentName(String name) {
+    public List<Subject> getSubjectsByStudentName(String name) {
         Optional<Student> student = studentRepository.findByFirstName(name);
 
         if (student.isPresent()) {
@@ -39,7 +37,7 @@ public class StudentService {
         }
     }
 
-    public List<Subject> findSubjectsByStudentEmail(String email) {
+    public List<Subject> getSubjectsByStudentEmail(String email) {
         Optional<Student> student = studentRepository.findByEmail(email);
 
         if (student.isPresent()) {
@@ -49,7 +47,7 @@ public class StudentService {
         }
     }
 
-    public List<Subject> findSubjectsByStudentId(Long studentId) {
+    public List<Subject> getSubjectsByStudentId(Long studentId) {
         @SuppressWarnings("null")
         Optional<Student> student = studentRepository.findById(studentId);
         if (student.isPresent()) {
@@ -57,6 +55,10 @@ public class StudentService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    public List<Student> getAllBySubjectsId(Long id){
+        return studentRepository.findAllBySubjectsId(id);
     }
 
     
@@ -78,6 +80,16 @@ public class StudentService {
         // Retorna el estudiante o lanza una excepción si no se encuentra
         return studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found with id " + studentId));
+    }
+
+    public boolean isExistsByEmail(String email){
+        return studentRepository.existsByEmail(email);
+    }
+
+
+    @SuppressWarnings("null")
+    public void setStudent(Student student){
+        studentRepository.save(student);
     }
 
     public boolean existsByEmail(List<Student> students, String email) {

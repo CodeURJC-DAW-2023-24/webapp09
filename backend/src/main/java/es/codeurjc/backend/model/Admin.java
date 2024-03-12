@@ -1,7 +1,5 @@
 package es.codeurjc.backend.model;
 
-import java.sql.Blob;
-
 import jakarta.persistence.*;
 
 @Entity

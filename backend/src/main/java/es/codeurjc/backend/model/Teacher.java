@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 

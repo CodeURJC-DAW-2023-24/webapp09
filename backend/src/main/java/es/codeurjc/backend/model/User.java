@@ -1,6 +1,5 @@
 package es.codeurjc.backend.model;
 
-import java.sql.Blob;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
