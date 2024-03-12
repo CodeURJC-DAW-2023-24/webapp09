@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HelloworldVscodeApplication",
+            "request": "launch",
+            "mainClass": "es.codeurjc.backend.HelloworldVscodeApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-HelloworldVscodeApplication<helloworld-vscode>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
