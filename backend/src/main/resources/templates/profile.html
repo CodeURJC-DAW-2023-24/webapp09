@@ -84,12 +84,14 @@
           </div>
         </div>
 
+        {{#isStudent}}
         <div class="mt-4">
           <!-- Sección de gráficos o fotos con datos -->
           <h5>Statistics</h5>
           <br></br>
-          <img src="/chart/exams" alt="Grades Chart">
+          <img src="/api/chart/exams" alt="Grades Chart">
         </div>
+        {{/isStudent}}
       </div>
     </div>
   </div>

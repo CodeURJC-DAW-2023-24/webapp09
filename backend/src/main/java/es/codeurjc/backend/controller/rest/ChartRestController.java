@@ -1,12 +1,14 @@
-package es.codeurjc.backend.controller;
+package es.codeurjc.backend.controller.rest;
 
-import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.awt.Color;
 
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -17,18 +19,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.backend.model.ExamStudent;
 import es.codeurjc.backend.model.Student;
 import es.codeurjc.backend.services.StudentService;
 import es.codeurjc.backend.services.SubjectService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-public class ChartController {
 
+@RestController
+@RequestMapping("/api/")
+public class ChartRestController {
     @Autowired
     SubjectService subjectService;
     @Autowired
@@ -150,5 +154,4 @@ public class ChartController {
 
         return chartImageBytes;
     }
-
 }

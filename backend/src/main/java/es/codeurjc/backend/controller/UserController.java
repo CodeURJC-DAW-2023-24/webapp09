@@ -50,7 +50,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/login")
     public String showLogin() {
         return "login";
@@ -58,7 +57,7 @@ public class UserController {
 
     @PostMapping("/logout")
     public String showLogout() {
-        return "redirect:/login"; 
+        return "redirect:/login";
     }
 
     @GetMapping("/subjects_registereduser")
@@ -66,7 +65,7 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         ModelAndView modelAndView = new ModelAndView("subjects_registereduser");
         Optional<User> user = userService.getByEmail(principal.getName());
-        
+
         if (user.get().getRoles().contains("TEACHER")) {
             modelAndView.addObject("isStudent", false);
             Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
@@ -78,13 +77,13 @@ public class UserController {
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
             modelAndView.addObject("user", student);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-        
+
         } else if (user.get().getRoles().contains("ADMIN")) {
             modelAndView.addObject("isStudent", false);
             Admin admin = adminService.getAdminByEmail(principal.getName());
             modelAndView.addObject("user", admin);
         }
-        
+
         return modelAndView;
     }
 
@@ -93,10 +92,10 @@ public class UserController {
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userService.getByEmail(principal.getName());
         String url = "";
-        
+
         if (user.get().getRoles().contains("STUDENT")) {
             url = "/subject_onesubj_student/" + subjectId;
-        
+
         } else if (user.get().getRoles().contains("TEACHER")) {
             url = "/teachers/subject/" + subjectId + "/general-information";
         }
@@ -114,11 +113,11 @@ public class UserController {
 
         String errorM = "";
 
-        if(error.equals("repeat")){
+        if (error.equals("repeat")) {
             errorM = "Email do not acept!";
-        }else if(error.equals("password")){
+        } else if (error.equals("password")) {
             errorM = "Passwords do not match!";
-        }else if(error.equals("email")){
+        } else if (error.equals("email")) {
             errorM = "Emails do not match!";
         }
 
@@ -139,7 +138,6 @@ public class UserController {
             @RequestParam String password,
             @RequestParam String confirmPassword) throws IOException {
 
-
         if (studentService.emailRepeat(email)) {
 
             // Same password?
@@ -155,7 +153,7 @@ public class UserController {
             studentService.setStudent(newStudent);
             response.sendRedirect("/login");
 
-        }else{
+        } else {
             response.sendRedirect("sign-up?error=repeat");
         }
 
@@ -165,13 +163,13 @@ public class UserController {
     public ModelAndView personalArea(Model model, HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("profile");
-        
+
         Principal principal = request.getUserPrincipal();
         Optional<User> userOptional = userService.getByEmail(principal.getName());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            boolean hasImage=!(user.getProfilePicture()==null);
+            boolean hasImage = !(user.getProfilePicture() == null);
             model.addAttribute("hasImage", hasImage);
 
             String firstName = user.getFirstName();
@@ -183,39 +181,41 @@ public class UserController {
             String email = user.getEmail();
             model.addAttribute("email", email);
 
+            boolean isStudent = request.isUserInRole("STUDENT");
+            model.addAttribute("isStudent", isStudent);
+
         }
 
-        
         model.addAttribute("username", request.getUserPrincipal().getName());
         String role = "UNKNOWN"; // Por defecto
-       
+
         String username = request.getUserPrincipal().getName();
-        /*if (request.isUserInRole("STUDENT")) {
-            role = "Student";
-            Student student = studentService.getStudentByEmail(username);
-        } else if (request.isUserInRole("TEACHER")) {
-            role = "Teacher";
-            Teacher teacher = teacherService.getByEmail(username);
-        }*/
+        /*
+         * if (request.isUserInRole("STUDENT")) {
+         * role = "Student";
+         * Student student = studentService.getStudentByEmail(username);
+         * } else if (request.isUserInRole("TEACHER")) {
+         * role = "Teacher";
+         * Teacher teacher = teacherService.getByEmail(username);
+         * }
+         */
 
         List<Subject> subjects = new ArrayList<>();
-        
-        
-        
+
         if (request.isUserInRole("STUDENT")) {
             // Si se encuentra un estudiante, obtener las asignaturas asociadas
             Student student = studentService.getStudentByEmail(username);
             role = "Student";
             subjects = studentService.getSubjectsByStudentId(student.getId());
             modelAndView.addObject("subjects", subjects);
-        
+
         } else if (request.isUserInRole("TEACHER")) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
             Teacher teacher = teacherService.getByEmail(username);
             role = "Teacher";
             subjects = teacherService.getSubjectsByTeacherId(teacher.getId());
             modelAndView.addObject("subjects", subjects);
-        
+
         } else if (request.isUserInRole("ADMIN")) {
             // Si se encuentra un profesor, obtener las asignaturas asociadas
             role = "Admin";
@@ -249,7 +249,7 @@ public class UserController {
             @RequestParam("lastName") Optional<String> lastName,
             @RequestParam("email") Optional<String> email,
             @RequestParam("password") Optional<String> password,
-            @RequestParam("file") Optional <MultipartFile> file) throws ServletException, IOException {
+            @RequestParam("file") Optional<MultipartFile> file) throws ServletException, IOException {
 
         Principal principal = request.getUserPrincipal();
         Optional<User> user = userService.getByEmail(principal.getName());
@@ -259,12 +259,11 @@ public class UserController {
             currentUser.setLastName(lastName.orElse(currentUser.getLastName()));
             currentUser.setEmail(email.orElse(currentUser.getEmail()));
             currentUser.setPassword(password.orElse(currentUser.getPassword()));
-            if (file.isPresent()){
-                try{
-                    byte[] foto =file.get().getBytes();
+            if (file.isPresent()) {
+                try {
+                    byte[] foto = file.get().getBytes();
                     currentUser.setProfilePicture(foto);
-                }
-                catch(IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -297,13 +296,13 @@ public class UserController {
                 }
             }
         }
-        // Si el usuario no tiene foto de perfil o no está logueado, retorna la imagen predeterminada
+        // Si el usuario no tiene foto de perfil o no está logueado, retorna la imagen
+        // predeterminada
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(loadDefaultImage());
     }
-
 
     private byte[] loadDefaultImage() {
         try {
