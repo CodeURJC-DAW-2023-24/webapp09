@@ -40,13 +40,16 @@ public class SubjectService {
         return subjectRepository.findAll();
     }
 
+    public Page<Subject> getAllPage(Pageable page) {
+        return subjectRepository.findAll(page);
+    }
+
     @SuppressWarnings("null")
     public Optional<Subject> unique(Long id) {
         return subjectRepository.findById(id);
     }
 
     public List<Subject> getSubjects(Pageable pageable) {
-        @SuppressWarnings("null")
         Page<Subject> subjectPage = subjectRepository.findAll(pageable);
         return subjectPage.getContent();
     }

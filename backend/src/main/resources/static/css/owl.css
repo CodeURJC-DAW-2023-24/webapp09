@@ -8,6 +8,13 @@
  */
 
  /* Estilos para el modal */
+
+
+.lds-dual-ring.hidden {
+  display: none;
+}
+
+
 .modal {
   display: none;
   position: fixed;

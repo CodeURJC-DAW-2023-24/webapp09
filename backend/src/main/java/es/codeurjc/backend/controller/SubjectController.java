@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -86,8 +87,8 @@ public class SubjectController{
                 modelAndView.addObject("isStudent", false);
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
-                ArrayList<Subject> subjects = (ArrayList<Subject>) subjectService.getAll(); 
-                modelAndView.addObject("subjects", subjects);
+                Page<Subject> moreSubjects = subjectService.getAllPage(PageRequest.of(0, 3)); 
+                modelAndView.addObject("moreSubjects", moreSubjects);
 
             }
         } else {

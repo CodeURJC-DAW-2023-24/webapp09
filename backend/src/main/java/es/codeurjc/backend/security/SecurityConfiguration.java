@@ -54,6 +54,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/subjectUser").permitAll() 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+					.requestMatchers("/moreSubjectsAdmin/**").hasAnyRole("ADMIN")
 					.requestMatchers("/subject_onesubj_admin").hasAnyRole("ADMIN")
 					.requestMatchers("/subject_onesubj_student/**").hasAnyRole("STUDENT", "TEACHER")
 					.requestMatchers("/subject_onesubj_teacher").permitAll()

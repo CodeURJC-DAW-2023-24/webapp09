@@ -299,7 +299,6 @@ public class TeacherController {
 				.body(exam.getData());
 	}
 
-	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/type-exams/delete")
 	public void deleteFile(@PathVariable Long subjectId, @RequestParam Long examId, HttpServletResponse response)
 			throws IOException {
@@ -368,7 +367,6 @@ public class TeacherController {
 	}
 
 	// SAVE MARK EXAM //
-	@SuppressWarnings("null")
 	@PostMapping("/subject/{subjectId}/type-exams/{examId}/correct-exams")
 	public void showStudentExam(@PathVariable Long subjectId, @PathVariable Long examId, HttpServletRequest request,
 			HttpServletResponse response,
@@ -492,7 +490,6 @@ public class TeacherController {
 	}
 
 	// DELETE COMMENT //
-	@SuppressWarnings("null")
 	@GetMapping("/subject/{subjectId}/forum/delete")
 	public void deleteForum(@PathVariable Long subjectId, @RequestParam Long forumId, HttpServletResponse response)
 			throws IOException {
