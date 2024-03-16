@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +22,8 @@ import es.codeurjc.backend.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @RestController
-public class SubjectController{
+public class SubjectController {
 
     @Autowired
     SubjectService subjectService;
@@ -35,9 +33,9 @@ public class SubjectController{
     TeacherService teacherService;
     @Autowired
     AdminService adminService;
-    @Autowired 
+    @Autowired
     MailService mailService;
-    @Autowired 
+    @Autowired
     UserService userService;
 
     @ModelAttribute
@@ -59,69 +57,29 @@ public class SubjectController{
     @GetMapping("/")
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        Principal principal = request.getUserPrincipal();
         modelAndView.setViewName("main_page");
 
-        if (principal != null) {
-            Optional<User> user = userService.getByEmail(principal.getName());
+        modelAndView.addObject("isNotRegstered", false);
 
-            if (user.get().getRoles().contains("TEACHER")) {
-                modelAndView.addObject("isStudent", false);
-                modelAndView.addObject("isNotAdmin", true);
-                
-                Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
-                modelAndView.addObject("user", teacher);
-                
-                //ajax
-                modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
+        List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
+        modelAndView.addObject("recommendedSubjects", recommendedSubjects);
 
-            } else if(user.get().getRoles().contains("STUDENT")){
-                modelAndView.addObject("isStudent", true);
-                modelAndView.addObject("isNotAdmin", true);
-                
-                Student student = studentService.getStudentByEmail(principal.getName());
-                modelAndView.addObject("user", student);
+        // ajax
+        modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
 
-                List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
-                modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-
-                //ajax
-                model.addAttribute("moreSubjects", subjectService.getAllNotEnrolled(student.getSubjects(), PageRequest.of(0, 3)));
-
-            } else if (user.get().getRoles().contains("ADMIN")){
-                modelAndView.setViewName("subjects_admin");
-                modelAndView.addObject("isNotAdmin", false);
-                modelAndView.addObject("isStudent", false);
-                
-                Admin admin = adminService.getAdminByEmail(principal.getName());
-                modelAndView.addObject("user", admin);
-                
-                //ajax 
-                modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
-            }
-        
-        } else {
-            modelAndView.addObject("isStudent", true);
-            
-            List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
-            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
-            
-            //ajax
-            modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
-        }
         return modelAndView;
     }
 
     @GetMapping("/subject/{id}")
     public ModelAndView uniqueEvent(HttpServletRequest request, Model model, @PathVariable Long id) {
         ModelAndView modelView = new ModelAndView();
-        Principal principal =  request.getUserPrincipal();
+        Principal principal = request.getUserPrincipal();
 
         boolean registered = false;
-        
-        if (principal!= null){
+
+        if (principal != null) {
             Optional<User> user = userService.getByEmail(principal.getName());
-            if(user.get().getRoles().contains("STUDENT")){
+            if (user.get().getRoles().contains("STUDENT")) {
                 registered = true;
             }
         }
@@ -129,7 +87,7 @@ public class SubjectController{
         if (subjectService.unique(id).isPresent()) {
             modelView.setViewName("subject_info");
             model.addAttribute("subject", subjectService.unique(id).get());
-            
+
             model.addAttribute("isStudent", registered);
             return modelView;
         } else {
@@ -147,7 +105,7 @@ public class SubjectController{
         Teacher teacher = subject.getTeachers().get(0);
 
         mailService.enviarCorreo(teacher.getEmail(), student, subject);
-        
+
         return ResponseEntity.ok("Enrolled successfully");
     }
 
@@ -165,9 +123,4 @@ public class SubjectController{
         return subjectService.getSubjectsUser(request, pageable);
     }
 
-
 }
-    
-
-
-    

@@ -51,6 +51,7 @@ public class SecurityConfiguration {
 					//PRIVATE PAGES
 
 					.requestMatchers("/subjects_registereduser").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+					.requestMatchers("/registered").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/subjectUser").permitAll() 
 					.requestMatchers("/profile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
 					.requestMatchers("/editProfile").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
@@ -68,7 +69,7 @@ public class SecurityConfiguration {
 					.loginPage("/login")
 					.usernameParameter("email")
 					.failureUrl("/error")
-					.defaultSuccessUrl("/")
+					.defaultSuccessUrl("/registered")
 					.permitAll()
 			)
 			.logout(logout -> logout

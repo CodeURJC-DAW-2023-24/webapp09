@@ -1,35 +1,35 @@
 $(window).on("load", function () {
 
-    valueIndex(1);
+  valueIndex(1);
 
-    //subjects admin
-    $("#btnMoreAdminSubjects").on("click", () =>
-        functionMoreSubejctAdmin(
-            "#moreAdminSubjects",
-            "#spinner",
-            "#btnMoreAdminSubjects"
-        )
-    );
-
-
-    //subjects main
-    $("#btnMoreMainSubjects").on("click", () =>
-        functionMoreSubejctAdmin(
-            "#moreMainSubjects",
-            "#spinner",
-            "#btnMoreMainSubjects"
-        )
-    );
+  //subjects admin
+  $("#btnMoreAdminSubjects").on("click", () =>
+    functionMoreSubejctAdmin(
+      "#moreAdminSubjects",
+      "#spinner",
+      "#btnMoreAdminSubjects"
+    )
+  );
 
 
-    //exam teacher
-    $("#btnMoreTeacherExams").on("click", () =>
-        functionMoreSubejctAdmin(
-            "#moreTeacherExams",
-            "#spinner",
-            "#btnMoreTeacherExams"
-        )
-    );
+  //subjects main
+  $("#btnMoreMainSubjects").on("click", () =>
+    functionMoreSubejctAdmin(
+      "#moreMainSubjects",
+      "#spinner",
+      "#btnMoreMainSubjects"
+    )
+  );
+
+
+  //exam teacher
+  $("#btnMoreTeacherExams").on("click", () =>
+    functionMoreExamsTeacher(
+      "#moreTeacherExams",
+      "#spinner",
+      "#btnMoreTeacherExams"
+    )
+  );
 
 });
 
@@ -62,11 +62,11 @@ function ajaxCall(url, spinner, where, button) {
 
 //Subjects admin
 function functionMoreSubejctAdmin(where, spinner, button) {
-    var value = indexAdminSubjects;
-    this.indexAdminSubjects += 1;
-  
-    var url = "/moreSubjectsAdmin?page="+value;
-    ajaxCall(url, spinner, where, button);
+  var value = indexAdminSubjects;
+  this.indexAdminSubjects += 1;
+
+  var url = "/moreSubjectsAdmin?page=" + value;
+  ajaxCall(url, spinner, where, button);
 }
 
 
@@ -75,26 +75,26 @@ function functionMoreSubejctAdmin(where, spinner, button) {
   var value = indexMainSubjects;
   this.indexAdminSubjects += 1;
 
-  var url = "/moreSubjectsMain?page="+value;
+  var url = "/moreSubjectsMain?page=" + value;
   ajaxCall(url, spinner, where, button);
 }
 
 
 //Subjects admin
-function functionMoreSubejctAdmin(where, spinner, button) {
+function functionMoreExamsTeacher(where, spinner, button) {
   var value = indexSubejctAdmin;
   this.indexSubejctAdmin += 1;
 
   const arrayPath = window.location.pathname.split("/");
   const id = arrayPath[3];
 
-  var url = "/teachers/subject/"+id+"/type-exams/moreTeacherExam?page="+value;
+  var url = "/teachers/subject/" + id + "/type-exams/moreTeacherExam?page=" + value;
   ajaxCall(url, spinner, where, button);
 }
 
 
 function valueIndex(num) {
-    this.indexAdminSubjects = num;
-    this.indexMainSubjects = num;
-    this.indexSubejctAdmin = num;
+  this.indexAdminSubjects = num;
+  this.indexMainSubjects = num;
+  this.indexSubejctAdmin = num;
 }

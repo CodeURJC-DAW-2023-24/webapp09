@@ -115,7 +115,7 @@ public class AjaxController {
 			return null;
 		} else {
 			model.addAttribute("moreExams", moreExams);
-			return "moreTeacherExams";
+			return "moreExamsTeacher";
 		}
 	}
 }
