@@ -23,4 +23,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
     @Query("SELECT s.gender, COUNT(s) FROM Subject s GROUP BY s.gender")
     List<Object[]> countSubjectsByGender();
 
+    Page<Subject> findAllByIdNotIn(List<Long> enrolledSubjects, Pageable page);
+
 }

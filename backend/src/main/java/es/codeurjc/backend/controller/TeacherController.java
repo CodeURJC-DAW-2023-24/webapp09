@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -275,10 +277,10 @@ public class TeacherController {
 
 		Subject subject = subjectService.getById(subjectId);
 
-		List<Exam> exams = examService.getAllBySubjectId(subjectId);
+		Page<Exam> moreExams = examService.getAllBySubjectIdPage(subjectId, PageRequest.of(0, 3));
 
 		modelAndView.addObject("name", subject.getName());
-		modelAndView.addObject("exams", exams);
+		modelAndView.addObject("moreExams", moreExams);
 		modelAndView.setViewName("type_exams");
 
 		return modelAndView;
@@ -400,7 +402,7 @@ public class TeacherController {
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////
 	///// /////
-	///// SHOW EXAMS /////
+	///// SHOW MARKS /////
 	///// /////
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////

@@ -1,7 +1,6 @@
 package es.codeurjc.backend.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +60,6 @@ public class SubjectController{
     public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("subjects", subjectService.getAll());
         modelAndView.setViewName("main_page");
 
         if (principal != null) {
@@ -70,31 +68,46 @@ public class SubjectController{
             if (user.get().getRoles().contains("TEACHER")) {
                 modelAndView.addObject("isStudent", false);
                 modelAndView.addObject("isNotAdmin", true);
+                
                 Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
                 modelAndView.addObject("user", teacher);
+                
+                //ajax
+                modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
 
             } else if(user.get().getRoles().contains("STUDENT")){
                 modelAndView.addObject("isStudent", true);
                 modelAndView.addObject("isNotAdmin", true);
+                
                 Student student = studentService.getStudentByEmail(principal.getName());
-                List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("user", student);
+
+                List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
                 modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+
+                //ajax
+                model.addAttribute("moreSubjects", subjectService.getAllNotEnrolled(student.getSubjects(), PageRequest.of(0, 3)));
 
             } else if (user.get().getRoles().contains("ADMIN")){
                 modelAndView.setViewName("subjects_admin");
                 modelAndView.addObject("isNotAdmin", false);
                 modelAndView.addObject("isStudent", false);
+                
                 Admin admin = adminService.getAdminByEmail(principal.getName());
                 modelAndView.addObject("user", admin);
-                Page<Subject> moreSubjects = subjectService.getAllPage(PageRequest.of(0, 3)); 
-                modelAndView.addObject("moreSubjects", moreSubjects);
-
+                
+                //ajax 
+                modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
             }
+        
         } else {
             modelAndView.addObject("isStudent", true);
+            
             List<Subject> recommendedSubjects = subjectService.recommendSubjects(null);
             modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+            
+            //ajax
+            modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
         }
         return modelAndView;
     }
@@ -104,12 +117,20 @@ public class SubjectController{
         ModelAndView modelView = new ModelAndView();
         Principal principal =  request.getUserPrincipal();
 
-        boolean registered=principal!=null;
+        boolean registered = false;
+        
+        if (principal!= null){
+            Optional<User> user = userService.getByEmail(principal.getName());
+            if(user.get().getRoles().contains("STUDENT")){
+                registered = true;
+            }
+        }
 
         if (subjectService.unique(id).isPresent()) {
             modelView.setViewName("subject_info");
             model.addAttribute("subject", subjectService.unique(id).get());
-            model.addAttribute("registered", registered);
+            
+            model.addAttribute("isStudent", registered);
             return modelView;
         } else {
             modelView.setViewName("error");
