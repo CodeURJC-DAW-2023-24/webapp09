@@ -238,7 +238,10 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String showEditProfile() {
+    public String showEditProfile(HttpServletRequest request, Model model) {
+        Principal principal = request.getUserPrincipal();
+        Optional<User> user = userService.getByEmail(principal.getName());
+        model.addAttribute("user", user.get());
         return "editProfile";
     }
 
@@ -259,13 +262,17 @@ public class UserController {
             currentUser.setLastName(lastName.orElse(currentUser.getLastName()));
             currentUser.setEmail(email.orElse(currentUser.getEmail()));
             currentUser.setPassword(password.orElse(currentUser.getPassword()));
-            if (file.isPresent()) {
+            if (file.isPresent() && file.get().getSize() > 0) {
                 try {
                     byte[] foto = file.get().getBytes();
                     currentUser.setProfilePicture(foto);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+            else {
+                byte[] fotoAnterior = currentUser.getProfilePicture();
+                currentUser.setProfilePicture(fotoAnterior);
             }
             userService.setUser(currentUser);
 
