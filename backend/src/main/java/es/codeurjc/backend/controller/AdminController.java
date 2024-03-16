@@ -181,7 +181,6 @@ public class AdminController {
 		// Find subject by name
 		Subject subject = subjectService.getById(subjectId);
 
-
 		// if need to create a new student
 		if ("new".equals(addorcreate)) {
 			if (firstName != null && password != null && lastName != null) { // if the data is complete
