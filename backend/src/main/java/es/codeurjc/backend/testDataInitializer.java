@@ -274,7 +274,7 @@ public class testDataInitializer {
 
 
         private byte[] getFile() throws IOException{
-                String filePath = "C:\\Users\\amand\\Documents\\GitHub\\webapp09\\backend\\src\\main\\blanco.pdf";
+                String filePath = "C:\\Users\\paula\\OneDrive - Universidad Rey Juan Carlos\\UNI\\4º AÑO\\2º CUATRI\\DAW\\webapp09\\backend\\src\\main\\blanco.pdf";
                 File pdfFile = new File(filePath);
 
                 byte[] fileBytes = Files.readAllBytes(pdfFile.toPath());
