@@ -3,8 +3,11 @@ package es.codeurjc.backend.controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -60,6 +63,69 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @GetMapping("/registered")
+    public ModelAndView showSubjects(Model model, HttpSession session, Pageable pageable, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        Principal principal = request.getUserPrincipal();
+        modelAndView.setViewName("main_page");
+
+        Optional<User> user = userService.getByEmail(principal.getName());
+
+        if (user.get().getRoles().contains("TEACHER")) {
+            modelAndView.addObject("isStudent", false);
+            modelAndView.addObject("isNotAdmin", true);
+
+            Teacher teacher = teacherService.getTeacherByEmail(principal.getName());
+            modelAndView.addObject("user", teacher);
+
+            // ajax
+            modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
+
+        } else if (user.get().getRoles().contains("STUDENT")) {
+            modelAndView.addObject("isStudent", true);
+            modelAndView.addObject("isNotAdmin", true);
+
+            Student student = studentService.getStudentByEmail(principal.getName());
+            modelAndView.addObject("user", student);
+
+            List<Subject> recommendedSubjects = subjectService.recommendSubjects(student);
+            modelAndView.addObject("recommendedSubjects", recommendedSubjects);
+
+            // ajax
+            model.addAttribute("moreSubjects",
+                    subjectService.getAllNotEnrolled(student.getSubjects(), PageRequest.of(0, 3)));
+
+        } else if (user.get().getRoles().contains("ADMIN")) {
+            modelAndView.setViewName("subjects_admin");
+            modelAndView.addObject("isNotAdmin", false);
+            modelAndView.addObject("isStudent", false);
+
+            Admin admin = adminService.getAdminByEmail(principal.getName());
+            modelAndView.addObject("user", admin);
+
+            // ajax
+            modelAndView.addObject("moreSubjects", subjectService.getAllPage(PageRequest.of(0, 3)));
+        }
+
+        return modelAndView;
+    }
+
+    @GetMapping("/redirection/{subjectId}")
+    public String redirectURL(HttpServletRequest request, @PathVariable Long subjectId) {
+        Principal principal = request.getUserPrincipal();
+        Optional<User> user = userService.getByEmail(principal.getName());
+        String url = "";
+
+        if (user.get().getRoles().contains("STUDENT")) {
+            url = "/subject_onesubj_student/" + subjectId;
+
+        } else if (user.get().getRoles().contains("TEACHER")) {
+            url = "/teachers/subject/" + subjectId + "/general-information";
+        }
+
+        return ("redirect:" + url);
+    }
+
     @GetMapping("/subjects_registereduser")
     public ModelAndView showSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
@@ -85,22 +151,6 @@ public class UserController {
         }
 
         return modelAndView;
-    }
-
-    @GetMapping("/redirection/{subjectId}")
-    public String redirectURL(HttpServletRequest request, @PathVariable Long subjectId) {
-        Principal principal = request.getUserPrincipal();
-        Optional<User> user = userService.getByEmail(principal.getName());
-        String url = "";
-
-        if (user.get().getRoles().contains("STUDENT")) {
-            url = "/subject_onesubj_student/" + subjectId;
-
-        } else if (user.get().getRoles().contains("TEACHER")) {
-            url = "/teachers/subject/" + subjectId + "/general-information";
-        }
-
-        return ("redirect:" + url);
     }
 
     @RequestMapping("/loginerror")
@@ -238,7 +288,10 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String showEditProfile() {
+    public String showEditProfile(HttpServletRequest request, Model model) {
+        Principal principal = request.getUserPrincipal();
+        Optional<User> user = userService.getByEmail(principal.getName());
+        model.addAttribute("user", user.get());
         return "editProfile";
     }
 
@@ -259,13 +312,16 @@ public class UserController {
             currentUser.setLastName(lastName.orElse(currentUser.getLastName()));
             currentUser.setEmail(email.orElse(currentUser.getEmail()));
             currentUser.setPassword(password.orElse(currentUser.getPassword()));
-            if (file.isPresent()) {
+            if (file.isPresent() && file.get().getSize() > 0) {
                 try {
                     byte[] foto = file.get().getBytes();
                     currentUser.setProfilePicture(foto);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                byte[] fotoAnterior = currentUser.getProfilePicture();
+                currentUser.setProfilePicture(fotoAnterior);
             }
             userService.setUser(currentUser);
 

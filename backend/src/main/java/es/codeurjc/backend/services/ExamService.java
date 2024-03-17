@@ -1,6 +1,9 @@
 package es.codeurjc.backend.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,9 +38,9 @@ public class ExamService {
     @Autowired
     private SubjectService subjectService;
 
+    @SuppressWarnings("null")
     public List<ExamStudent> findExamStudentsByStudentAndSubject(Long studentId, Long subjectId) {
         // Obtener el estudiante y la asignatura por sus IDs
-        @SuppressWarnings("null")
         Student student = studentRepository.findById(studentId).orElse(null);
         Subject subject = subjectRepository.findById(subjectId).orElse(null);
 
@@ -77,6 +80,12 @@ public class ExamService {
         Subject subject = subjectService.getSubjectById(subjectId);
         return subject.getExams();
     }
+
+    public Page<Exam> getAllBySubjectIdPage(Long subjectId, PageRequest pageRequest){
+        return examRepository.findAllBysubjectId(subjectId,pageRequest);
+    }
+
+    
 
     @SuppressWarnings("null")
     public void deleteById(Long examId){

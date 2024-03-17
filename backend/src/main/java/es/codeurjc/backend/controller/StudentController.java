@@ -19,7 +19,8 @@ import java.security.Principal;
 import java.util.List;
 
 
-@Controller
+@RestController
+@RequestMapping("/students/")
 public class StudentController {
 
     @Autowired

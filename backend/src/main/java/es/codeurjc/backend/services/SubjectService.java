@@ -124,30 +124,44 @@ public class SubjectService {
 
         // Contar las asignaturas cursadas por gender
         Map<String, Long> countByGender = student.getSubjects().stream()
-                .collect(Collectors.groupingBy(Subject::getGender, Collectors.counting()));
+                .collect(Collectors.groupingBy(Subject::getGender, Collectors.counting())
+        );
 
         // Ordenar genders por frecuencia
         List<String> gendersOrdered = countByGender.entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()
+        );
 
-        // Asegurar que al menos se incluyan asignaturas de los dos genders más
-        // frecuentes
+        // Asegurar que al menos se incluyan asignaturas de los dos genders más frecuentes
         List<Subject> recommendedSubjects = new ArrayList<>();
         for (String gender : gendersOrdered) {
             List<Subject> subjectsByGender = findByGenderAndNotStudent(gender, student)
                     .stream()
                     .filter(s -> !student.getSubjects().contains(s))
                     .limit(5)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()
+            );
 
             recommendedSubjects.addAll(subjectsByGender);
             if (recommendedSubjects.size() >= 5) {
                 break; // Asegurarse de no exceder 5 recomendaciones en total
             }
         }
+        
         return recommendedSubjects.stream().limit(5).collect(Collectors.toList());
+    }
+
+    public Page<Subject> getAllNotEnrolled(List<Subject> subjectsStudent, Pageable page){
+
+        List<Long> idSubejcts = new ArrayList<>();
+
+        for(Subject sub: subjectsStudent){
+            idSubejcts.add(sub.getId());
+        }
+
+        return subjectRepository.findAllByIdNotIn(idSubejcts, page);
     }
 
     public boolean isNameUnique(String name){
