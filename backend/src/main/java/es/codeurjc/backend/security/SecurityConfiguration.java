@@ -73,7 +73,7 @@ public class SecurityConfiguration {
 			.formLogin(formLogin -> formLogin
 					.loginPage("/login")
 					.usernameParameter("email")
-					.failureUrl("/error")
+					.failureUrl("/login")
 					.defaultSuccessUrl("/registered")
 					.permitAll()
 			)
